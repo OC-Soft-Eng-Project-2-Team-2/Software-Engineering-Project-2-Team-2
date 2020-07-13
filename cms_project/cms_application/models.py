@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User  # used for authentication & authorization purposes only
+from django.contrib.auth.models import User  # for authentication & authorization purposes
 
 
 class Student(models.Model):
@@ -220,3 +220,7 @@ class StudentAssignment(models.Model):
 
     def __str__(self):
         return str(self.assignment) + ': ' + str(self.student)
+
+
+
+# the directory tree is probably borked to heck, and we need enums to control allowable values in the Enrollment status & grade fields (customize the django-admin interface)
