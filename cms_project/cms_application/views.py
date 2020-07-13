@@ -4,7 +4,7 @@ from django.http import HttpResponse
 
 
 def home(response):
-    return HttpResponse("<h1>Class Management System</h1>")
+    return render(response, "cms_application/home.html", {"UserName":"TestName"})
     
 def login(response):
-    return HttpResponse("<h1>Login</h1>")
+      return render(response, "cms_application/login.html", {"UserName":"TestName"})
