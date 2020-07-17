@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Homepages</h2>
+<p>welcome to OC blackboard, {% if user.is_authenticated %}{{user.username}}{% else %}please login as student{%endif%}</p>
+
+{% endblock %} 
