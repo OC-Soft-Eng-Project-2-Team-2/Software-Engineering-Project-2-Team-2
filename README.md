@@ -12,7 +12,7 @@ To install dependencies (django and any other libraries or modules we end up nee
 --run "pip install -r requirements.txt"
 
 To add a dependency to that requirements file:
---copy the pip install command for that library/module/software WITH ITS VERSION NUMBER (e.g. "pip install django=3.8.0")
+--copy the pip install command for that library/module/software WITH ITS VERSION NUMBER (e.g. "pip install django=3.0.8")
 --make a new, blank line at the end of requirements.txt
 --paste the command you copied onto the blank line you just made
 --delete "pip install " from the beginning of that line
@@ -25,7 +25,7 @@ To apply database edits (this will be necessary any time models.py is edited in 
 To run the server/site:
 --cd into the outer cms_project folder
 --run "python manage.py runserver"
---navigate in your browser to "127.0.0.1:8000" or "localhost:8000" (they are equivalent)
+--navigate in your browser to "127.0.0.1:8000" or "localhost:8000"
 [If you encounter an error, your first line of defense should be to make sure you've applied all database edits (see above), especially if you've recently pulled from the remote repository]
 
 To stop the server:
@@ -33,7 +33,7 @@ To stop the server:
 --type Ctrl+C (or whatever the BREAK command is on your system)
 
 To access the built-in django admin interface:
---run the application (see above)
+--run the server (see above)
 --navigate in your browser to "localhost:8000/admin"
 --log in with admin or superuser credentials (see below)
 [Users, authentication groups, and any other data in the site's database can be created, deleted, or have their permissions modified through this interface
