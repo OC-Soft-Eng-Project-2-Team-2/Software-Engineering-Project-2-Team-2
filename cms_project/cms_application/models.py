@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User  # for authentication & authorization purposes
 
+import datetime
+
 
 class Student(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
@@ -71,6 +73,25 @@ class Student(models.Model):
                 sum += credit_hours * grade_points
         
         return round((sum / 4.0), 2)
+
+    @property
+    def current_semester_gpa(self):
+        today = datetime.date.today()
+        current_enrollments = self.sections.filter(start_date <= today and end_date >= today)
+        grade_points = 0
+        if current_enrollments:
+            for e in current_enrollments:
+                if e.current_grade >= 90.00:
+                    grade_points = grade_points + (4 * e.section.course.credit_hours)
+                elif e.current_grade >= 80.00:
+                    grade_points = grade_points + (3 * e.section.course.credit_hours)
+                elif e.current_grade >= 70.00:
+                    grade_points = grade_points + (2 * e.section.course.credit_hours)
+                elif e.current_grade >= 60.00:
+                    grade_points = grade_points + e.section.course.credit_hours
+                else:
+                    pass  # don't add anything in the event of a failing grade
+        return round(grade_points / 4.0, 2)
 
     def __str__(self):
         return self.last_name + ', ' + self.first_name + ' (' + self.student_id + ')'
@@ -193,14 +214,59 @@ class Enrollment(models.Model):
     """Status tells the relationship between the student and the section, letter_grade tells the student's performance in the section.
     
         status='DROPPED' is used if the student drops the class any time before the school's scheduled 'last day to drop without a W'; no letter_grade is recorded.
-        letter_grade='W' is used if the student drops the class any time after the above date but before the school's 'last day to drop with a W'.
+        final_letter_grade='W' is used if the student drops the class any time after the above date but before the school's 'last day to drop with a W'.
         """
-    status = models.CharField(max_length=13)  # REGISTERED, REGISTERED_PF, AUDITED, WAITLISTED, or DROPPED
-    midterm_letter_grade = models.CharField(max_length=1, null=True) # manually entered by professor, can be: A, B, C, D, F, P (pass), or W (withdrawal)
-    final_letter_grade = models.CharField(max_length=1, null=True) # manually entered by professor, can be any of the options available to midterm_letter_grade or I (incomplete)
+    status = models.CharField(
+        max_length=4,
+        choices=[
+            (WAIT, 'Waitlisted'),
+            (REG, 'Registered'),
+            (RPF, 'Registered Pass/Fail'),
+            (AUD, 'Auditing'),
+            (DROP, 'Dropped')
+        ],
+        default=WAIT
+    )
+    midterm_letter_grade = models.CharField(
+        max_length=1,
+        choices = [
+            (A, 'A'),
+            (B, 'B'),
+            (C, 'C'),
+            (D, 'D'),
+            (P, 'Pass'),
+            (F, 'Fail')
+        ],
+        default=None,
+        null=True
+     )
+    final_letter_grade = models.CharField(
+        max_length=1,
+        choices = [
+            (A, 'A'),
+            (B, 'B'),
+            (C, 'C'),
+            (D, 'D'),
+            (P, 'Pass'),
+            (F, 'Fail'),
+            (W, 'Withdrawal'),
+            (I, 'Incomplete')
+        ],
+        default=None,
+        null=True
+     )
 
     student = models.ForeignKey('Student', on_delete=models.SET_NULL, null=True)
     section = models.ForeignKey('Section', on_delete=models.SET_NULL, null=True)
+
+    @property
+    def current_grade(self):
+        current_section_student_assignments = self.student.assignments.filter(assignment.section=self.section)
+        sum_of_grades = 0
+        if current_section_student_assignments:
+            for a in current_section_student_assignments:
+                sum_of_grades = sum_of_grades + a.assignment_grade
+        return round(sum_of_grades / 100.00, 2)
 
     def __str__(self):
         return str(self.student) + ' enrolled in ' + str(self.section.full_section_code) + '; Status: ' + self.status
@@ -209,13 +275,17 @@ class Enrollment(models.Model):
 class StudentAssignment(models.Model):
     student = models.ForeignKey('Student', on_delete=models.SET_NULL, null=True)
     assignment = models.ForeignKey('Assignment', on_delete=models.SET_NULL, null=True)
-    assignment_grade = models.FloatField()  # manually entered by professor
+    assignment_grade = models.DecimalField(max_digits=5, decimal_places=2)  # manually entered by professor, must be between 0.00 and 100.00
     submission_file_name = models.CharField(max_length=50, null=True)  # the name of the file the student uploads; should be overwritten by subsequent submissions
 
     @property
     def student_assignment_submission_location(self):
         """This is the full path to the folder where the student's submission for the assignment can be found"""
         return self.student.student_data_folder_name + self.assignment.student_data_subfolder_name + self.submission_file_name
+
+    @property
+    def student_assignment_submission_file(self):
+        return self.student_assignment_submission_location + self.submission_file_name
 
 
     def __str__(self):
