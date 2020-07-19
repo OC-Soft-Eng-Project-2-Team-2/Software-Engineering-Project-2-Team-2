@@ -293,4 +293,4 @@ class StudentAssignment(models.Model):
 
 
 
-# the directory tree is probably borked to heck, and we need enums to control allowable values in the Enrollment status & grade fields (customize the django-admin interface)
+# the directory tree is probably borked to heck, and we have no test data yet
