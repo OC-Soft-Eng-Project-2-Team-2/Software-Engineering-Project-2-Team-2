@@ -8,3 +8,6 @@ def home(response):
     
 def login(response):
     return HttpResponse("<h1>Login</h1>")
+
+def aClass(response):
+    return render(response, "class.html", {"UserName":"TestName"})
