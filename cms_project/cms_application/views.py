@@ -7,4 +7,7 @@ def home(response):
     return render(response, "cms_application/home.html", {"UserName":"TestName"})
     
 def login(response):
-      return render(response, "cms_application/login.html", {"UserName":"TestName"})
+    return HttpResponse("<h1>Login</h1>")
+
+def aClass(response):
+    return render(response, "class.html", {"UserName":"TestName"})

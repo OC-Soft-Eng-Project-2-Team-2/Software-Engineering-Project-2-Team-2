@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("cms_application.urls")),
     path('home/', include("cms_application.urls")),
+    path('class/', include("cms_application.urls")),
 ]
