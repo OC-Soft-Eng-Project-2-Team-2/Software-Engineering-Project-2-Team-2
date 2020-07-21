@@ -37,8 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'cms_application'
+    'cms_application',
+    'crispy_forms'
 ]
+CRSISPY_TEMPLATE_PACK='bootstrap4.5'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -123,3 +125,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/'
 #LOGOUT_REDIRECT_URL = '/accounts/logout' 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
