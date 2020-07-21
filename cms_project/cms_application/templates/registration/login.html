@@ -1,0 +1,43 @@
+{% extends "baseAuth.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-6">
+    <div class="card">
+      <div class="card-body">
+
+  {% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+  {% endif %}
+  
+  {% if next %}
+    {% if user.is_authenticated %}
+      <p>Your account doesn't have access to this page. To proceed,
+      please login with an account that has access.</p>
+    {% else %}
+      <p>To access this page please login</p>
+    {% endif %}
+  {% endif %}
+  
+  <form method="post" novalidate action="{% url 'login' %}">
+    {% csrf_token %}
+    <table>
+      <tr>
+        <td>{{ form|crispy }}</td>
+        <!-- <td>{{ form.username }}</td> -->
+      </tr>
+     
+    </table>
+    <input type="submit" class="btn btn-primary value="login" />
+    <input type="hidden" name="next" value="{{ next }}" />
+  
+
+  
+  {# Assumes you setup the password_reset view in your URLconf #}
+ 
+  <a href="{% url 'password_reset' %}"class="btn btn-link">forget your password?</a>
+</form>
+</div>
+</div>
+{% endblock %}
