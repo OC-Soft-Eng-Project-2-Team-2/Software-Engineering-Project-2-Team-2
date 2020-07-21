@@ -11,15 +11,8 @@ from django.contrib.auth.decorators import login_required
 def home(request):
     return render(request,"home.html")
     
+def login(response):
+    return render(response, "cms_application/login.html", {"UserName":"TestName"})
 
-
-# def login(request):
-#     if request.method=='POST':
-#         username=request.POST['username']
-#         password=request.POST['password']
-        
-#         user=auth.authenticate(username=username,password=password)
-
-
-#         return render(request,"login.html")
-        
+def aClass(response):
+    return render(response, "class.html", {"UserName":"TestName"})
