@@ -1,150 +1,210 @@
+{% extends 'base.html' %}
 <html>
-
-<head>
+  <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
     <style>
-        * {
-            padding: 0;
-            margin: 0;
-        }
+      * {
+        padding: 0;
+        margin: 0;
+      }
 
-        html,
-        body {
-            background-color: #333;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
+      html,
+      body {
+        background-color: #333;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
 
-        body>* {
-            flex-shrink: 0;
-        }
+      body > * {
+        flex-shrink: 0;
+      }
 
-        body>.tab-content {
-            flex-grow: 1;
-        }
+      body > .tab-content {
+        flex-grow: 1;
+      }
 
-        img {
-            height: 100%;
-            width: auto;
-        }
+      img {
+        height: 100%;
+        width: auto;
+      }
 
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6,
-        p,
-        div {
-            color: ivory;
-            margin: 0;
-            line-height: 1.2;
-        }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      p,
+      div {
+        color: ivory;
+        margin: 0;
+        line-height: 1.2;
+      }
 
-        .tab-pane,
-        .nav-tabs .nav-item.show .nav-link,
-        .nav-tabs .nav-link.active {
-            color: ivory;
-            background-color: #555;
-            border-color: #555;
-        }
+      .tab-pane,
+      .nav-tabs .nav-item.show .nav-link,
+      .nav-tabs .nav-link.active {
+        color: ivory;
+        background-color: #555;
+        border-color: #555;
+      }
 
-        .nav-tabs {
-            border-color: #555;
-        }
+      .nav-tabs {
+        border-color: #555;
+      }
 
-        /*.nav-item:hover {
+      /*.nav-item:hover {
             background-color: transparent;
         }*/
-        .nav-tabs>li>a {
-            color: ivory;
-        }
+      .nav-tabs > li > a {
+        color: ivory;
+      }
 
-        .nav-tabs>li>a:hover {
-            margin: 1;
-            background-color: #444;
-            border: none;
-            border-top-left-radius: .25rem;
-            border-top-right-radius: .25rem;
-        }
+      .nav-tabs > li > a:hover {
+        margin: 1;
+        background-color: #444;
+        border: none;
+        border-top-left-radius: 0.25rem;
+        border-top-right-radius: 0.25rem;
+      }
 
-        .nav-tabs>li:active:hover {
-            border: red;
-            border-top-left-radius: .25rem;
-            border-top-right-radius: .25rem;
-        }
+      .nav-tabs > li:active:hover {
+        border: red;
+        border-top-left-radius: 0.25rem;
+        border-top-right-radius: 0.25rem;
+      }
 
-        a,
-        a:hover {
-            color: #2093E8;
-        }
+      a,
+      a:hover {
+        color: #2093e8;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
+    {% block content %}
     <div class="container">
-        <div class="row justify-content-start">
-            <div class="col" width="50%">
-                <img src="https://cdn.pixabay.com/photo/2016/11/22/23/53/animal-1851289_1280.jpg" alt="Dr. Patrick Star"
-                    height="auto" width="100%">
-            </div>
-            <div class="col" width="50%">
-                <div class="col">
-                    <h2>WUM 101 - Intro to Wumbology</h2>
-                    <h4>Dr. Patrick Star</h4>
-                    <a href="">Syllabus</a>
-                </div>
-
-                <div class="col">
-                    <p>3 Credit Hour(s)</p>
-                    <p>2020 Summer Session 1</p>
-                    <p>MWF 8:00 AM
-                </div>
-
-                <div class="col">
-                    <p>Current Grade: 46/100</p>
-                    <p>Final Grade: -</p>
-                </div>
-            </div>
+      <div class="row justify-content-start">
+        <div class="col" width="50%">
+          <img
+            src="https://cdn.pixabay.com/photo/2016/11/22/23/53/animal-1851289_1280.jpg"
+            alt="Dr. Patrick Star"
+            height="auto"
+            width="100%"
+          />
         </div>
+        <div class="col" width="50%">
+          <div class="col">
+            <h2>WUM 101 - Intro to Wumbology</h2>
+            <h4>Dr. Patrick Star</h4>
+            <a href="">Syllabus</a>
+          </div>
+
+          <div class="col">
+            <p>3 Credit Hour(s)</p>
+            <p>2020 Summer Session 1</p>
+            <p>MWF 8:00 AM</p>
+          </div>
+
+          <div class="col">
+            <p>Current Grade: 46/100</p>
+            <p>Final Grade: -</p>
+          </div>
+        </div>
+      </div>
     </div>
 
     <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item" role="presentation">
-            <a class="nav-link active" id="Announcements-tab" data-toggle="tab" href="#Announcements" role="tab"
-                aria-controls="Announcements" aria-selected="true">Announcements</a>
-        </li>
-        <li class="nav-item" role="presentation">
-            <a class="nav-link" id="Assignments-tab" data-toggle="tab" href="#Assignments" role="tab"
-                aria-controls="Assignments" aria-selected="false">Assignments</a>
-        </li>
-        <li class="nav-item" role="presentation">
-            <a class="nav-link" id="Students-tab" data-toggle="tab" href="#Students" role="tab" aria-controls="Students"
-                aria-selected="false">Students</a>
-        </li>
+      <li class="nav-item" role="presentation">
+        <a
+          class="nav-link active"
+          id="Announcements-tab"
+          data-toggle="tab"
+          href="#Announcements"
+          role="tab"
+          aria-controls="Announcements"
+          aria-selected="true"
+          >Announcements</a
+        >
+      </li>
+      <li class="nav-item" role="presentation">
+        <a
+          class="nav-link"
+          id="Assignments-tab"
+          data-toggle="tab"
+          href="#Assignments"
+          role="tab"
+          aria-controls="Assignments"
+          aria-selected="false"
+          >Assignments</a
+        >
+      </li>
+      <li class="nav-item" role="presentation">
+        <a
+          class="nav-link"
+          id="Students-tab"
+          data-toggle="tab"
+          href="#Students"
+          role="tab"
+          aria-controls="Students"
+          aria-selected="false"
+          >Students</a
+        >
+      </li>
     </ul>
     <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="Announcements" role="tabpanel" aria-labelledby="Announcements-tab">
-            lots of announcements</div>
-        <div class="tab-pane fade" id="Assignments" role="tabpanel" aria-labelledby="Assignments-tab">too many
-            assignments</div>
-        <div class="tab-pane fade" id="Students" role="tabpanel" aria-labelledby="Students-tab">hundreds of students
-        </div>
+      <div
+        class="tab-pane fade show active"
+        id="Announcements"
+        role="tabpanel"
+        aria-labelledby="Announcements-tab"
+      >
+        lots of announcements
+      </div>
+      <div
+        class="tab-pane fade"
+        id="Assignments"
+        role="tabpanel"
+        aria-labelledby="Assignments-tab"
+      >
+        too many assignments
+      </div>
+      <div
+        class="tab-pane fade"
+        id="Students"
+        role="tabpanel"
+        aria-labelledby="Students-tab"
+      >
+        hundreds of students
+      </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-</body>
-
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    {% endblock %}
+  </body>
 </html>

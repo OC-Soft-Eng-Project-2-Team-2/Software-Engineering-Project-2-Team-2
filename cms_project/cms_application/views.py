@@ -7,12 +7,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
-@login_required
 def home(request):
-    return render(request,"home.html")
+    return render(request,"cms_application/home.html", {"UserName":"TestName"})
     
 def login(response):
-    return render(response, "cms_application/login.html", {"UserName":"TestName"})
+    return render(response, "registration/login.html", {"UserName":"TestName"})
 
 def aClass(response):
-    return render(response, "class.html", {"UserName":"TestName"})
+    return render(response, "cms_application/class.html", {"UserName":"TestName"})
