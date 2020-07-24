@@ -7,16 +7,17 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
   <style>
+    
   </style>
 </head>
 
 <body>
   {% block content %}
-  <div class="container"> 
+  <div class="container-fluid">
     <div class="row justify-content-start">
       <div class="col justify-content-start">
         <img src="https://cdn.pixabay.com/photo/2016/11/22/23/53/animal-1851289_1280.jpg" alt="Dr. Patrick Star"
-          height="auto" width="100%" />
+          height="auto" width="100%"/>
       </div>
       <div class="col" width="50%">
         <div class="col">
@@ -53,12 +54,117 @@
         aria-selected="false">Students</a>
     </li>
   </ul>
+
   <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="Announcements" role="tabpanel" aria-labelledby="Announcements-tab">
-      lots of announcements
+      <ul style="padding: 5px;">
+
+        <li class="announcement" style="margin: 0px; margin: 5px; border: 2px solid #333; border-radius: 0.25rem;">
+          <div class="container-fluid" style="margin: 0px; padding: 5px">
+            <div class="row">
+              <div class="col justify-content-start" style="margin-bottom: 5px;">
+                <p>Title of Announcement</p>
+              </div>
+              <div class="col justify-content-end">
+                <p>Posted on 07/08/2020 at 8:02 AM</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col justify-content-start">
+                <p>Content of announcement. This is where the professor adds more requirements to the assignment or
+                  something. Perhaps he's adding hundreds of new assignments. Maybe he wants everyone to write a
+                  100-page
+                  paper about squirrels. I Wumbo, you Wumbo, he/she/it Wumbo.</p>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="announcement" style="margin: 0px; margin: 5px; border: 2px solid #333; border-radius: 0.25rem;">
+          <div class="container-fluid" style="margin: 0px; padding: 5px">
+            <div class="row">
+              <div class="col justify-content-start" style="margin-bottom: 5px;">
+                <p>Title of Announcement</p>
+              </div>
+              <div class="col justify-content-end">
+                <p>Posted on 07/08/2020 at 8:02 AM</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col justify-content-start">
+                <p>Content of announcement. This is where the professor adds more requirements to the assignment or
+                  something. Perhaps he's adding hundreds of new assignments. Maybe he wants everyone to write a
+                  100-page
+                  paper about squirrels. I Wumbo, you Wumbo, he/she/it Wumbo.</p>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="announcement" style="margin: 0px; margin: 5px; border: 2px solid #333; border-radius: 0.25rem;">
+          <div class="container-fluid" style="margin: 0px; padding: 5px">
+            <div class="row">
+              <div class="col justify-content-start" style="margin-bottom: 5px;">
+                <p>Title of Announcement</p>
+              </div>
+              <div class="col justify-content-end">
+                <p>Posted on 07/08/2020 at 8:02 AM</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col justify-content-start">
+                <p>Content of announcement. This is where the professor adds more requirements to the assignment or
+                  something. Perhaps he's adding hundreds of new assignments. Maybe he wants everyone to write a
+                  100-page
+                  paper about squirrels. I Wumbo, you Wumbo, he/she/it Wumbo.</p>
+              </div>
+            </div>
+          </div>
+        </li>
+
+      </ul>
     </div>
     <div class="tab-pane fade" id="Assignments" role="tabpanel" aria-labelledby="Assignments-tab">
-      too many assignments
+      <ul style="padding: 5px;">
+
+        <li class="announcement" style="margin: 0px; margin: 5px; border: 2px solid #333; border-radius: 0.25rem;">
+          <div class="container-fluid" style="margin: 0px; padding: 5px">
+            <div class="row">
+              <div class="col justify-content-start" style="margin-bottom: 5px;">
+                <p>Title of Assignment</p>
+              </div>
+              <div class="col justify-content-end">
+                <p>DUE at 11:59 PM on 07/08/2020</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col justify-content-start" style="margin-bottom: 5px;">
+                <p>Grade: ?/100</p>
+              </div>
+              <div class="col justify-content-end">
+                <p>Submitted at 11:58 PM on 07/08/2020</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col justify-content-start">
+                <p>Description of Assignment. This is where the professor adds more requirements to the assignment or
+                  something. Perhaps he's adding hundreds of new assignments. Maybe he wants everyone to write a
+                  100-page
+                  paper about squirrels. I Wumbo, you Wumbo, he/she/it Wumbo.</p>
+              </div>
+            </div>
+
+            <div class="row" style="margin-top: 5px;">
+              <div class="col justify-content-start">
+                <button>Upload File(s)</button>
+              </div>
+              <div class="col justify-content-end">
+                <button>Submit</button>
+              </div>
+            </div>
+
+          </div>
+        </li>
+
+      </ul>
     </div>
     <div class="tab-pane fade" id="Students" role="tabpanel" aria-labelledby="Students-tab">
       hundreds of students
