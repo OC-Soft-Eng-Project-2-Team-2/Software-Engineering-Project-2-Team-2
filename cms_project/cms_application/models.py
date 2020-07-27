@@ -5,7 +5,7 @@ import datetime
 
 
 class Student(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    user = models.OneToOneField(User, on_delete=models.SET_NULL, null=True)
 
     student_id = models.CharField(max_length=7, primary_key=True)
     first_name = models.CharField(max_length=20)
@@ -98,7 +98,7 @@ class Student(models.Model):
                 
 
 class Professor(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    user = models.OneToOneField(User, on_delete=models.SET_NULL, null=True)
 
     faculty_id = models.CharField(max_length=7, primary_key=True)
     first_name = models.CharField(max_length=20)
@@ -111,7 +111,7 @@ class Professor(models.Model):
 
 
 class Admin(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    user = models.OneToOneField(User, on_delete=models.SET_NULL, null=True)
 
     staff_id = models.CharField(max_length=7, primary_key=True)
     first_name = models.CharField(max_length=20)
@@ -182,7 +182,7 @@ class Section(models.Model):
 
 
 class Announcement(models.Model):
-    section = models.ForeignKey('Section', on_delete=models.CASCADE)
+    section = models.ForeignKey('Section', on_delete=models.SET_NULL, null=True)
     posted_date = models.DateField()
     announcement_text = models.CharField(max_length=1000)
 
@@ -191,7 +191,7 @@ class Announcement(models.Model):
 
 
 class Assignment(models.Model):
-    section = models.ForeignKey('Section', on_delete=models.CASCADE)
+    section = models.ForeignKey('Section', on_delete=models.SET_NULL, null=True)
     assignment_name = models.CharField(max_length=100)
     due_date = models.DateField()
     
