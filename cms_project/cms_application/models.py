@@ -181,8 +181,17 @@ class Section(models.Model):
         unique_together=('course', 'section_number', 'semester_code')
 
 
+class Announcement(models.Model):
+    section = models.ForeignKey('Section', on_delete=models.CASCADE)
+    posted_date = models.DateField()
+    announcement_text = models.CharField(max_length=1000)
+
+    def __str__(self):
+        return posted_date + '(' + section + ')' + '--' + announcement_text[:100]
+
+
 class Assignment(models.Model):
-    section = models.ForeignKey('Section', on_delete=models.SET_NULL, null=True)
+    section = models.ForeignKey('Section', on_delete=models.CASCADE)
     assignment_name = models.CharField(max_length=100)
     due_date = models.DateField()
     
@@ -290,7 +299,3 @@ class StudentAssignment(models.Model):
 
     def __str__(self):
         return str(self.assignment) + ': ' + str(self.student)
-
-
-
-# the directory tree is probably borked to heck, and we have no test data yet
