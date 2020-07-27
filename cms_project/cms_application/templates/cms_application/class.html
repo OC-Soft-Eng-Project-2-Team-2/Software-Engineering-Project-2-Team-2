@@ -1,186 +1,276 @@
 {% extends 'base.html' %}
-<html>
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
-  <style>
-    
-  </style>
-</head>
+{% block styles %}
+<style>
+  h2 {
+    margin: 5px 15px 15px 15px;
+  }
 
-<body>
-  {% block content %}
-  <div class="container-fluid">
-    <div class="row justify-content-start">
-      <div class="col justify-content-start">
-        <img src="https://cdn.pixabay.com/photo/2016/11/22/23/53/animal-1851289_1280.jpg" alt="Dr. Patrick Star"
-          height="auto" width="100%"/>
-      </div>
-      <div class="col" width="50%">
-        <div class="col">
-          <h2>WUM 101 - Intro to Wumbology</h2>
-          <h4>Dr. Patrick Star</h4>
-          <a href="">Syllabus</a>
+  .tableRow {
+    display: table-row;
+  }
+
+  .tableRow>img,
+  .tableRow>div {
+    display: table-cell;
+    vertical-align: top;
+    margin: 0px 15px 15px 15px;
+    max-height: 216px;
+  }
+
+  .tableRow>div>div {
+    margin: 0px 0px 15px 0px;
+  }
+
+  .tab-pane,
+  .nav-tabs .nav-item.show .nav-link,
+  .nav-tabs .nav-link.active {
+    color: ivory;
+    background-color: #333;
+    border-color: #333;
+  }
+
+  .tab-pane>ul {
+    padding: 5px
+  }
+
+  .nav-tabs .nav-link {
+    border: none;
+  }
+
+  .nav-tabs {
+    border-bottom: 1px solid #222;
+  }
+
+  .nav-tabs>li>a {
+    color: ivory;
+  }
+
+  .nav-tabs>li>a:hover {
+    margin: 1;
+    background-color: rgb(42, 42, 42);
+    border: none;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+  }
+
+  .announcement {
+    margin: 5px 5px 8px 5px;
+    padding: 8px;
+    border: 2px solid #222;
+    border-radius: 0.25rem;
+  }
+
+  p {
+    font-weight: lighter;
+  }
+
+  .normalWeight {
+    font-weight: normal;
+  }
+
+  .marginAndWeight {
+    margin-bottom: 10px;
+    font-weight: normal;
+  }
+
+  .marginBottom {
+    margin-bottom: 10px;
+  }
+
+  span {
+    float: right;
+  }
+
+  .table {
+    display: table;
+    margin: 0 0 5px 50px;
+    border-collapse: separate;
+    border-spacing: 0 15px;
+  }
+
+  .tableColumn {
+    display: table-column;
+    width: 20%
+  }
+
+  .studentsContainer {
+    padding: 15px;
+  }
+
+  .students {
+    display: grid;
+    grid-gap: 15px;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  }
+
+  .students>div {
+    height: 170px;
+    width: 160px;
+  }
+
+  .students img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-height: 120px;
+    max-width: 120px;
+  }
+
+  .students p {
+    margin-top: 5px;
+    text-align: center;
+  }
+</style>
+{% endblock styles %}
+
+{% block content %}
+<h2>WUM 101 - Intro to Wumbology</h2>
+<div class="tableRow">
+  <img src="https://cdn.pixabay.com/photo/2016/11/22/23/53/animal-1851289_1280.jpg" alt="Dr. Patrick Star"
+    height="auto" />
+  <div>
+    <div>
+      <h4>Dr. Patrick Star</h4>
+      <a href="">Syllabus</a>
+    </div>
+    <div>
+      <p>MWF 8:00 AM</p>
+      <p>2020 Summer Session 1</p>
+      <p>3 Credit Hour(s)</p>
+    </div>
+    <div>
+      <p>Current Grade: 46/100</p>
+      <p>Final Grade: -</p>
+    </div>
+  </div>
+</div>
+
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <a class="nav-link active" id="Announcements-tab" data-toggle="tab" href="#Announcements" role="tab"
+      aria-controls="Announcements" aria-selected="true">Announcements</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" id="Assignments-tab" data-toggle="tab" href="#Assignments" role="tab"
+      aria-controls="Assignments" aria-selected="false">Assignments</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" id="Students-tab" data-toggle="tab" href="#Students" role="tab" aria-controls="Students"
+      aria-selected="false">Students</a>
+  </li>
+</ul>
+
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="Announcements" role="tabpanel" aria-labelledby="Announcements-tab">
+    <ul>
+      <li>
+        <div class="announcement">
+          <p class="marginAndWeight">Title of Announcement<span>Posted on 07/08/2020 at 8:02 AM</span></p>
+          <p>Content of announcement. This is where the professor adds more requirements to the assignment or
+            something. Perhaps he's adding hundreds of new assignments. Maybe he wants everyone to write a
+            100-page paper about squirrels. I Wumbo, you Wumbo, he/she/it Wumbo.</p>
         </div>
-
-        <div class="col">
-          <p>3 Credit Hour(s)</p>
-          <p>2020 Summer Session 1</p>
-          <p>MWF 8:00 AM</p>
+      </li>
+      <li>
+        <div class="announcement">
+          <p class="marginAndWeight">Title of Announcement<span>Posted on 07/08/2020 at 8:02 AM</span></p>
+          <p>Content of announcement. This is where the professor adds more requirements to the assignment or
+            something. Perhaps he's adding hundreds of new assignments. Maybe he wants everyone to write a
+            100-page paper about squirrels. I Wumbo, you Wumbo, he/she/it Wumbo.</p>
         </div>
+      </li>
+      <li>
+        <div class="announcement">
+          <p class="marginAndWeight">Title of Announcement<span>Posted on 07/08/2020 at 8:02 AM</span></p>
+          <p>Content of announcement. This is where the professor adds more requirements to the assignment or
+            something. Perhaps he's adding hundreds of new assignments. Maybe he wants everyone to write a
+            100-page paper about squirrels. I Wumbo, you Wumbo, he/she/it Wumbo.</p>
+        </div>
+      </li>
 
-        <div class="col">
-          <p>Current Grade: 46/100</p>
-          <p>Final Grade: -</p>
+
+    </ul>
+  </div>
+  <div class="tab-pane fade" id="Assignments" role="tabpanel" aria-labelledby="Assignments-tab">
+    <ul>
+      <li>
+        <div class="announcement">
+          <p class="normalWeight">Title of Assignment<span>DUE at 11:59 PM on 07/08/2020</span></p>
+          <p class="marginAndWeight">Grade: ?/100<span>SUBMITTED at 11:58 PM on 07/08/2020</span></p>
+          <p class="marginBottom">Description of Assignment. This is where the professor adds more requirements to the
+            assignment or
+            something. Perhaps he's adding hundreds of new assignments. Maybe he wants everyone to write a
+            100-page paper about squirrels. I Wumbo, you Wumbo, he/she/it Wumbo.</p>
+          <div class="table">
+            <div class="tableColumn"></div>
+            <div class="tableRow">
+              <div>
+                <p>Attachments:</p>
+              </div>
+              <div>
+                <a href="">Wumbography Template.pdf</a><br>
+                <a href="">Wumbography Example.pdf</a><br>
+              </div>
+            </div>
+            <div class="tableRow">
+              <div>
+                <p>File(s) Uploaded:</p>
+              </div>
+              <a href="">Rock Bottom map final.png.pdf</a>
+            </div>
+          </div>
+          <button>Upload File(s)</button>
+          <span>
+            <button>Submit</button>
+          </span>
+        </div>
+      </li>
+  </div>
+  <div class="tab-pane fade" id="Students" role="tabpanel" aria-labelledby="Students-tab">
+    <div class="studentsContainer">
+      <div class="students">
+        <div>
+          <img src="https://i.pinimg.com/originals/51/c2/54/51c25482d801d6ff7f80deee727e13c6.png">
+          <p>Red</p>
+        </div>
+        <div>
+          <img src="https://www.ssbwiki.com/images/thumb/0/03/Samus_SSBU.png/1200px-Samus_SSBU.png">
+          <p>Samus Aran</p>
+        </div>
+        <div>
+          <img
+            src="https://vignette.wikia.nocookie.net/lotr/images/4/43/Aragorn3.jpg/revision/latest/scale-to-width-down/340?cb=20080318215744">
+          <p>Aragorn Son of Arathorn</p>
+        </div>
+        <div>
+          <img src="https://i.pinimg.com/originals/51/c2/54/51c25482d801d6ff7f80deee727e13c6.png">
+          <p>Red</p>
+        </div>
+        <div>
+          <img src="https://www.ssbwiki.com/images/thumb/0/03/Samus_SSBU.png/1200px-Samus_SSBU.png">
+          <p>Samus Aran</p>
+        </div>
+        <div>
+          <img
+            src="https://vignette.wikia.nocookie.net/lotr/images/4/43/Aragorn3.jpg/revision/latest/scale-to-width-down/340?cb=20080318215744">
+          <p>Aragorn Son of Arathorn</p>
+        </div>
+        <div>
+          <img src="https://i.pinimg.com/originals/51/c2/54/51c25482d801d6ff7f80deee727e13c6.png">
+          <p>Red</p>
+        </div>
+        <div>
+          <img src="https://www.ssbwiki.com/images/thumb/0/03/Samus_SSBU.png/1200px-Samus_SSBU.png">
+          <p>Samus Aran</p>
+        </div>
+        <div>
+          <img
+            src="https://vignette.wikia.nocookie.net/lotr/images/4/43/Aragorn3.jpg/revision/latest/scale-to-width-down/340?cb=20080318215744">
+          <p>Aragorn Son of Arathorn</p>
         </div>
       </div>
     </div>
   </div>
-
-  <ul class="nav nav-tabs" id="myTab" role="tablist">
-    <li class="nav-item" role="presentation">
-      <a class="nav-link active" id="Announcements-tab" data-toggle="tab" href="#Announcements" role="tab"
-        aria-controls="Announcements" aria-selected="true">Announcements</a>
-    </li>
-    <li class="nav-item" role="presentation">
-      <a class="nav-link" id="Assignments-tab" data-toggle="tab" href="#Assignments" role="tab"
-        aria-controls="Assignments" aria-selected="false">Assignments</a>
-    </li>
-    <li class="nav-item" role="presentation">
-      <a class="nav-link" id="Students-tab" data-toggle="tab" href="#Students" role="tab" aria-controls="Students"
-        aria-selected="false">Students</a>
-    </li>
-  </ul>
-
-  <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active" id="Announcements" role="tabpanel" aria-labelledby="Announcements-tab">
-      <ul style="padding: 5px;">
-
-        <li class="announcement" style="margin: 0px; margin: 5px; border: 2px solid #333; border-radius: 0.25rem;">
-          <div class="container-fluid" style="margin: 0px; padding: 5px">
-            <div class="row">
-              <div class="col justify-content-start" style="margin-bottom: 5px;">
-                <p>Title of Announcement</p>
-              </div>
-              <div class="col justify-content-end">
-                <p>Posted on 07/08/2020 at 8:02 AM</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col justify-content-start">
-                <p>Content of announcement. This is where the professor adds more requirements to the assignment or
-                  something. Perhaps he's adding hundreds of new assignments. Maybe he wants everyone to write a
-                  100-page
-                  paper about squirrels. I Wumbo, you Wumbo, he/she/it Wumbo.</p>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li class="announcement" style="margin: 0px; margin: 5px; border: 2px solid #333; border-radius: 0.25rem;">
-          <div class="container-fluid" style="margin: 0px; padding: 5px">
-            <div class="row">
-              <div class="col justify-content-start" style="margin-bottom: 5px;">
-                <p>Title of Announcement</p>
-              </div>
-              <div class="col justify-content-end">
-                <p>Posted on 07/08/2020 at 8:02 AM</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col justify-content-start">
-                <p>Content of announcement. This is where the professor adds more requirements to the assignment or
-                  something. Perhaps he's adding hundreds of new assignments. Maybe he wants everyone to write a
-                  100-page
-                  paper about squirrels. I Wumbo, you Wumbo, he/she/it Wumbo.</p>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li class="announcement" style="margin: 0px; margin: 5px; border: 2px solid #333; border-radius: 0.25rem;">
-          <div class="container-fluid" style="margin: 0px; padding: 5px">
-            <div class="row">
-              <div class="col justify-content-start" style="margin-bottom: 5px;">
-                <p>Title of Announcement</p>
-              </div>
-              <div class="col justify-content-end">
-                <p>Posted on 07/08/2020 at 8:02 AM</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col justify-content-start">
-                <p>Content of announcement. This is where the professor adds more requirements to the assignment or
-                  something. Perhaps he's adding hundreds of new assignments. Maybe he wants everyone to write a
-                  100-page
-                  paper about squirrels. I Wumbo, you Wumbo, he/she/it Wumbo.</p>
-              </div>
-            </div>
-          </div>
-        </li>
-
-      </ul>
-    </div>
-    <div class="tab-pane fade" id="Assignments" role="tabpanel" aria-labelledby="Assignments-tab">
-      <ul style="padding: 5px;">
-
-        <li class="announcement" style="margin: 0px; margin: 5px; border: 2px solid #333; border-radius: 0.25rem;">
-          <div class="container-fluid" style="margin: 0px; padding: 5px">
-            <div class="row">
-              <div class="col justify-content-start" style="margin-bottom: 5px;">
-                <p>Title of Assignment</p>
-              </div>
-              <div class="col justify-content-end">
-                <p>DUE at 11:59 PM on 07/08/2020</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col justify-content-start" style="margin-bottom: 5px;">
-                <p>Grade: ?/100</p>
-              </div>
-              <div class="col justify-content-end">
-                <p>Submitted at 11:58 PM on 07/08/2020</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col justify-content-start">
-                <p>Description of Assignment. This is where the professor adds more requirements to the assignment or
-                  something. Perhaps he's adding hundreds of new assignments. Maybe he wants everyone to write a
-                  100-page
-                  paper about squirrels. I Wumbo, you Wumbo, he/she/it Wumbo.</p>
-              </div>
-            </div>
-
-            <div class="row" style="margin-top: 5px;">
-              <div class="col justify-content-start">
-                <button>Upload File(s)</button>
-              </div>
-              <div class="col justify-content-end">
-                <button>Submit</button>
-              </div>
-            </div>
-
-          </div>
-        </li>
-
-      </ul>
-    </div>
-    <div class="tab-pane fade" id="Students" role="tabpanel" aria-labelledby="Students-tab">
-      hundreds of students
-    </div>
-  </div>
-
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
-  {% endblock %}
-</body>
-
-</html>
+</div>
+{% endblock %}

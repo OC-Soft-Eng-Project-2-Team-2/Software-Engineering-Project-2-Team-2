@@ -83,7 +83,7 @@
 
     html,
     body {
-      background-color: #333;
+      background-color: #222;
       height: 100%;
       display: flex;
       flex-direction: column;
@@ -115,49 +115,21 @@
     }
 
     button {
-      background-color: #333;
+      background-color: #222;
       color: ivory;
-      padding: 3px 5px;
-      border: 1px solid #333;
+      padding: 3px 15px;
+      border: 1px solid #222;
       border-radius: .2rem;
     }
 
     button:hover {
-      background-color: #444;
+      background-color: rgb(42, 42, 42);
       color: ivory;
     }
 
     a,
     a:hover {
       color: #2093e8;
-    }
-
-    .tab-pane,
-    .nav-tabs .nav-item.show .nav-link,
-    .nav-tabs .nav-link.active {
-      color: ivory;
-      background-color: #555;
-      border-color: #555;
-    }
-
-    .nav-tabs .nav-link {
-      border: none;
-    }
-
-    .nav-tabs {
-      border-bottom: 1px solid #333;
-    }
-
-    .nav-tabs>li>a {
-      color: ivory;
-    }
-
-    .nav-tabs>li>a:hover {
-      margin: 1;
-      background-color: #444;
-      border: none;
-      border-top-left-radius: 0.25rem;
-      border-top-right-radius: 0.25rem;
     }
   </style>
 
@@ -166,6 +138,8 @@
       color: black;
     }
   </style>
+
+  {% block styles %} {% endblock styles %}
 
   <title>Class Management</title>
 </head>
