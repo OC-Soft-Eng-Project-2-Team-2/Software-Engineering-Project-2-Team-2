@@ -184,10 +184,11 @@ class Section(models.Model):
 class Announcement(models.Model):
     section = models.ForeignKey('Section', on_delete=models.SET_NULL, null=True)
     posted_date = models.DateField()
+    announcement_title = models.CharField(max_length=100)
     announcement_text = models.CharField(max_length=1000)
 
     def __str__(self):
-        return posted_date + '(' + section + ')' + '--' + announcement_text[:100]
+        return announcement_title + '(' + posted_date + '):' + announcement_text[:100]
 
 
 class Assignment(models.Model):
