@@ -200,6 +200,7 @@
             <p>{{item.content}}</p>
           </div>
         </li>
+        {% empty %}
         {% endfor %}
 
         {% else %}
@@ -323,6 +324,7 @@
               <img src="{{student.img}}">
               <p>{{student.name}}</p>
             </div>
+            {% empty %}
           {% endfor %}
 
         {% else %}
