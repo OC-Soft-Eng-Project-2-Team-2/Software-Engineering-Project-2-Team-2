@@ -1,65 +1,71 @@
 <!DOCTYPE html>
 
 <html>
+  <head>
+    <!--Boot Strap-->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <!--END BOOTSTRAP-->
 
-<head>
-  <!--Boot Strap-->
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
-  <!--END BOOTSTRAP-->
+    <style>
+      /* The side navigation menu */
+      .sidenav {
+        height: 100%;
+        /* 100% Full-height */
+        width: 0;
+        /* 0 width - change this with JavaScript */
+        position: fixed;
+        /* Stay in place */
+        z-index: 1;
+        /* Stay on top */
+        top: 0;
+        /* Stay at the top */
+        left: 0;
+        background-color: #222;
+        /* Black*/
+        overflow-x: hidden;
+        /* Disable horizontal scroll */
+        padding-top: 60px;
+        /* Place content 60px from the top */
+        transition: 0.5s;
+        /* 0.5 second transition effect to slide in the sidenav */
+      }
 
-  <style>
-    /* The side navigation menu */
-    .sidenav {
-      height: 100%;
-      /* 100% Full-height */
-      width: 0;
-      /* 0 width - change this with JavaScript */
-      position: fixed;
-      /* Stay in place */
-      z-index: 1;
-      /* Stay on top */
-      top: 0;
-      /* Stay at the top */
-      left: 0;
-      background-color: #222;
-      /* Black*/
-      overflow-x: hidden;
-      /* Disable horizontal scroll */
-      padding-top: 60px;
-      /* Place content 60px from the top */
-      transition: 0.5s;
-      /* 0.5 second transition effect to slide in the sidenav */
-    }
+      /* The navigation menu links */
+      .sidenav a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: rgb(255, 255, 255);
+        display: block;
+        transition: 0.3s;
+      }
 
-    /* The navigation menu links */
-    .sidenav a {
-      padding: 8px 8px 8px 32px;
-      text-decoration: none;
-      font-size: 25px;
-      color: rgb(255, 255, 255);
-      display: block;
-      transition: 0.3s;
-    }
+      /* When you mouse over the navigation links, change their color */
+      .sidenav a:hover {
+        color: #c4c4c4;
+      }
 
-    /* When you mouse over the navigation links, change their color */
-    .sidenav a:hover {
-      color: #c4c4c4;
-    }
+      /* Position and style the close button (top right corner) */
+      .sidenav .closebtn {
+        position: absolute;
+        top: 0;
+        left: -20px;
+        font-size: 36px;
+      }
+    </style>
 
-    /* Position and style the close button (top right corner) */
-    .sidenav .closebtn {
-      position: absolute;
-      top: 0;
-      left: -20px;
-      font-size: 36px;
-    }
-  </style>
-
-  <style>
-    /*.grid-container {
+    <style>
+      /*.grid-container {
       display: grid;
       grid-template-columns: auto auto;
       grid-template-rows: auto auto;
@@ -76,226 +82,262 @@
       height: 100px;
     }*/
 
-    * {
-      padding: 0;
-      margin: 0;
-    }
+      * {
+        padding: 0;
+        margin: 0;
+      }
 
-    html,
-    body {
-      background-color: #222;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-    }
+      html,
+      body {
+        background-color: #222;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
 
-    body>* {
-      flex-shrink: 0;
-    }
+      body > * {
+        flex-shrink: 0;
+      }
 
-    body>.tab-content {
-      flex-grow: 1;
-    }
+      body > .tab-content {
+        flex-grow: 1;
+      }
 
-    img {
-      border-radius: 0.25rem;
-    }
+      img {
+        border-radius: 0.25rem;
+      }
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6,
-    p,
-    div,
-    th,
-    td {
-      color: ivory;
-      margin: 0;
-      line-height: 1.2;
-    }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      p,
+      div,
+      th,
+      td {
+        color: ivory;
+        margin: 0;
+        line-height: 1.2;
+      }
 
-    button,
-    select {
-      background-color: #222;
-      color: ivory;
-      padding: 3px 15px;
-      border: 1px solid #222;
-      border-radius: .2rem;
-    }
+      button,
+      select {
+        background-color: #222;
+        color: ivory;
+        padding: 3px 15px;
+        border: 1px solid #222;
+        border-radius: 0.2rem;
+      }
 
-    button:hover {
-      background-color: rgb(42, 42, 42);
-      color: ivory;
-    }
+      button:hover {
+        background-color: rgb(42, 42, 42);
+        color: ivory;
+      }
 
-    a,
-    a:hover {
-      color: #2093e8;
-    }
-  </style>
+      a,
+      a:hover {
+        color: #2093e8;
+      }
+    </style>
 
-  <style>
-    .dropdown-item {
-      color: black;
-    }
-  </style>
+    <style>
+      .dropdown-item {
+        color: black;
+      }
+    </style>
 
-  {% block styles %} {% endblock styles %}
+    {% block styles %} {% endblock styles %}
 
-  <title>Class Management</title>
-</head>
+    <title>Class Management</title>
+  </head>
 
-<body>
-  <div>
-    <!--NavBar at the Top-->
-    <div id="navBar">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a onclick="toggleNav()" class="navbar-brand" style="font-size: 30px;" href="#">&#9776;
-        </a>
-        <a class="navbar-brand" href="#">Class Management</a>
+  <body>
+    <div>
+      <!--NavBar at the Top-->
+      <div id="navBar">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <a
+            onclick="toggleNav()"
+            class="navbar-brand"
+            style="font-size: 30px;"
+            href="#"
+            >&#9776;
+          </a>
+          <a class="navbar-brand" href="#">Class Management</a>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <!-- <a class="nav-link" href="#"
-                  >Home <span class="sr-only">(current)</span></a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-              </li>
-              <li class="nav-item dropdown">
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item dropdown" style="left: 1650%;">
                 <a
                   class="nav-link dropdown-toggle"
                   href="#"
-                  id="navbarDropdown"
+                  id="notificationDropdown"
                   role="button"
                   data-toggle="dropdown"
                   aria-haspopup="true"
                   aria-expanded="false"
+                  style="font-size: 30px;"
                 >
-                  Dropdown
+                  🕭
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
+                <div
+                  class="dropdown-menu"
+                  aria-labelledby="notificationDropdown"
+                  style="left: -200%;"
+                >
+                  {% for item in notifications %}
+                  <a class="dropdown-item" href="#">item.description</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Something else here</a>
+                  {% empty %} {% endfor %}
+
+                  <!-- TEST DATA BELOW REMOVE WHEN DATABASE IS READY-->
+                  <a class="dropdown-item" href="#"
+                    >WUM 101 - New Announcement</a
+                  >
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#"
+                    >WUM 101 - Assignment Due!!</a
+                  >
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">WUM 101 - Test Graded</a>
+                  <!-- END TEST DATA-->
                 </div>
-              </li> -->
-            </li>
+              </li>
+            </ul>
 
-            <li class="nav-item dropdown" style="left: 1650%;">
-              <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 30px;">
-                🕭
-              </a>
-              <div class="dropdown-menu" aria-labelledby="notificationDropdown" style="left: -200%;">
-                {% for item in notifications %}
-                <a class="dropdown-item" href="#">item.description</a>
-                <div class="dropdown-divider"></div>
-                {% empty %} {% endfor %}
+            <a class="navbar-brand" style="font-size: 30px;" href="#">😗 </a>
+          </div>
+        </nav>
+        <!-- END NAV BAR-->
 
-                <!-- TEST DATA BELOW REMOVE WHEN DATABASE IS READY-->
-                <a class="dropdown-item" href="#">WUM 101 - New Announcement</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">WUM 101 - Assignment Due!!</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">WUM 101 - Test Graded</a>
-                <!-- END TEST DATA-->
-              </div>
-            </li>
-          </ul>
+        <!-- HAMBURGER MENU-->
+        <!-- Sidebar -->
+        <div id="mySidenav" class="sidenav">
+          <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
+            >&#9776;</a
+          >
+          <a href="/home">Home</a>
 
-          <a class="navbar-brand" style="font-size: 30px;" href="#">😗 </a>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Classes
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              {% for item in classes %}
+              <a class="dropdown-item" href="/class/{{item.class}}"
+                >{{item.class}}</a
+              >
+              {% empty %} {% endfor %}
+
+              <!-- TEST DATA BELOW REMOVE WHEN DATABASE IS READY-->
+              <a class="dropdown-item" href="/class" style="color: black;"
+                >WUM 101</a
+              >
+              <a class="dropdown-item" href="/class" style="color: black;"
+                >WWE 210</a
+              >
+              <a class="dropdown-item" href="/class" style="color: black;"
+                >YEET 555</a
+              >
+              <!-- END TEST DATA-->
+            </div>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Grades
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              {% for item in classes %}
+              <a class="dropdown-item" href="/grades/{{item.class}}"
+                >{{item.class}}</a
+              >
+              {% empty %} {% endfor %}
+
+              <!-- TEST DATA BELOW REMOVE WHEN DATABASE IS READY-->
+              <a class="dropdown-item" href="/grades" style="color: black;"
+                >WUM 101</a
+              >
+              <a class="dropdown-item" href="/grades" style="color: black;"
+                >WWE 210</a
+              >
+              <a class="dropdown-item" href="/grades" style="color: black;"
+                >YEET 555</a
+              >
+              <!-- END TEST DATA-->
+            </div>
+          </li>
         </div>
-      </nav>
-      <!-- END NAV BAR-->
 
-      <!-- HAMBURGER MENU-->
-      <!-- Sidebar -->
-      <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&#9776;</a>
-        <a href="/home">Home</a>
-
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            Classes
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            {% for item in classes %}
-            <a class="dropdown-item" href="/class/{{item.class}}">{{item.class}}</a>
-            {% empty %} {% endfor %}
-
-            <!-- TEST DATA BELOW REMOVE WHEN DATABASE IS READY-->
-            <a class="dropdown-item" href="#" style="color: black;">WUM 101</a>
-            <a class="dropdown-item" href="#" style="color: black;">WWE 210</a>
-            <a class="dropdown-item" href="#" style="color: black;">YEET 555</a>
-            <!-- END TEST DATA-->
-          </div>
-        </li>
-
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            Grades
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            {% for item in classes %}
-            <a class="dropdown-item" href="/grades/{{item.class}}">{{item.class}}</a>
-            {% empty %} {% endfor %}
-
-            <!-- TEST DATA BELOW REMOVE WHEN DATABASE IS READY-->
-            <a class="dropdown-item" href="#" style="color: black;">WUM 101</a>
-            <a class="dropdown-item" href="#" style="color: black;">WWE 210</a>
-            <a class="dropdown-item" href="#" style="color: black;">YEET 555</a>
-            <!-- END TEST DATA-->
-          </div>
-        </li>
-      </div>
-
-      <script>
-        function openNav() {
-          document.getElementById("mySidenav").style.width = "250px";
-        }
-
-        function toggleNav() {
-          if (document.getElementById("mySidenav").style.width == "250px") {
-            document.getElementById("mySidenav").style.width = "0";
-          } else {
+        <script>
+          function openNav() {
             document.getElementById("mySidenav").style.width = "250px";
           }
-        }
 
-        function closeNav() {
-          document.getElementById("mySidenav").style.width = "0";
-        }
-      </script>
+          function toggleNav() {
+            if (document.getElementById("mySidenav").style.width == "250px") {
+              document.getElementById("mySidenav").style.width = "0";
+            } else {
+              document.getElementById("mySidenav").style.width = "250px";
+            }
+          }
 
-      <!-- END HAMBURGER MENU-->
+          function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+          }
+        </script>
 
-      <!--Boot Strap-->
-      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+        <!-- END HAMBURGER MENU-->
+
+        <!--Boot Strap-->
+        <script
+          src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+          integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+          crossorigin="anonymous"
+        ></script>
+        <script
+          src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+          integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+          crossorigin="anonymous"
+        ></script>
+        <script
+          src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+          integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+          crossorigin="anonymous"
+        ></script>
+      </div>
+
+      {% block content %} {% endblock %}
     </div>
-
-    {% block content %} {% endblock %}
-  </div>
-</body>
-
+  </body>
 </html>
