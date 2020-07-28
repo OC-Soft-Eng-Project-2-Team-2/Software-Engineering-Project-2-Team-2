@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def home(request):
-    return render(request,"home.html")
+    return render(request,"cms_application/home.html")
     
 def login(response):
     return render(response, "cms_application/login.html", {"UserName":"TestName"})

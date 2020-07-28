@@ -219,23 +219,23 @@ class Enrollment(models.Model):
     status = models.CharField(
         max_length=4,
         choices=[
-            (WAIT, 'Waitlisted'),
-            (REG, 'Registered'),
-            (RPF, 'Registered Pass/Fail'),
-            (AUD, 'Auditing'),
-            (DROP, 'Dropped')
+            ('WAIT', 'Waitlisted'),
+            ('REG', 'Registered'),
+            ('RPF', 'Registered Pass/Fail'),
+            ('AUD', 'Auditing'),
+            ('DROP', 'Dropped')
         ],
-        default=WAIT
+        default='WAIT'
     )
     midterm_letter_grade = models.CharField(
         max_length=1,
         choices = [
-            (A, 'A'),
-            (B, 'B'),
-            (C, 'C'),
-            (D, 'D'),
-            (P, 'Pass'),
-            (F, 'Fail')
+            ('A', 'A'),
+            ('B', 'B'),
+            ('C', 'C'),
+            ('D', 'D'),
+            ('P', 'Pass'),
+            ('F', 'Fail')
         ],
         default=None,
         null=True
@@ -243,14 +243,14 @@ class Enrollment(models.Model):
     final_letter_grade = models.CharField(
         max_length=1,
         choices = [
-            (A, 'A'),
-            (B, 'B'),
-            (C, 'C'),
-            (D, 'D'),
-            (P, 'Pass'),
-            (F, 'Fail'),
-            (W, 'Withdrawal'),
-            (I, 'Incomplete')
+            ('A', 'A'),
+            ('B', 'B'),
+            ('C', 'C'),
+            ('D', 'D'),
+            ('P', 'Pass'),
+            ('F', 'Fail'),
+            ('W', 'Withdrawal'),
+            ('I', 'Incomplete')
         ],
         default=None,
         null=True
@@ -261,7 +261,7 @@ class Enrollment(models.Model):
 
     @property
     def current_grade(self):
-        current_section_student_assignments = self.student.assignments.filter(assignment.section=self.section)
+        current_section_student_assignments = self.student.assignments.filter(section==self.section)
         sum_of_grades = 0
         if current_section_student_assignments:
             for a in current_section_student_assignments:
