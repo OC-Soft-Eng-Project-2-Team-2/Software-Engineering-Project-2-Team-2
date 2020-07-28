@@ -5,7 +5,7 @@ import datetime
 
 
 class Student(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    user = models.OneToOneField(User, on_delete=models.SET_NULL, null=True)
 
     student_id = models.CharField(max_length=7, primary_key=True)
     first_name = models.CharField(max_length=20)
@@ -98,7 +98,7 @@ class Student(models.Model):
                 
 
 class Professor(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    user = models.OneToOneField(User, on_delete=models.SET_NULL, null=True)
 
     faculty_id = models.CharField(max_length=7, primary_key=True)
     first_name = models.CharField(max_length=20)
@@ -111,7 +111,7 @@ class Professor(models.Model):
 
 
 class Admin(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    user = models.OneToOneField(User, on_delete=models.SET_NULL, null=True)
 
     staff_id = models.CharField(max_length=7, primary_key=True)
     first_name = models.CharField(max_length=20)
@@ -179,6 +179,16 @@ class Section(models.Model):
     class Meta:
         """Enforces that no two sections have the same full_section_code"""
         unique_together=('course', 'section_number', 'semester_code')
+
+
+class Announcement(models.Model):
+    section = models.ForeignKey('Section', on_delete=models.SET_NULL, null=True)
+    posted_date = models.DateField()
+    announcement_title = models.CharField(max_length=100)
+    announcement_text = models.CharField(max_length=1000)
+
+    def __str__(self):
+        return announcement_title + '(' + posted_date + '):' + announcement_text[:100]
 
 
 class Assignment(models.Model):
@@ -261,7 +271,7 @@ class Enrollment(models.Model):
 
     @property
     def current_grade(self):
-        current_section_student_assignments = self.student.assignments.filter(section==self.section)
+        current_section_student_assignments = self.student.assignments.filter(assignment.section==self.section)
         sum_of_grades = 0
         if current_section_student_assignments:
             for a in current_section_student_assignments:
@@ -290,7 +300,3 @@ class StudentAssignment(models.Model):
 
     def __str__(self):
         return str(self.assignment) + ': ' + str(self.student)
-
-
-
-# the directory tree is probably borked to heck, and we have no test data yet
