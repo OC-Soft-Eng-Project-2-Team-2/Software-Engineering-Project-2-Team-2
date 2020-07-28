@@ -12,7 +12,10 @@ def home(request):
     return render(request, "cms_application/home.html")
     
 def login(response):
-    return render(response, "registration/login.html", {"UserName":"TestName"})
+    return render(response, "registration/login.html")
 
 def aClass(response):
-    return render(response, "cms_application/class.html", {"UserName":"TestName"})
+    return render(response, "cms_application/class.html")
+
+def grades(response):
+    return render(response, "cms_application/index.html")
