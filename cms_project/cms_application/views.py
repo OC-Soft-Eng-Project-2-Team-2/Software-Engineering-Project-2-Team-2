@@ -19,3 +19,6 @@ def aClass(response):
 
 def grades(response):
     return render(response, "cms_application/index.html")
+
+def assignmentlist(response):
+    return render(response, "cms_application/assignmentList.html")
