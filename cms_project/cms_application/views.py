@@ -197,7 +197,7 @@ def assignmentlist(response):
     return render(response, "cms_application/class.html", {"UserName":"TestName"})
 
 def grades(response):
-    context = []
+    context = {}
     grades = []
 
     grade1 = {
