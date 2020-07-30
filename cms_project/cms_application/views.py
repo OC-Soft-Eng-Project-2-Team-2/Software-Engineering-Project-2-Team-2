@@ -12,7 +12,41 @@ def home(request):
     return render(request, "cms_application/home.html")
     
 def login(response):
-    return render(response, "registration/login.html", {"UserName":"TestName"})
+    return render(response, "registration/login.html")
 
 def aClass(response):
     return render(response, "cms_application/class.html", {"UserName":"TestName"})
+
+def grades(response):
+    return render(
+        response, 
+        "cms_application/grades.html",
+        {"grades": [
+            {
+                'name': 'Course I',
+                'grade': '200/100',
+                'percentage': 200, 
+                'letter': 'F',
+                'assignments': [
+                        {'name': 'Assignment1', 'grade': '200/100'},
+                        {'name': 'Assignment2', 'grade': '200/100'},
+                        {'name': 'Assignment3', 'grade': '200/100'},
+                        {'name': 'Assignment4', 'grade': '200/100'},
+                        {'name': 'Assignment5', 'grade': '200/100'},
+                ]
+            },
+            {
+                'name': 'Course II',
+                'grade': '50/100',
+                'percentage': 200, 
+                'letter': 'A',
+                'assignments': [
+                        {'name': 'Assignment1', 'grade': '200/100'},
+                        {'name': 'Assignment2', 'grade': '200/100'},
+                        {'name': 'Assignment3', 'grade': '200/100'},
+                        {'name': 'Assignment4', 'grade': '200/100'},
+                        {'name': 'Assignment5', 'grade': '200/100'},
+                ]
+            },
+        ]}
+    )

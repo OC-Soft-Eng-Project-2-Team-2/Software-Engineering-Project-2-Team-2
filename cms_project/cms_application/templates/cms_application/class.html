@@ -36,6 +36,8 @@
 
   .nav-tabs .nav-link {
     border: none;
+    padding: 5px 8px;
+    font-size: 20px;
   }
 
   .nav-tabs {
@@ -125,10 +127,36 @@
 {% endblock styles %}
 
 {% block content %}
-<h2>WUM 101 - Intro to Wumbology</h2>
+
+{% if class %}
+  <h2>{{class.name}}</h2>
+{% else %}
+  <h2>WUM 101 - Intro to Wumbology</h2>
+{% endif %}
+
 <div class="tableRow">
+  {% if class %}
+  <img src="{{class.img}}" alt="{{class.alt}}"
+  height="auto" />
+  <div>
+    <div>
+      <h4>{{class.professor}}</h4>
+      <a href="{{class.syllabus}}">Syllabus</a>
+    </div>
+    <div>
+      <p>{{class.time}}</p>
+      <p>{{class.semester}}</p>
+      <p>{{class.credits}}</p>
+    </div>
+    <div>
+      <p>Current Grade: 46/100</p> <!-- Not sure about how to get the student grade for the specified class-->
+      <p>Final Grade: -</p>
+    </div>
+  </div>
+
+  {% else %}
   <img src="https://cdn.pixabay.com/photo/2016/11/22/23/53/animal-1851289_1280.jpg" alt="Dr. Patrick Star"
-    height="auto" />
+  height="auto" />
   <div>
     <div>
       <h4>Dr. Patrick Star</h4>
@@ -144,6 +172,8 @@
       <p>Final Grade: -</p>
     </div>
   </div>
+  {% endif %}
+
 </div>
 
 <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -164,6 +194,19 @@
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="Announcements" role="tabpanel" aria-labelledby="Announcements-tab">
     <ul>
+      {% if class %}
+        {% for item in class.announcements %}
+        <li>
+          <div class="announcement">
+            <p class="marginAndWeight">{{item.title}}<span>Posted on {{item.date}} at {{item.time}}</span></p>
+            <p>{{item.content}}</p>
+          </div>
+        </li>
+        {% empty %}
+        {% endfor %}
+
+        {% else %}
+
       <li>
         <div class="announcement">
           <p class="marginAndWeight">Title of Announcement<span>Posted on 07/08/2020 at 8:02 AM</span></p>
@@ -189,11 +232,56 @@
         </div>
       </li>
 
-
+      {% endif %}
     </ul>
   </div>
   <div class="tab-pane fade" id="Assignments" role="tabpanel" aria-labelledby="Assignments-tab">
     <ul>
+      {% if class %}
+        {% for item in class.assignments %}
+
+      <li>
+        <div class="announcement">
+          <p class="normalWeight">{{item.title}}<span>DUE at {{item.time}} on {{item.date}}</span></p>
+          <p class="marginAndWeight">Grade: {{item.grade}}
+
+          {% if item.submitted.bool %}
+            <span>SUBMITTED at {{item.submitted.time}} on {{item.submitted.date}}</span></p>
+          {% endif %}
+
+          <p class="marginBottom">{{item.description}}</p>
+          <div class="table">
+            <div class="tableColumn"></div>
+            <div class="tableRow">
+              <div>
+                <p>Attachments:</p>
+              </div>
+              <div>
+                {% for attachment in item.attachments %}
+                  <a href="{{attachment.url}}">{{attachment.title}}</a><br>
+                  {% empty %}
+                {% endfor %}
+              </div>
+            </div>
+            <div class="tableRow">
+              <div>
+                <p>File(s) Uploaded:</p>
+              </div>
+              {% for upload in item.uploads %}
+                <a href="{{upload.url}}">{{upload.title}}</a>
+                {% empty %}
+              {% endfor %}
+            </div>
+          </div>
+          <button>Upload File(s)</button>
+          <span>
+            <button>Submit</button>
+          </span>
+        </div>
+      </li>
+      {% endfor %}
+
+      {% else %}
       <li>
         <div class="announcement">
           <p class="normalWeight">Title of Assignment<span>DUE at 11:59 PM on 07/08/2020</span></p>
@@ -226,49 +314,63 @@
           </span>
         </div>
       </li>
+      {% endif %}
+
   </div>
   <div class="tab-pane fade" id="Students" role="tabpanel" aria-labelledby="Students-tab">
     <div class="studentsContainer">
       <div class="students">
-        <div>
-          <img src="https://i.pinimg.com/originals/51/c2/54/51c25482d801d6ff7f80deee727e13c6.png">
-          <p>Red</p>
-        </div>
-        <div>
-          <img src="https://www.ssbwiki.com/images/thumb/0/03/Samus_SSBU.png/1200px-Samus_SSBU.png">
-          <p>Samus Aran</p>
-        </div>
-        <div>
-          <img
-            src="https://vignette.wikia.nocookie.net/lotr/images/4/43/Aragorn3.jpg/revision/latest/scale-to-width-down/340?cb=20080318215744">
-          <p>Aragorn Son of Arathorn</p>
-        </div>
-        <div>
-          <img src="https://i.pinimg.com/originals/51/c2/54/51c25482d801d6ff7f80deee727e13c6.png">
-          <p>Red</p>
-        </div>
-        <div>
-          <img src="https://www.ssbwiki.com/images/thumb/0/03/Samus_SSBU.png/1200px-Samus_SSBU.png">
-          <p>Samus Aran</p>
-        </div>
-        <div>
-          <img
-            src="https://vignette.wikia.nocookie.net/lotr/images/4/43/Aragorn3.jpg/revision/latest/scale-to-width-down/340?cb=20080318215744">
-          <p>Aragorn Son of Arathorn</p>
-        </div>
-        <div>
-          <img src="https://i.pinimg.com/originals/51/c2/54/51c25482d801d6ff7f80deee727e13c6.png">
-          <p>Red</p>
-        </div>
-        <div>
-          <img src="https://www.ssbwiki.com/images/thumb/0/03/Samus_SSBU.png/1200px-Samus_SSBU.png">
-          <p>Samus Aran</p>
-        </div>
-        <div>
-          <img
-            src="https://vignette.wikia.nocookie.net/lotr/images/4/43/Aragorn3.jpg/revision/latest/scale-to-width-down/340?cb=20080318215744">
-          <p>Aragorn Son of Arathorn</p>
-        </div>
+        {% if class %}
+          {% for student in class.students %}
+            <div>
+              <img src="{{student.img}}">
+              <p>{{student.name}}</p>
+            </div>
+            {% empty %}
+          {% endfor %}
+
+        {% else %}
+          <div>
+            <img src="https://i.pinimg.com/originals/51/c2/54/51c25482d801d6ff7f80deee727e13c6.png">
+            <p>Red</p>
+          </div>
+          <div>
+            <img src="https://www.ssbwiki.com/images/thumb/0/03/Samus_SSBU.png/1200px-Samus_SSBU.png">
+            <p>Samus Aran</p>
+          </div>
+          <div>
+            <img
+              src="https://vignette.wikia.nocookie.net/lotr/images/4/43/Aragorn3.jpg/revision/latest/scale-to-width-down/340?cb=20080318215744">
+            <p>Aragorn Son of Arathorn</p>
+          </div>
+          <div>
+            <img src="https://i.pinimg.com/originals/51/c2/54/51c25482d801d6ff7f80deee727e13c6.png">
+            <p>Red</p>
+          </div>
+          <div>
+            <img src="https://www.ssbwiki.com/images/thumb/0/03/Samus_SSBU.png/1200px-Samus_SSBU.png">
+            <p>Samus Aran</p>
+          </div>
+          <div>
+            <img
+              src="https://vignette.wikia.nocookie.net/lotr/images/4/43/Aragorn3.jpg/revision/latest/scale-to-width-down/340?cb=20080318215744">
+            <p>Aragorn Son of Arathorn</p>
+          </div>
+          <div>
+            <img src="https://i.pinimg.com/originals/51/c2/54/51c25482d801d6ff7f80deee727e13c6.png">
+            <p>Red</p>
+          </div>
+          <div>
+            <img src="https://www.ssbwiki.com/images/thumb/0/03/Samus_SSBU.png/1200px-Samus_SSBU.png">
+            <p>Samus Aran</p>
+          </div>
+          <div>
+            <img
+              src="https://vignette.wikia.nocookie.net/lotr/images/4/43/Aragorn3.jpg/revision/latest/scale-to-width-down/340?cb=20080318215744">
+            <p>Aragorn Son of Arathorn</p>
+          </div>
+        {% endif %}
+
       </div>
     </div>
   </div>
