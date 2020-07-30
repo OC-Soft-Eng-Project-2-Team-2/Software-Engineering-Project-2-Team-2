@@ -144,7 +144,7 @@
     <div>
       <p>{{class.time}}</p>
       <p>{{class.semester}}</p>
-      <p>{{class.credits}}</p>
+      <p>{{class.credits}} Credit Hour(s)</p>
     </div>
     <div>
       <p>Current Grade: 46/100</p> <!-- Not sure about how to get the student grade for the specified class-->
@@ -192,51 +192,45 @@
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="Announcements" role="tabpanel" aria-labelledby="Announcements-tab">
     <ul>
-      {% if class %}
-        {% for item in class.announcements %}
+        {% for item in announcements %}
         <li>
           <div class="announcement">
             <p class="marginAndWeight">{{item.title}}<span>Posted on {{item.date}} at {{item.time}}</span></p>
-            <p>{{item.content}}</p>
+            <p>{{item.text}}</p>
           </div>
         </li>
         {% empty %}
+        <li>
+          <div class="announcement">
+            <p class="marginAndWeight">Title of Announcement<span>Posted on 07/08/2020 at 8:02 AM</span></p>
+            <p>Content of announcement. This is where the professor adds more requirements to the assignment or
+              something. Perhaps he's adding hundreds of new assignments. Maybe he wants everyone to write a
+              100-page paper about squirrels. I Wumbo, you Wumbo, he/she/it Wumbo.</p>
+          </div>
+        </li>
+        <li>
+          <div class="announcement">
+            <p class="marginAndWeight">Title of Announcement<span>Posted on 07/08/2020 at 8:02 AM</span></p>
+            <p>Content of announcement. This is where the professor adds more requirements to the assignment or
+              something. Perhaps he's adding hundreds of new assignments. Maybe he wants everyone to write a
+              100-page paper about squirrels. I Wumbo, you Wumbo, he/she/it Wumbo.</p>
+          </div>
+        </li>
+        <li>
+          <div class="announcement">
+            <p class="marginAndWeight">Title of Announcement<span>Posted on 07/08/2020 at 8:02 AM</span></p>
+            <p>Content of announcement. This is where the professor adds more requirements to the assignment or
+              something. Perhaps he's adding hundreds of new assignments. Maybe he wants everyone to write a
+              100-page paper about squirrels. I Wumbo, you Wumbo, he/she/it Wumbo.</p>
+          </div>
+        </li>
         {% endfor %}
-
-        {% else %}
-
-      <li>
-        <div class="announcement">
-          <p class="marginAndWeight">Title of Announcement<span>Posted on 07/08/2020 at 8:02 AM</span></p>
-          <p>Content of announcement. This is where the professor adds more requirements to the assignment or
-            something. Perhaps he's adding hundreds of new assignments. Maybe he wants everyone to write a
-            100-page paper about squirrels. I Wumbo, you Wumbo, he/she/it Wumbo.</p>
-        </div>
-      </li>
-      <li>
-        <div class="announcement">
-          <p class="marginAndWeight">Title of Announcement<span>Posted on 07/08/2020 at 8:02 AM</span></p>
-          <p>Content of announcement. This is where the professor adds more requirements to the assignment or
-            something. Perhaps he's adding hundreds of new assignments. Maybe he wants everyone to write a
-            100-page paper about squirrels. I Wumbo, you Wumbo, he/she/it Wumbo.</p>
-        </div>
-      </li>
-      <li>
-        <div class="announcement">
-          <p class="marginAndWeight">Title of Announcement<span>Posted on 07/08/2020 at 8:02 AM</span></p>
-          <p>Content of announcement. This is where the professor adds more requirements to the assignment or
-            something. Perhaps he's adding hundreds of new assignments. Maybe he wants everyone to write a
-            100-page paper about squirrels. I Wumbo, you Wumbo, he/she/it Wumbo.</p>
-        </div>
-      </li>
-
-      {% endif %}
     </ul>
   </div>
   <div class="tab-pane fade" id="Assignments" role="tabpanel" aria-labelledby="Assignments-tab">
     <ul>
       {% if class %}
-        {% for item in class.assignments %}
+        {% for item in assignments %}
 
       <li>
         <div class="announcement">
@@ -318,56 +312,53 @@
   <div class="tab-pane fade" id="Students" role="tabpanel" aria-labelledby="Students-tab">
     <div class="studentsContainer">
       <div class="students">
-        {% if class %}
-          {% for student in class.students %}
+          {% for student in students %}
             <div>
               <img src="{{student.img}}">
               <p>{{student.name}}</p>
             </div>
             {% empty %}
+            <div>
+              <img src="https://i.pinimg.com/originals/51/c2/54/51c25482d801d6ff7f80deee727e13c6.png">
+              <p>Red</p>
+            </div>
+            <div>
+              <img src="https://www.ssbwiki.com/images/thumb/0/03/Samus_SSBU.png/1200px-Samus_SSBU.png">
+              <p>Samus Aran</p>
+            </div>
+            <div>
+              <img
+                src="https://vignette.wikia.nocookie.net/lotr/images/4/43/Aragorn3.jpg/revision/latest/scale-to-width-down/340?cb=20080318215744">
+              <p>Aragorn Son of Arathorn</p>
+            </div>
+            <div>
+              <img src="https://i.pinimg.com/originals/51/c2/54/51c25482d801d6ff7f80deee727e13c6.png">
+              <p>Red</p>
+            </div>
+            <div>
+              <img src="https://www.ssbwiki.com/images/thumb/0/03/Samus_SSBU.png/1200px-Samus_SSBU.png">
+              <p>Samus Aran</p>
+            </div>
+            <div>
+              <img
+                src="https://vignette.wikia.nocookie.net/lotr/images/4/43/Aragorn3.jpg/revision/latest/scale-to-width-down/340?cb=20080318215744">
+              <p>Aragorn Son of Arathorn</p>
+            </div>
+            <div>
+              <img src="https://i.pinimg.com/originals/51/c2/54/51c25482d801d6ff7f80deee727e13c6.png">
+              <p>Red</p>
+            </div>
+            <div>
+              <img src="https://www.ssbwiki.com/images/thumb/0/03/Samus_SSBU.png/1200px-Samus_SSBU.png">
+              <p>Samus Aran</p>
+            </div>
+            <div>
+              <img
+                src="https://vignette.wikia.nocookie.net/lotr/images/4/43/Aragorn3.jpg/revision/latest/scale-to-width-down/340?cb=20080318215744">
+              <p>Aragorn Son of Arathorn</p>
+            </div>
           {% endfor %}
 
-        {% else %}
-          <div>
-            <img src="https://i.pinimg.com/originals/51/c2/54/51c25482d801d6ff7f80deee727e13c6.png">
-            <p>Red</p>
-          </div>
-          <div>
-            <img src="https://www.ssbwiki.com/images/thumb/0/03/Samus_SSBU.png/1200px-Samus_SSBU.png">
-            <p>Samus Aran</p>
-          </div>
-          <div>
-            <img
-              src="https://vignette.wikia.nocookie.net/lotr/images/4/43/Aragorn3.jpg/revision/latest/scale-to-width-down/340?cb=20080318215744">
-            <p>Aragorn Son of Arathorn</p>
-          </div>
-          <div>
-            <img src="https://i.pinimg.com/originals/51/c2/54/51c25482d801d6ff7f80deee727e13c6.png">
-            <p>Red</p>
-          </div>
-          <div>
-            <img src="https://www.ssbwiki.com/images/thumb/0/03/Samus_SSBU.png/1200px-Samus_SSBU.png">
-            <p>Samus Aran</p>
-          </div>
-          <div>
-            <img
-              src="https://vignette.wikia.nocookie.net/lotr/images/4/43/Aragorn3.jpg/revision/latest/scale-to-width-down/340?cb=20080318215744">
-            <p>Aragorn Son of Arathorn</p>
-          </div>
-          <div>
-            <img src="https://i.pinimg.com/originals/51/c2/54/51c25482d801d6ff7f80deee727e13c6.png">
-            <p>Red</p>
-          </div>
-          <div>
-            <img src="https://www.ssbwiki.com/images/thumb/0/03/Samus_SSBU.png/1200px-Samus_SSBU.png">
-            <p>Samus Aran</p>
-          </div>
-          <div>
-            <img
-              src="https://vignette.wikia.nocookie.net/lotr/images/4/43/Aragorn3.jpg/revision/latest/scale-to-width-down/340?cb=20080318215744">
-            <p>Aragorn Son of Arathorn</p>
-          </div>
-        {% endif %}
 
       </div>
     </div>
