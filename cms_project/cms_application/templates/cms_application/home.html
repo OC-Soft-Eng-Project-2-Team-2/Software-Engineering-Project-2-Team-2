@@ -5,10 +5,10 @@
   .gridView {
     display: grid;
     grid-gap: 15px;
-    grid-template-columns: 375px auto;
+    grid-template-columns: 375px minmax(375px, 1fr);
   }
 
-  .calendarArea {
+  .tiles {
     background-color: #333;
     border: 1px solid #333;
     border-radius: .25em;
@@ -90,12 +90,12 @@
 
     <h1>Calendar</h1>
 
-    <div class="calendarArea">
+    <div class="tiles">
       <div class="gridView">
         <div class="calendarAndButtons">
           <div id="buttons">
             <form class="form-inline">
-              <button onclick="previous()">&lt;</button>
+              <button type="button" onclick="previous()">&lt;</button>
 
               <select name="month" id="month" onchange="jump()">
                 <option value="0">Jan</option>
@@ -155,7 +155,7 @@
                 <option value="2029">2029</option>
                 <option value="2030">2030</option>
               </select>
-              <button onclick="next()">&gt;</button>
+              <button type="button" onclick="next()">&gt;</button>
             </form>
 
           </div>
@@ -245,9 +245,6 @@
 
 
 </div>
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-  integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 
 <script>
   let today = new Date();

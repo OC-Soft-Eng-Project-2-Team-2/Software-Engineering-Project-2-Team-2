@@ -192,8 +192,45 @@ def aClass(response):
 
     return render(response, "cms_application/class.html", context)
 
-def grades(response):
-    return render(response, "cms_application/index.html")
-
 def assignmentlist(response):
     return render(response, "cms_application/assignmentList.html")
+    return render(response, "cms_application/class.html", {"UserName":"TestName"})
+
+def grades(response):
+    context = []
+    grades = []
+
+    grade1 = {
+        'name': 'Course I',
+        'grade': '50/100',
+        'percentage': 50, 
+        'letter': 'F',
+        'assignments': [
+            {'name': 'Assignment1', 'grade': '50/100'},
+            {'name': 'Assignment2', 'grade': '50/100'},
+            {'name': 'Assignment3', 'grade': '50/100'},
+            {'name': 'Assignment4', 'grade': '50/100'},
+            {'name': 'Assignment5', 'grade': '50/100'}
+        ]
+    }
+
+    grade2 = {
+        'name': 'Course II',
+        'grade': '200/100',
+        'percentage': 200, 
+        'letter': 'A',
+        'assignments': [
+            {'name': 'Assignment1', 'grade': '200/100'},
+            {'name': 'Assignment2', 'grade': '200/100'},
+            {'name': 'Assignment3', 'grade': '200/100'},
+            {'name': 'Assignment4', 'grade': '200/100'},
+            {'name': 'Assignment5', 'grade': '200/100'}
+        ]
+    }
+
+    grades.append(grade1)
+    grades.append(grade2)
+    context["grades"] = grades
+    
+    return render(response, "cms_application/grades.html", context)
+    
