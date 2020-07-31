@@ -131,7 +131,7 @@
 {% if class %}
   <h2>{{class.name}}</h2>
 {% else %}
-  <h2>WUM 101 - Intro to Wumbology</h2>
+  <h2>Class not Found</h2>
 {% endif %}
 
 <div class="tableRow">
@@ -155,21 +155,17 @@
   </div>
 
   {% else %}
-  <img src="https://cdn.pixabay.com/photo/2016/11/22/23/53/animal-1851289_1280.jpg" alt="Dr. Patrick Star"
+  <img src="https://miro.medium.com/max/978/1*pUEZd8z__1p-7ICIO1NZFA.png" alt="No Img Found"
   height="auto" />
   <div>
     <div>
-      <h4>Dr. Patrick Star</h4>
-      <a href="">Syllabus</a>
+
     </div>
     <div>
-      <p>MWF 8:00 AM</p>
-      <p>2020 Summer Session 1</p>
-      <p>3 Credit Hour(s)</p>
+      
     </div>
     <div>
-      <p>Current Grade: 46/100</p>
-      <p>Final Grade: -</p>
+
     </div>
   </div>
   {% endif %}
@@ -204,26 +200,7 @@
         {% empty %}
         <li>
           <div class="announcement">
-            <p class="marginAndWeight">Title of Announcement<span>Posted on 07/08/2020 at 8:02 AM</span></p>
-            <p>Content of announcement. This is where the professor adds more requirements to the assignment or
-              something. Perhaps he's adding hundreds of new assignments. Maybe he wants everyone to write a
-              100-page paper about squirrels. I Wumbo, you Wumbo, he/she/it Wumbo.</p>
-          </div>
-        </li>
-        <li>
-          <div class="announcement">
-            <p class="marginAndWeight">Title of Announcement<span>Posted on 07/08/2020 at 8:02 AM</span></p>
-            <p>Content of announcement. This is where the professor adds more requirements to the assignment or
-              something. Perhaps he's adding hundreds of new assignments. Maybe he wants everyone to write a
-              100-page paper about squirrels. I Wumbo, you Wumbo, he/she/it Wumbo.</p>
-          </div>
-        </li>
-        <li>
-          <div class="announcement">
-            <p class="marginAndWeight">Title of Announcement<span>Posted on 07/08/2020 at 8:02 AM</span></p>
-            <p>Content of announcement. This is where the professor adds more requirements to the assignment or
-              something. Perhaps he's adding hundreds of new assignments. Maybe he wants everyone to write a
-              100-page paper about squirrels. I Wumbo, you Wumbo, he/she/it Wumbo.</p>
+            <p class="marginAndWeight">No announcements<span></span></p>
           </div>
         </li>
         {% endfor %}
@@ -278,34 +255,7 @@
       {% else %}
       <li>
         <div class="announcement">
-          <p class="normalWeight">Title of Assignment<span>DUE at 11:59 PM on 07/08/2020</span></p>
-          <p class="marginAndWeight">Grade: ?/100<span>SUBMITTED at 11:58 PM on 07/08/2020</span></p>
-          <p class="marginBottom">Description of Assignment. This is where the professor adds more requirements to the
-            assignment or
-            something. Perhaps he's adding hundreds of new assignments. Maybe he wants everyone to write a
-            100-page paper about squirrels. I Wumbo, you Wumbo, he/she/it Wumbo.</p>
-          <div class="table">
-            <div class="tableColumn"></div>
-            <div class="tableRow">
-              <div>
-                <p>Attachments:</p>
-              </div>
-              <div>
-                <a href="">Wumbography Template.pdf</a><br>
-                <a href="">Wumbography Example.pdf</a><br>
-              </div>
-            </div>
-            <div class="tableRow">
-              <div>
-                <p>File(s) Uploaded:</p>
-              </div>
-              <a href="">Rock Bottom map final.png.pdf</a>
-            </div>
-          </div>
-          <button>Upload File(s)</button>
-          <span>
-            <button>Submit</button>
-          </span>
+          <p class="normalWeight">No Assignments<span></span></p>
         </div>
       </li>
       {% endif %}
@@ -321,47 +271,9 @@
             </div>
             {% empty %}
             <div>
-              <img src="https://i.pinimg.com/originals/51/c2/54/51c25482d801d6ff7f80deee727e13c6.png">
-              <p>Red</p>
-            </div>
-            <div>
-              <img src="https://www.ssbwiki.com/images/thumb/0/03/Samus_SSBU.png/1200px-Samus_SSBU.png">
-              <p>Samus Aran</p>
-            </div>
-            <div>
-              <img
-                src="https://vignette.wikia.nocookie.net/lotr/images/4/43/Aragorn3.jpg/revision/latest/scale-to-width-down/340?cb=20080318215744">
-              <p>Aragorn Son of Arathorn</p>
-            </div>
-            <div>
-              <img src="https://i.pinimg.com/originals/51/c2/54/51c25482d801d6ff7f80deee727e13c6.png">
-              <p>Red</p>
-            </div>
-            <div>
-              <img src="https://www.ssbwiki.com/images/thumb/0/03/Samus_SSBU.png/1200px-Samus_SSBU.png">
-              <p>Samus Aran</p>
-            </div>
-            <div>
-              <img
-                src="https://vignette.wikia.nocookie.net/lotr/images/4/43/Aragorn3.jpg/revision/latest/scale-to-width-down/340?cb=20080318215744">
-              <p>Aragorn Son of Arathorn</p>
-            </div>
-            <div>
-              <img src="https://i.pinimg.com/originals/51/c2/54/51c25482d801d6ff7f80deee727e13c6.png">
-              <p>Red</p>
-            </div>
-            <div>
-              <img src="https://www.ssbwiki.com/images/thumb/0/03/Samus_SSBU.png/1200px-Samus_SSBU.png">
-              <p>Samus Aran</p>
-            </div>
-            <div>
-              <img
-                src="https://vignette.wikia.nocookie.net/lotr/images/4/43/Aragorn3.jpg/revision/latest/scale-to-width-down/340?cb=20080318215744">
-              <p>Aragorn Son of Arathorn</p>
+              <p>No Students</p>
             </div>
           {% endfor %}
-
-
       </div>
     </div>
   </div>

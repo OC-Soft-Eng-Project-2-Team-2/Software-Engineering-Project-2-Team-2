@@ -108,6 +108,11 @@
       color: ivory;
       position: absolute;
       padding: 0;
+      right: 0px;
+    }
+
+    .dropdown-menu show {
+      right: 0px;
     }
 
     .dropdown-item:hover {
@@ -197,18 +202,18 @@
           aria-expanded="false">
           🕭
         </a>
-        <div class="dropdown-menu" aria-labelledby="notificationDropdown">
+        <div class="dropdown-menu" aria-labelledby="notificationDropdown" id="test" style="right:0px">
           {% for item in notifications %}
-          <a class="dropdown-item" href="#">item.description</a>
+          <a class="dropdown-item" href="#" style="font-size: 20px;">item.description</a>
           <div class="dropdown-divider"></div>
           {% empty %} {% endfor %}
 
           <!-- TEST DATA BELOW REMOVE WHEN DATABASE IS READY-->
-          <a class="dropdown-item" href="#">WUM 101 - New Announcement</a>
+          <a class="dropdown-item" href="#" style="font-size: 20px;">WUM 101 - New Announcement</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">WUM 101 - Assignment Due!!</a>
+          <a class="dropdown-item" href="#" style="font-size: 20px;">WUM 101 - Assignment Due!!</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">WUM 101 - Test Graded</a>
+          <a class="dropdown-item" href="#" style="font-size: 20px;">WUM 101 - Test Graded</a>
           <!-- END TEST DATA-->
         </div>
         <img class="sideNavTopItem2" src="{% static "cms_application/account icon.png" %}" title="Account" href="#"
