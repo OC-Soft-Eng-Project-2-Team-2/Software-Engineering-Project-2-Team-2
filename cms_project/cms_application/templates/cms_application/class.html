@@ -30,6 +30,11 @@
     border-color: #333;
   }
 
+  .tab-pane {
+    border-radius: 0.25em;
+    border-top-left-radius: 0;
+  }
+
   .tab-pane>ul {
     padding: 5px
   }
@@ -129,9 +134,9 @@
 {% block content %}
 
 {% if class %}
-  <h2>{{class.name}}</h2>
+  <h1>{{class.name}}</h1>
 {% else %}
-  <h2>WUM 101 - Intro to Wumbology</h2>
+  <h1>WUM 101 - Intro to Wumbology</h1>
 {% endif %}
 
 <div class="tableRow">

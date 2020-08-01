@@ -4,46 +4,31 @@
     .grade-detail-row {
         display: inline-flex;
         flex-direction: row;
-        padding: 10px;
-        margin-top: 2px;
-        margin-bottom: 2px;
-        width: 99%;
-        margin-left: 0.5%;
-        margin-right: 0.5%;
+        padding: 5px;
+        margin: 5px;
+        width: 98%;
     }
 
     .grade-body-row {
-        border: solid rgb(99, 96, 96);
-    }
-
-    .grade-col {
-        text-align: right;
+        border: solid #222;
+        border-radius: 0.25em;
     }
 
     #grade-summary {
-        background-color:rgb(250, 250, 250);
-        margin-left: 10%;
-        margin-right: 10%;
-        margin-top:10px;
-        margin-bottom: 10px;
-        width: 80%;
+        background-color: #333;
         padding: 10px;
+        border-radius: 0.25em;
+        display: grid;
+        grid-gap: 15px;
+        grid-template-columns: 50% auto auto auto;
+        margin-bottom: 10px;
     }
 
-    .grade-summary-row, .grade-summary-details {
+    .grade-summary-row,
+    .grade-summary-details {
         display: inline-flex;
         flex-direction: row;
-        justify-content: space-evenly;
-        padding: 5px;
-        margin-top: 2px;
-        margin-bottom: 2px;
-        width: 99%;
-        margin-left: 0.5%;
-        margin-right: 0.5%;
-    }
-
-    #grade-summary div {
-        color: black;
+        margin: 5px;
     }
 
     .header {
@@ -52,59 +37,59 @@
     }
 
     #grade-details {
-        background-color:rgb(134, 118, 118);
-        margin-left: 10%;
-        margin-right: 10%;
-        margin-top:10px;
-        margin-bottom: 10px;
-        width: 80%;
+        background-color: #333;
+        border-radius: 0.25em;
     }
 
-    .col>img {
-        height: 30px;
-        width: 30px;
+    .col {
+        display: inline-block;
+        padding: 0;
     }
 
+    .col * {
+        display: inline;
+    }
+
+    .col img {
+        height: 32px;
+        width: auto;
+        overflow: hidden;
+        border-radius: 0.25em;
+    }
+
+    .grade-col {
+        margin-right: 5px;
+    }
 </style>
 
 {% endblock styles %}
 {% block content %}
-    <div id="grades-container">
-        <div id="grade-summary">
-            <div class="grade-summary-row">
-                <div class="header">Courses</div>
-                <div class="grade-summary-details">
-                    <div>Grade Total</div>
-                    <div>Percentage</div>
-                    <div>Letter</div>
-                </div>
-            </div>
-            {% for course in grades %}
-                <div class="grade-summary-row">
-                    <div>{{course.name}}</div>
-                    <div class="grade-summary-details">
-                        <div>{{course.grade}}</div>
-                        <div>{{course.percentage}}</div>
-                        <div>{{course.letter}}</div>
-                    </div>
-                </div>
-            {% endfor %}
+<h1>Courses</h1>
+<div id="grade-summary">
+    <div class="header">Course</div>
+    <div class="header">Grade Total</div>
+    <div class="header">Percentage</div>
+    <div class="header">Letter</div>
+    {% for course in grades %}
+    <div>{{course.name}}</div>
+    <div>{{course.grade}}</div>
+    <div>{{course.percentage}}</div>
+    <div>{{course.letter}}</div>
+    {% endfor %}
+</div>
+<h1>Assignments</h1>
+<div id="grade-details">
+    {% for course in grades %}
+    {% for assignment in course.assignments %}
+    <div class="grade-detail-row grade-body-row">
+        <div class="col">
+            <img src="https://i.pinimg.com/originals/51/c2/54/51c25482d801d6ff7f80deee727e13c6.png">
+            <p>{{course.name}} - {{assignment.name}}</p>
         </div>
-        <div id="grade-details">
-            <div class="grade-detail-row">
-                <div class="grade-col header">Assignments</div>
-            </div>
-            {% for course in grades %}
-                {% for assignment in course.assignments %}
-                    <div class="grade-detail-row grade-body-row">
-                        <div class="col">
-                            <img src="https://i.pinimg.com/originals/51/c2/54/51c25482d801d6ff7f80deee727e13c6.png">
-                            {{course.name}} - {{assignment.name}}
-                        </div>
-                        <div class="grade-col">{{assignment.grade}}</div>
-                    </div>
-                {% endfor %}
-            {% endfor %}
-        </div>
+        <div class="grade-col">{{assignment.grade}}</div>
     </div>
+    {% endfor %}
+    {% endfor %}
+</div>
+</div>
 {% endblock %}
