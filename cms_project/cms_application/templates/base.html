@@ -105,8 +105,6 @@
 
     .dropdown-menu {
       background-color: #222;
-      color: ivory;
-      position: absolute;
       padding: 0;
     }
 
@@ -160,6 +158,10 @@
       line-height: 1.2;
     }
 
+    h1 {
+      margin-bottom: 5px;
+    }
+
     button,
     select {
       background-color: #222;
@@ -193,10 +195,14 @@
 
         <!-- HAMBURGER MENU-->
         <a href="javascript:void(0)" class="toggleBtn" onclick="toggleNav()">&#9776;</a>
+        
+        
         <a class="sideNavTopItem1" href="#" id="notificationDropdown" data-toggle="dropdown" aria-haspopup="true"
           aria-expanded="false">
           🕭
         </a>
+
+
         <div class="dropdown-menu" aria-labelledby="notificationDropdown">
           {% for item in notifications %}
           <a class="dropdown-item" href="#">item.description</a>
@@ -211,6 +217,20 @@
           <a class="dropdown-item" href="#">WUM 101 - Test Graded</a>
           <!-- END TEST DATA-->
         </div>
+
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          {% for item in notifications %}
+          <a class="dropdown-item" href="/class/{{item.class}}">{{item.class}}</a>
+          {% empty %} {% endfor %}
+
+          <!-- TEST DATA BELOW REMOVE WHEN DATABASE IS READY-->
+          <a class="dropdown-item" href="/class">WUM 101</a>
+          <a class="dropdown-item" href="/class">WWE 210</a>
+          <a class="dropdown-item" href="/class">YEET 555</a>
+          <!-- END TEST DATA-->
+        </div>
+
+
         <img class="sideNavTopItem2" src="{% static "cms_application/account icon.png" %}" title="Account" href="#"
           id="notificationDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         </img>
