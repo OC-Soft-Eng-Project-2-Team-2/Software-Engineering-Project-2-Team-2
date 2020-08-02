@@ -1,0 +1,328 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <!--Boot Strap-->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  <!--END BOOTSTRAP-->
+
+  <style>
+    #main {
+      transition: margin-left .5s;
+      margin-left: 55px;
+      padding: 20px;
+    }
+
+    /* The side navigation menu */
+    .sidenav {
+      height: 100%;
+      /* 100% Full-height */
+      width: 55px;
+      /* 0 width - change this with JavaScript */
+      position: fixed;
+      /* Stay in place */
+      z-index: 1;
+      /* Stay on top */
+      top: 0;
+      /* Stay at the top */
+      left: 0;
+      background-color: #1A1A1A;
+      /* Black*/
+      overflow-x: hidden;
+      /* Disable horizontal scroll */
+      transition: 0.5s;
+      /* 0.5 second transition effect to slide in the sidenav */
+
+      white-space: nowrap;
+    }
+
+    .sidenav .sideNavTop {
+      display: inline-block;
+    }
+
+    .sideNavTop .sideNavTopItem1 {
+      margin: 9px 0 0 105px;
+      font-weight: 900;
+      font-size: 40px;
+      overflow: hidden;
+      display: inline-block;
+    }
+
+    .sideNavTop .sideNavTopItem2 {
+      margin: -35px 0 0 55px;
+      height: auto;
+      width: 36px;
+      overflow: hidden;
+      display: inline-block;
+    }
+
+    .sidenav a {
+      text-decoration: none;
+      font-size: 25px;
+      color: white;
+      display: block;
+      transition: 0.3s;
+    }
+
+    .sidenav a:hover {
+      color: white;
+    }
+
+    .pageLink {
+      padding-top: 8px;
+      height: 50px;
+    }
+
+    /* When you mouse over the navigation links, highlight the link background*/
+    .pageLink:hover {
+      background: #222;
+    }
+
+    /* Position and style the close button (top right corner) */
+    .sidenav .toggleBtn {
+      position: absolute;
+      top: 0;
+      margin: 10px 10px 25px 10px;
+      font-size: 36px;
+    }
+
+    .navIcon {
+      height: auto;
+      width: 32px;
+      margin: 0 15px 0 10px;
+      overflow: hidden;
+    }
+
+    .nav-link {
+      padding: 0;
+      font-size: 36px;
+    }
+
+    .dropdown-menu {
+      background-color: #222;
+      padding: 0;
+    }
+
+    .dropdown-item:hover {
+      background-color: #333;
+    }
+  </style>
+
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    ul {
+      list-style-type: none;
+    }
+
+    html,
+    body {
+      background-color: #222;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    body>* {
+      flex-shrink: 0;
+    }
+
+    body>.tab-content {
+      flex-grow: 1;
+    }
+
+    img {
+      border-radius: 0.25rem;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    div,
+    th,
+    td {
+      color: ivory;
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    h1 {
+      margin-bottom: 5px;
+    }
+
+    button,
+    select {
+      background-color: #222;
+      color: ivory;
+      padding: 3px 15px;
+      border: 1px solid #222;
+      border-radius: 0.2rem;
+    }
+
+    button:hover {
+      background-color: rgb(42, 42, 42);
+      color: ivory;
+    }
+
+    a,
+    a:hover {
+      color: #2093e8;
+    }
+  </style>
+
+  {% block styles %} {% endblock styles %}
+
+  <title>Class Management</title>
+</head>
+
+<body>
+  <div>
+    <!-- Sidebar -->
+    <div id="mySidenav" class="sidenav">
+      <div class="sideNavTop">
+
+        <!-- HAMBURGER MENU-->
+        <a href="javascript:void(0)" class="toggleBtn" onclick="toggleNav()">&#9776;</a>
+        
+        
+        <a class="sideNavTopItem1" href="#" id="notificationDropdown" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">
+          🕭
+        </a>
+
+
+        <div class="dropdown-menu" aria-labelledby="notificationDropdown">
+          {% for item in notifications %}
+          <a class="dropdown-item" href="#">item.description</a>
+          <div class="dropdown-divider"></div>
+          {% empty %} {% endfor %}
+
+          <!-- TEST DATA BELOW REMOVE WHEN DATABASE IS READY-->
+          <a class="dropdown-item" href="#">WUM 101 - New Announcement</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">WUM 101 - Assignment Due!!</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">WUM 101 - Test Graded</a>
+          <!-- END TEST DATA-->
+        </div>
+
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          {% for item in notifications %}
+          <a class="dropdown-item" href="/class/{{item.class}}">{{item.class}}</a>
+          {% empty %} {% endfor %}
+
+          <!-- TEST DATA BELOW REMOVE WHEN DATABASE IS READY-->
+          <a class="dropdown-item" href="/class">WUM 101</a>
+          <a class="dropdown-item" href="/class">WWE 210</a>
+          <a class="dropdown-item" href="/class">YEET 555</a>
+          <!-- END TEST DATA-->
+        </div>
+
+
+        <img class="sideNavTopItem2" src="{% static "cms_application/account icon.png" %}" title="Account" href="#"
+          id="notificationDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        </img>
+      </div>
+
+      <div class="pageLink">
+        <a href="/home"><img class="navIcon" src="{% static "cms_application/homeIcon.png" %}" title="Home">Home</a>
+      </div>
+
+      <div class="pageLink">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          <img class="navIcon" src="{% static "cms_application/Class Icon White.png" %}" title="Classes">Classes
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          {% for item in classes %}
+          <a class="dropdown-item" href="/class/{{item.class}}">{{item.class}}</a>
+          {% empty %} {% endfor %}
+
+          <!-- TEST DATA BELOW REMOVE WHEN DATABASE IS READY-->
+          <a class="dropdown-item" href="/class">WUM 101</a>
+          <a class="dropdown-item" href="/class">WWE 210</a>
+          <a class="dropdown-item" href="/class">YEET 555</a>
+          <!-- END TEST DATA-->
+        </div>
+      </div>
+
+      <div class="pageLink">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          <img class="navIcon" src="{% static "cms_application/grades Icon small.png" %}" title="Grades">Grades
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          {% for item in classes %}
+          <a class="dropdown-item" href="/grades/{{item.class}}">{{item.class}}</a>
+          {% empty %} {% endfor %}
+
+          <!-- TEST DATA BELOW REMOVE WHEN DATABASE IS READY-->
+          <a class="dropdown-item" href="/grades">WUM 101</a>
+          <a class="dropdown-item" href="/grades">WWE 210</a>
+          <a class="dropdown-item" href="/grades">YEET 555</a>
+          <!-- END TEST DATA-->
+        </div>
+      </div>
+
+      <div class="pageLink">
+        <a href="/logout" id="navbarDropdown" role="button">
+          <img class="navIcon" src="{% static "cms_application/logout icon.png" %}" title="Logout">Logout
+        </a>
+      </div>
+    </div>
+
+    <script>
+      function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+        document.getElementById("main").style.marginLeft = "250px";
+      }
+
+      function toggleNav() {
+        if (document.getElementById("mySidenav").style.width == "250px") {
+          document.getElementById("mySidenav").style.width = "55px";
+          document.getElementById("main").style.marginLeft = "55px";
+        } else {
+          document.getElementById("mySidenav").style.width = "250px";
+          document.getElementById("main").style.marginLeft = "250px";
+        }
+      }
+
+      function closeNav() {
+        document.getElementById("mySidenav").style.width = "55px";
+        document.getElementById("main").style.marginLeft = "55px";
+      }
+    </script>
+
+    <!-- END HAMBURGER MENU-->
+
+    <!--Boot Strap-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"></script>
+  </div>
+
+  <div id="main">
+    {% block content %} {% endblock %}
+  </div>
+  </div>
+</body>
+
+</html>
