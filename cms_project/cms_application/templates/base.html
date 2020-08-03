@@ -254,7 +254,8 @@
       <div class="pageLink dropright">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
-          <img class="navIcon" src="{% static "cms_application/Class Icon White.png" %}" title="Classes">Classes
+          <img class="navIcon" src="{% static "cms_application/Class Icon White.png" %}" onclick="openNav()"
+            title="Classes">Classes
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           {% for item in classes %}
@@ -272,7 +273,8 @@
       <div class="pageLink dropright">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
-          <img class="navIcon" src="{% static "cms_application/grades Icon small.png" %}" title="Grades">Grades
+          <img class="navIcon" src="{% static "cms_application/grades Icon small.png" %}" onclick="openNav()"
+            title="Grades">Grades
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           {% for item in classes %}
@@ -313,24 +315,6 @@
       function closeNav() {
         document.getElementById("mySidenav").style.width = "55px";
         document.getElementById("main").style.marginLeft = "55px";
-      }
-    </script>
-
-    <script>
-      /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
-      var dropdown = document.getElementsByClassName("dropdown-btn");
-      var i;
-
-      for (i = 0; i < dropdown.length; i++) {
-        dropdown[i].addEventListener("click", function () {
-          this.classList.toggle("active");
-          var dropdownContent = this.nextElementSibling;
-          if (dropdownContent.style.display === "block") {
-            dropdownContent.style.display = "none";
-          } else {
-            dropdownContent.style.display = "block";
-          }
-        });
       }
     </script>
 
