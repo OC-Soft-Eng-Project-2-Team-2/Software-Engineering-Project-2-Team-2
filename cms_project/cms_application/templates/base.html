@@ -105,11 +105,24 @@
 
     .dropdown-menu {
       background-color: #222;
-      padding: 0;
+      padding: 2px;
+      width: auto;
+      text-align: left;
+      left: 0;
+      right: 0;
+    }
+
+    .sideNavTop .dropdown-menu {
+      width: 90%;
     }
 
     .dropdown-item:hover {
       background-color: #333;
+    }
+
+    a.dropdown-item {
+      font-size: 18px;
+      padding: 2px;
     }
   </style>
 
@@ -180,11 +193,6 @@
     a:hover {
       color: #2093e8;
     }
-
-    .dropdown-menu {
-      position: relative;
-      overflow: visible;
-    }
   </style>
 
   {% block styles %} {% endblock styles %}
@@ -200,10 +208,10 @@
 
         <!-- HAMBURGER MENU-->
         <a href="javascript:void(0)" class="toggleBtn" onclick="toggleNav()">&#9776;</a>
-        
-        
-        <a class="sideNavTopItem1 dropright" href="#" id="notificationDropdown" data-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false">
+
+
+        <a class="sideNavTopItem1 dropright" href="#" id="notificationDropdown" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
           🕭
         </a>
 
@@ -215,11 +223,9 @@
           {% empty %} {% endfor %}
 
           <!-- TEST DATA BELOW REMOVE WHEN DATABASE IS READY-->
-          <a class="dropdown-item" href="#">WUM 101 - New Announcement</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">WUM 101 - Assignment Due!!</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">WUM 101 - Test Graded</a>
+          <a class="dropdown-item" href="#">New Announcement 12345</a>
+          <a class="dropdown-item" href="#">Website Down</a>
+          <a class="dropdown-item" href="#">Test Today</a>
           <!-- END TEST DATA-->
         </div>
 
@@ -307,6 +313,24 @@
       function closeNav() {
         document.getElementById("mySidenav").style.width = "55px";
         document.getElementById("main").style.marginLeft = "55px";
+      }
+    </script>
+
+    <script>
+      /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+      var dropdown = document.getElementsByClassName("dropdown-btn");
+      var i;
+
+      for (i = 0; i < dropdown.length; i++) {
+        dropdown[i].addEventListener("click", function () {
+          this.classList.toggle("active");
+          var dropdownContent = this.nextElementSibling;
+          if (dropdownContent.style.display === "block") {
+            dropdownContent.style.display = "none";
+          } else {
+            dropdownContent.style.display = "block";
+          }
+        });
       }
     </script>
 
