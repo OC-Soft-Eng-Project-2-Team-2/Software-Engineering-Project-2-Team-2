@@ -105,11 +105,24 @@
 
     .dropdown-menu {
       background-color: #222;
-      padding: 0;
+      padding: 2px;
+      width: auto;
+      text-align: left;
+      left: 0;
+      right: 0;
+    }
+
+    .sideNavTop .dropdown-menu {
+      width: 90%;
     }
 
     .dropdown-item:hover {
       background-color: #333;
+    }
+
+    a.dropdown-item {
+      font-size: 18px;
+      padding: 2px;
     }
   </style>
 
@@ -180,11 +193,6 @@
     a:hover {
       color: #2093e8;
     }
-
-    .dropdown-menu {
-      position: relative;
-      overflow: visible;
-    }
   </style>
 
   {% block styles %} {% endblock styles %}
@@ -200,10 +208,10 @@
 
         <!-- HAMBURGER MENU-->
         <a href="javascript:void(0)" class="toggleBtn" onclick="toggleNav()">&#9776;</a>
-        
-        
-        <a class="sideNavTopItem1 dropright" href="#" id="notificationDropdown" data-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false">
+
+
+        <a class="sideNavTopItem1 dropright" href="#" id="notificationDropdown" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
           🕭
         </a>
 
@@ -215,11 +223,9 @@
           {% empty %} {% endfor %}
 
           <!-- TEST DATA BELOW REMOVE WHEN DATABASE IS READY-->
-          <a class="dropdown-item" href="#">WUM 101 - New Announcement</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">WUM 101 - Assignment Due!!</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">WUM 101 - Test Graded</a>
+          <a class="dropdown-item" href="#">New Announcement 12345</a>
+          <a class="dropdown-item" href="#">Website Down</a>
+          <a class="dropdown-item" href="#">Test Today</a>
           <!-- END TEST DATA-->
         </div>
 
@@ -236,8 +242,8 @@
         </div>
 
 
-        <img class="sideNavTopItem2" src="{% static "cms_application/account icon.png" %}" title="Account" href="#"
-          id="notificationDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <img class="sideNavTopItem2" src="{% static "cms_application/account icon.png" %}" title="Account"
+          id="notificationDropdown" onclick="uploadPfp()">
         </img>
       </div>
 
@@ -248,7 +254,8 @@
       <div class="pageLink dropright">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
-          <img class="navIcon" src="{% static "cms_application/Class Icon White.png" %}" title="Classes">Classes
+          <img class="navIcon" src="{% static "cms_application/Class Icon White.png" %}" onclick="openNav()"
+            title="Classes">Classes
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           {% for item in classes %}
@@ -266,7 +273,8 @@
       <div class="pageLink dropright">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
-          <img class="navIcon" src="{% static "cms_application/grades Icon small.png" %}" title="Grades">Grades
+          <img class="navIcon" src="{% static "cms_application/grades Icon small.png" %}" onclick="openNav()"
+            title="Grades">Grades
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           {% for item in classes %}
@@ -308,6 +316,15 @@
         document.getElementById("mySidenav").style.width = "55px";
         document.getElementById("main").style.marginLeft = "55px";
       }
+
+      function uploadPfp() {
+        var x = document.createElement("INPUT");
+        x.setAttribute("type", "file");
+        x.setAttribute("accept", "image/*");
+        x.click();
+        /* TODO: Send image file to database, etc. */
+        x.getAttribute('value')
+      }
     </script>
 
     <!-- END HAMBURGER MENU-->
@@ -326,7 +343,6 @@
 
   <div id="main">
     {% block content %} {% endblock %}
-  </div>
   </div>
 </body>
 
