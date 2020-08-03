@@ -180,6 +180,11 @@
     a:hover {
       color: #2093e8;
     }
+
+    .dropdown-menu {
+      position: relative;
+      overflow: visible;
+    }
   </style>
 
   {% block styles %} {% endblock styles %}
@@ -197,7 +202,7 @@
         <a href="javascript:void(0)" class="toggleBtn" onclick="toggleNav()">&#9776;</a>
         
         
-        <a class="sideNavTopItem1" href="#" id="notificationDropdown" data-toggle="dropdown" aria-haspopup="true"
+        <a class="sideNavTopItem1 dropright" href="#" id="notificationDropdown" data-toggle="dropdown" aria-haspopup="true"
           aria-expanded="false">
           🕭
         </a>
@@ -240,7 +245,7 @@
         <a href="/home"><img class="navIcon" src="{% static "cms_application/homeIcon.png" %}" title="Home">Home</a>
       </div>
 
-      <div class="pageLink">
+      <div class="pageLink dropright">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
           <img class="navIcon" src="{% static "cms_application/Class Icon White.png" %}" title="Classes">Classes
@@ -258,7 +263,7 @@
         </div>
       </div>
 
-      <div class="pageLink">
+      <div class="pageLink dropright">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
           <img class="navIcon" src="{% static "cms_application/grades Icon small.png" %}" title="Grades">Grades
