@@ -1,0 +1,148 @@
+<<<<<<< HEAD
+{% extends "baseAuth.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<style>
+
+
+
+.form-container{
+  position: absolute;
+  top:15vh;
+  background:#fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px #000;
+}
+</style>
+</head>
+
+<body background="https://cdn.pixabay.com/photo/2016/11/22/23/53/animal-1851289_1280.jpg" width="100%" height="100vh" background-size="100%">
+  <section class="container-fluid bg">
+    <section class="row justify-content-center">
+      <section class="col-6">
+      
+
+        
+          
+  
+  <form class="form-container" 
+   method="post" novalidate action="{% url 'login' %}">
+     
+   {% if form.errors %}
+   <p style="color: green;">Your username and password didn't match. Please try again.</p>
+ {% endif %}
+ 
+ {% if next %}
+   {% if user.is_authenticated %}
+     <p style="color: green;">Your account doesn't have access to this page. To proceed,
+     please login with an account that has access.</p>
+   {% else %}
+   
+     <!-- <p>To access this page please login.</p> -->
+   {% endif %}
+ {% endif %}
+
+ 
+ <p1 style="color: blueviolet;">To access this page please login.</p1>
+    {% csrf_token %}
+    <table>
+      <tr>
+        <td>{{ form|crispy }}</td>
+        <!-- <td>{{ form.username }}</td> -->
+      </tr>
+     
+    </table>
+    <input type="submit" class="btn btn-primary" value="login" />
+    <input type="hidden" name="next" value="{{ next }}" />
+  
+
+  
+  {# Assumes you setup the password_reset view in your URLconf #}
+ 
+  <a href="{% url 'password_reset' %}"class="btn btn-link ">forget your password?</a>
+
+</form>
+
+</div> 
+
+
+        </section>
+      </section>
+    </section>
+     
+    
+
+     
+  
+</body>
+
+
+
+
+
+{% endblock %}
+||||||| merged common ancestors
+=======
+{% extends "baseAuth.html" %}
+{% load crispy_forms_tags %}
+
+{% block styles %}
+<style>
+  .topLine {
+    margin-bottom: 10px;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="container-fluid bg">
+  <section class="row justify-content-center">
+    <section class="col-6">
+
+      <form class="form-container" method="post" novalidate action="{% url 'login' %}">
+
+        {% if form.errors %}
+        <p style="color: pink;">Username and password didn't match. Please try again.</p>
+        {% endif %}
+
+        {% if next %}
+        {% if user.is_authenticated %}
+        <p style="color: pink;">Your account doesn't have access to this page. To proceed,
+          please login with an account that has access.</p>
+        {% else %}
+
+        <!-- <p>To access this page please login.</p> -->
+        {% endif %}
+        {% endif %}
+
+
+        <p class="topLine">To access this page, please login.</p>
+        {% csrf_token %}
+        <table>
+          <tr>
+            <td>{{ form|crispy }}</td>
+            <!-- <td>{{ form.username }}</td> -->
+          </tr>
+
+        </table>
+        <input id="loginButton" type="submit" class="btn btn-primary" value="Login" />
+        <input type="hidden" name="next" value="{{ next }}" />
+
+
+
+        {# Assumes you setup the password_reset view in your URLconf #}
+
+        <a id="forgotPassword" href="{% url 'password_reset' %}">Forget your password?</a>
+
+      </form>
+
+    </section>
+  </section>
+</section>
+
+{% endblock %}
+>>>>>>> 60586c965a5c7b73a4b3d9e7a573a4ae64c02abb

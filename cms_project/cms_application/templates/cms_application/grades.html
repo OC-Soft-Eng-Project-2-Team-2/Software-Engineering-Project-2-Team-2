@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% block styles %}
+<style>
+    .grade-detail-row {
+        display: inline-flex;
+        flex-direction: row;
+        padding: 5px;
+        margin: 5px;
+        width: 98%;
+    }
+
+    .grade-body-row {
+        border: solid #222;
+        border-radius: 0.25em;
+    }
+
+    #grade-summary {
+        background-color: #333;
+        padding: 10px;
+        border-radius: 0.25em;
+        display: grid;
+        grid-gap: 15px;
+        grid-template-columns: 50% auto auto auto;
+        margin-bottom: 10px;
+    }
+
+    .grade-summary-row,
+    .grade-summary-details {
+        display: inline-flex;
+        flex-direction: row;
+        margin: 5px;
+    }
+
+    .header {
+        font-weight: bold;
+        text-decoration: underline;
+    }
+
+    #grade-details {
+        background-color: #333;
+        border-radius: 0.25em;
+    }
+
+    .col {
+        display: inline-block;
+        padding: 0;
+    }
+
+    .col * {
+        display: inline;
+    }
+
+    .col img {
+        height: 32px;
+        width: auto;
+        overflow: hidden;
+        border-radius: 0.25em;
+    }
+
+    .grade-col {
+        margin-right: 5px;
+    }
+</style>
+
+{% endblock styles %}
+{% block content %}
+<h1>Courses</h1>
+<div id="grade-summary">
+    <div class="header">Course</div>
+    <div class="header">Grade Total</div>
+    <div class="header">Percentage</div>
+    <div class="header">Letter</div>
+    {% for course in grades %}
+    <div>{{course.name}}</div>
+    <div>{{course.grade}}</div>
+    <div>{{course.percentage}}</div>
+    <div>{{course.letter}}</div>
+    {% endfor %}
+</div>
+<h1>Assignments</h1>
+<div id="grade-details">
+    {% for course in grades %}
+    {% for assignment in course.assignments %}
+    <div class="grade-detail-row grade-body-row">
+        <div class="col">
+            <img src="https://i.pinimg.com/originals/51/c2/54/51c25482d801d6ff7f80deee727e13c6.png">
+            <p>{{course.name}} - {{assignment.name}}</p>
+        </div>
+        <div class="grade-col">{{assignment.grade}}</div>
+    </div>
+    {% endfor %}
+    {% endfor %}
+</div>
+</div>
+{% endblock %}
