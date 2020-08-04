@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'cms_application',
-    'crispy_forms'
+    'crispy_forms',
+    'cmsApi',
 ]
 CRISPY_TEMPLATE_PACK='bootstrap4'
 
@@ -102,7 +103,15 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
+#REST Authentication 
+#https://florimondmanca.github.io/djangorestframework-api-key/guide/
+#https://www.django-rest-framework.org/api-guide/authentication/
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        #"rest_framework_api_key.permissions.HasAPIKey",
+        "rest_framework.permissions.IsAuthenticated",
+    ],
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
