@@ -218,7 +218,7 @@
 
         <div class="dropdown-menu" aria-labelledby="notificationDropdown">
           {% for item in notifications %}
-          <a class="dropdown-item" href="#" style="font-size: 20px;">item.description</a>
+          <a class="dropdown-item" href="#">item.description</a>
           <div class="dropdown-divider"></div>
           {% empty %} {% endfor %}
 
@@ -257,7 +257,7 @@
           <img class="navIcon" src="{% static "cms_application/Class Icon White.png" %}" onclick="openNav()"
             title="Classes">Classes
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="yeet">
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           {% for item in classes %}
           <a class="dropdown-item" href="/class/{{item.class}}">{{item.class}}</a>
           {% empty %} {% endfor %}
