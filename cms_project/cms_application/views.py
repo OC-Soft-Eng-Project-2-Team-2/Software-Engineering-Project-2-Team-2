@@ -77,7 +77,7 @@ def home(request):
     return render(request, "cms_application/home.html", context)
     
 def login(response):
-    return render(response, "registration/login.html")
+    return redirect('/login/')
 
 def aClass(response):
     context = {}
