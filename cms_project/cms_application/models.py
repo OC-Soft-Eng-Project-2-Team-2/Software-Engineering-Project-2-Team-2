@@ -3,7 +3,10 @@ from django.contrib.auth.models import User  # for authentication & authorizatio
 
 import datetime
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6c2100b44a712462e9e71c695bad640a45d57fbc
 class Student(models.Model):
     user = models.OneToOneField(User, on_delete=models.SET_NULL, null=True)
 
@@ -12,6 +15,11 @@ class Student(models.Model):
     last_name = models.CharField(max_length=20)
     email = models.CharField(max_length=50)
     major = models.CharField(max_length=100)
+<<<<<<< HEAD
+=======
+    
+    profile_picture_filename = models.CharField(max_length=50, null=True)
+>>>>>>> 6c2100b44a712462e9e71c695bad640a45d57fbc
 
     sections = models.ManyToManyField(
         'Section',
@@ -26,9 +34,24 @@ class Student(models.Model):
 
     @property
     def student_data_folder_name(self):
+<<<<<<< HEAD
         """This is the folder where a student's profile image will be stored, as well as assignment-submission subfolders for all enrolled sections."""
         return "cms_application/static/students/" + self.student_id + '/'
 
+=======
+        """This is the folder where a student's profile image and uploaded coursework will be stored."""
+        return "cms_application/static/students/" + self.student_id + '/'
+
+
+    @property
+    def profile_picture_location(self):
+        """This is the full filepath to the student's profile image."""
+        if self.profile_picture_filename is None:
+            return "cms_application/static/cms_application/account icon.png"
+        else:
+            return self.student_data_folder_name + self.profile_picture_filename
+
+>>>>>>> 6c2100b44a712462e9e71c695bad640a45d57fbc
     @property
     def classification(self):
         credit_hours_completed = 0
@@ -105,6 +128,20 @@ class Professor(models.Model):
     last_name = models.CharField(max_length=20)
     email = models.CharField(max_length=50)
     department = models.CharField(max_length=100)
+<<<<<<< HEAD
+=======
+
+    profile_picture_filename = models.CharField(max_length=50, null=True)
+
+    @property
+    def profile_picture_location(self):
+        """This is the filepath to the professor's profile image."""
+        if self.profile_picture_filename is None:
+            return "cms_application/static/cms_application/account icon.png"
+        else:
+            return "cms_application/static/professors/" + self.faculty_id + "/" + self.profile_picture_filename
+
+>>>>>>> 6c2100b44a712462e9e71c695bad640a45d57fbc
     
     def __str__(self):
         return self.last_name + ', ' + self.first_name + ' (' + self.faculty_id + '); ' + self.department
@@ -129,6 +166,19 @@ class Course(models.Model):
     credit_hours = models.IntegerField()
     course_description = models.CharField(max_length=1000)
 
+<<<<<<< HEAD
+=======
+    profile_picture_filename = models.CharField(max_length=50, null=True)
+
+    @property
+    def profile_picture_location(self):
+        """This is the filepath to the course image."""
+        if self.profile_picture_filename is None:
+            return "cms_application/static/cms_application/Class icon white.png"
+        else:
+            return "cms_application/static/courses/" + self.full_course_code + "/" + self.profile_picture_filename
+
+>>>>>>> 6c2100b44a712462e9e71c695bad640a45d57fbc
     @property
     def full_course_code(self):
         return self.department_code + '-' +  self.course_number
@@ -153,6 +203,11 @@ class Section(models.Model):
     course = models.ForeignKey('Course', on_delete=models.SET_NULL, null=True)
     professor = models.ForeignKey('Professor', on_delete=models.SET_NULL, null=True)
 
+<<<<<<< HEAD
+=======
+    syllabus_filename = models.CharField(max_length=50, null=True)
+
+>>>>>>> 6c2100b44a712462e9e71c695bad640a45d57fbc
     students = models.ManyToManyField(
         'Student',
         through='Enrollment',
@@ -170,9 +225,23 @@ class Section(models.Model):
 
     @property
     def section_data_folder_name(self):
+<<<<<<< HEAD
         """This is the folder where the syllabus, all assignment instructions, and any other shared resources used for this section will be stored."""
         return "cms_application/static/sections/" + self.full_section_code + '/'
 
+=======
+        """This is the folder where the syllabus and all assignment instructions used for this section will be stored."""
+        return "cms_application/static/sections/" + self.full_section_code + '/'
+
+    @property
+    def syllabus_location(self):
+        """This is the filepath to the section syllabus."""
+        if self.syllabus_filename is None:
+            return None
+        else:
+            return self.section_data_folder_name + self.syllabus_filename
+
+>>>>>>> 6c2100b44a712462e9e71c695bad640a45d57fbc
     def __str__(self):
         return self.full_section_code
 
@@ -202,15 +271,31 @@ class Assignment(models.Model):
         through_fields=('assignment', 'student')
     )            
 
+<<<<<<< HEAD
     @property
     def instructions_folder_name(self):
         """This is the subfolder under the section folder where the assignment instructions will be stored"""
         return self.section.section_data_folder_name + self.assignment_name + '/'
+=======
+    instructions_filename = models.CharField(max_length=50, null=True)
+
+    @property
+    def instructions_location(self):
+        """This is the location where the instructions for the assignment will be stored"""
+        if self.instructions_filename is None:
+            return None
+        else:            
+            return self.section.section_data_folder_name + self.assignment_name + '/' + self.instructions_filename
+>>>>>>> 6c2100b44a712462e9e71c695bad640a45d57fbc
 
     @property
     def student_data_subfolder_name(self):
         """This is the subfolder under a student's data where the submission file for this assignment will be stored."""
+<<<<<<< HEAD
         return self.student_data_subfolder_name + self.assignment_name + '/'
+=======
+        return self.section.student_data_subfolder_name + self.assignment_name + '/'
+>>>>>>> 6c2100b44a712462e9e71c695bad640a45d57fbc
 
     def __str__(self):
         return str(self.section) + ' - ' + self.assignment_name
@@ -237,6 +322,7 @@ class Enrollment(models.Model):
         ],
         default='WAIT'
     )
+<<<<<<< HEAD
     midterm_letter_grade = models.CharField(
         max_length=1,
         choices = [
@@ -265,6 +351,8 @@ class Enrollment(models.Model):
         default=None,
         null=True
      )
+=======
+>>>>>>> 6c2100b44a712462e9e71c695bad640a45d57fbc
 
     student = models.ForeignKey('Student', on_delete=models.SET_NULL, null=True)
     section = models.ForeignKey('Section', on_delete=models.SET_NULL, null=True)
@@ -286,6 +374,7 @@ class StudentAssignment(models.Model):
     student = models.ForeignKey('Student', on_delete=models.SET_NULL, null=True)
     assignment = models.ForeignKey('Assignment', on_delete=models.SET_NULL, null=True)
     assignment_grade = models.DecimalField(max_digits=5, decimal_places=2)  # manually entered by professor, must be between 0.00 and 100.00
+<<<<<<< HEAD
     submission_file_name = models.CharField(max_length=50, null=True)  # the name of the file the student uploads; should be overwritten by subsequent submissions
 
     @property
@@ -300,3 +389,61 @@ class StudentAssignment(models.Model):
 
     def __str__(self):
         return str(self.assignment) + ': ' + str(self.student)
+=======
+    submission_filename = models.CharField(max_length=50, null=True)
+
+    @property
+    def student_data_subfolder_name(self):
+        return self.student.student_data_folder_name + self.assignment.student_data_subfolder_name + '/'
+
+
+    @property
+    def student_assignment_submission_location(self):
+        """This is the full path to the folder where the student's submission for the assignment can be found"""
+        return self.student_data_subfolder_name + self.submission_filename
+
+    def __str__(self):
+        return str(self.assignment) + ': ' + str(self.student)
+
+
+
+#######################################################################################################################
+#  Any field ending with '_filename' gets its data from a file upload, and should be overwritten by subsequent uploads
+#    (e.g. if a student goes to the place to upload a profile pic, uploads one, and then uploads another, the new one
+#    should overwrite whatever data was in the field, so the old one is gone even if the file is still there. Ideally
+#    the upload process would first delete the old one, THEN save the new, but it's not strictly required.)
+#
+#  Any @property ending with _'subfolder_name' is used in calculating the final location of static files related to the
+#    object that has the @property. When you SAVE a file, the value in this property is the folder you will be saving
+#    the file into.
+#
+#  Any @property ending with '_location' is the actual location of a file; you will use this @property to get the
+#    location of any file you want to DISPLAY or DOWNLOAD.
+#
+#
+# SUMMARY
+# If this all works together correctly, the steps are as follows:
+#
+# File Upload --
+#  1) A user submits a File to upload, which is linked to an Object.
+#              (A File is a .png, .jpg, .doc/.docx, .txt, or .pdf document. Other MIME types are tedious to support.)
+#              (Objects that can have files are: Student, Professor, Course, Section, Assignment, or StudentAssignment)
+#  2) The system checks the Object's corresponding '_location' @property
+#     2a) If the @property does not return a 'None' value, the file at the location *should*, in an ideal world, be
+#         deleted before proceeding.
+#     2b) If the @property did return a 'None' value, or if the old file at the location has been deleted, (or, in a
+#         non-ideal world, if we have chosen to simply ignore old files), the system proceeds to step 3.
+#  3) The system gets the name of the File, and stores it in the Object's '_filename' field, overwriting any previous
+#     value.
+#  4) The system saves the File to the subfolder specified in the Object's '_subfolder_name' @property (IF MORE THAN ONE
+#     OF THESE EXIST, use the one that is called by the '_location' @property), overwriting any previous file which may
+#     have existed under the same name in that subfolder.
+#
+# File Display --
+#  1) A user accesses a page where the File would be displayed.
+#  2) The system uses the value in the Object's '_location' @property to locate the File.
+#     2a) If, for some reason, the '_location' @property returns 'None', the system should display a "not found" message.
+#     2b) Else, the system should load and display the File.
+#         2b.1) If downloading the File is possible, that option is offered.
+#######################################################################################################################
+>>>>>>> 6c2100b44a712462e9e71c695bad640a45d57fbc
