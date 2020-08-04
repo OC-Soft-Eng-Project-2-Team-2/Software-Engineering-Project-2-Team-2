@@ -1,0 +1,207 @@
+//Home page test data
+{
+    "calendarEvents" : [
+        {
+        "event1" : {
+            "description": "WUM 101: Class Session",
+            "date":"7/13/20",
+            "month": "7",
+            "day": "13",
+            "year": "20",
+            "time": "8:00 AM"
+            },
+        "event2" : {
+            "description": "WUM 101: Test",
+            "date":"7/23/20",
+            "month": "7",
+            "day": "23",
+            "year": "20",
+            "time": "2:30 PM"
+            },
+        "event3" : {
+            "description": "WUM 101: Assignment Due",
+            "date":"7/27/20",
+            "month": "7",
+            "day": "27",
+            "year": "20",
+            "time": "11:59 PM"
+            }
+        }
+    ]
+}
+
+{
+    "announcements" : [
+        {
+            "item1" : {
+                "image": "https://upload.wikimedia.org/wikipedia/en/thumb/3/33/Patrick_Star.svg/1200px-Patrick_Star.svg.png",
+                "class": "WUM 101 - Intro to Wumbology",
+                "date" : "07/08/2020",
+                "time" : "8:02 PM",
+                "title": "Title of Announcement",
+                "text" : "Content of announcement. This is where the professor adds more requirements to the assignment or
+                something. Perhaps he's adding hundreds of new assignments. Maybe he wants everyone to write a
+                100-page paper about squirrels. I Wumbo, you Wumbo, he/she/it Wumbo."
+            },
+        
+            "item2" : {
+                "image": "https://upload.wikimedia.org/wikipedia/en/thumb/3/33/Patrick_Star.svg/1200px-Patrick_Star.svg.png",
+                "class": "WUM 101 - Intro to Wumbology",
+                "date" : "07/08/2020",
+                "time" : "8:02 PM",
+                "title": "Title of Announcement",
+                "text" : "Content of announcement. This is where the professor adds more requirements to the assignment or
+                something. Perhaps he's adding hundreds of new assignments. Maybe he wants everyone to write a
+                100-page paper about squirrels. I Wumbo, you Wumbo, he/she/it Wumbo."
+            },
+
+            "item3" : {
+                "image": "https://upload.wikimedia.org/wikipedia/en/thumb/3/33/Patrick_Star.svg/1200px-Patrick_Star.svg.png",
+                "class": "WUM 101 - Intro to Wumbology",
+                "date" : "07/08/2020",
+                "time" : "8:02 PM",
+                "title": "Title of Announcement",
+                "text" : "Content of announcement. This is where the professor adds more requirements to the assignment or
+                something. Perhaps he's adding hundreds of new assignments. Maybe he wants everyone to write a
+                100-page paper about squirrels. I Wumbo, you Wumbo, he/she/it Wumbo."
+            }
+        }
+    ]
+}
+
+//Class page test info
+{
+    "class" : {
+        "name" : "WUM 101 - Intro to Wumbology",
+        "img" : "https://cdn.pixabay.com/photo/2016/11/22/23/53/animal-1851289_1280.jpg",
+        "alt" : "Dr. Patrick Star",
+        "syllabus" : "/class",
+        "time": "MWF 8:00 AM",
+        "semester": "2020 Summer Session 1",
+        "credits" : "3"
+    }
+}
+
+{
+    "announcements" : [
+        {
+            "item1" : {
+                "image": "https://upload.wikimedia.org/wikipedia/en/thumb/3/33/Patrick_Star.svg/1200px-Patrick_Star.svg.png",
+                "class": "WUM 101 - Intro to Wumbology",
+                "date" : "07/08/2020",
+                "time" : "8:02 PM",
+                "title": "Title of Announcement",
+                "text" : "Content of announcement. This is where the professor adds more requirements to the assignment or
+                something. Perhaps he's adding hundreds of new assignments. Maybe he wants everyone to write a
+                100-page paper about squirrels. I Wumbo, you Wumbo, he/she/it Wumbo."
+            },
+        
+            "item2" : {
+                "image": "https://upload.wikimedia.org/wikipedia/en/thumb/3/33/Patrick_Star.svg/1200px-Patrick_Star.svg.png",
+                "class": "WUM 101 - Intro to Wumbology",
+                "date" : "07/08/2020",
+                "time" : "8:02 PM",
+                "title": "Title of Announcement",
+                "text" : "Content of announcement. This is where the professor adds more requirements to the assignment or
+                something. Perhaps he's adding hundreds of new assignments. Maybe he wants everyone to write a
+                100-page paper about squirrels. I Wumbo, you Wumbo, he/she/it Wumbo."
+            },
+
+            "item3" : {
+                "image": "https://upload.wikimedia.org/wikipedia/en/thumb/3/33/Patrick_Star.svg/1200px-Patrick_Star.svg.png",
+                "class": "WUM 101 - Intro to Wumbology",
+                "date" : "07/08/2020",
+                "time" : "8:02 PM",
+                "title": "Title of Announcement",
+                "text" : "Content of announcement. This is where the professor adds more requirements to the assignment or
+                something. Perhaps he's adding hundreds of new assignments. Maybe he wants everyone to write a
+                100-page paper about squirrels. I Wumbo, you Wumbo, he/she/it Wumbo."
+            }
+        }
+    ]
+}
+
+{
+    "assignments" : [
+        "assignment1" : {
+            "title" : "Title of Assignment",
+            "time" : "11:59PM",
+            "date" : "07/08/2020",
+            "grade" : "-/100",
+            "submitted" : {
+                "time" : "11:58 PM",
+                "date" : "07/08/2020"
+                },
+            "description" : "Description of Assignment. This is where the professor adds more requirements to the assignment or
+            something. Perhaps he's adding hundreds of new assignments. Maybe he wants everyone to write a
+            100-page paper about squirrels. I Wumbo, you Wumbo, he/she/it Wumbo.",
+            "attachments" : [
+                {
+                "url" : "Wumbography Template.pdf",
+                "title" : "Wumbography Template.pdf"
+                },
+                {
+                    "url" : "Wumbography Example.pdf",
+                    "title" : "Wumbography Example.pdf"
+                    }
+            ]
+            "uploads" : {
+                "url" : "Rock Bottom map final.png.pdf",
+                "title" : "Rock Bottom map final.png.pdf"
+                }
+        }
+    ]
+}
+
+{
+    "students" : [
+       "student1" : {
+        "img" : "https://i.pinimg.com/originals/51/c2/54/51c25482d801d6ff7f80deee727e13c6.png",
+        "name" : "Red"
+        },
+        
+        "student2" : {
+            "img" :"https://www.ssbwiki.com/images/thumb/0/03/Samus_SSBU.png/1200px-Samus_SSBU.png",
+            "name" : "Samus Aran"
+            },
+        
+        "student3" : {
+            "img" : "https://vignette.wikia.nocookie.net/lotr/images/4/43/Aragorn3.jpg/revision/latest/scale-to-width-down/340?cb=20080318215744",
+            "name" : "Aragorn Son of Arathorn"
+            },
+    ]
+}
+
+
+//Grades page Test Data
+{
+    "grades" : [
+        "grade1" : {
+            "name": "Course I",
+            "grade": "50/100",
+            "percentage": 50, 
+            "letter": "F",
+            "assignments": [
+                {"name": "Assignment1", "grade": "50/100"},
+                {"name": "Assignment2", "grade": "50/100"},
+                {"name": "Assignment3", "grade": "50/100"},
+                {"name": "Assignment4", "grade": "50/100"},
+                {"name": "Assignment5", "grade": "50/100"}
+            ]
+        },
+    
+        "grade2" : {
+            "name": "Course II",
+            "grade": "200/100",
+            "percentage": 200, 
+            "letter": "A",
+            "assignments": [
+                {"name": "Assignment1", "grade": "200/100"},
+                {"name": "Assignment2", "grade": "200/100"},
+                {"name": "Assignment3", "grade": "200/100"},
+                {"name": "Assignment4", "grade": "200/100"},
+                {"name": "Assignment5", "grade": "200/100"}
+            ]
+        }
+    ]
+}
