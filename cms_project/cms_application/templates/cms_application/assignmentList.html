@@ -130,7 +130,7 @@
     {% block content %} {% if class %}
     <h2>{{class.name}}</h2>
     {% else %}
-    <h2>WUM 101 - Intro to Wumbology</h2>
+    <h2>No Submissions found</h2>
     {% endif %}
 
     <div class="tableRow">
@@ -145,14 +145,14 @@
 
       {% else %}
       <img
-        src="https://cdn.pixabay.com/photo/2016/11/22/23/53/animal-1851289_1280.jpg"
-        alt="Dr. Patrick Star"
+        src="https://miro.medium.com/max/978/1*pUEZd8z__1p-7ICIO1NZFA.png"
+        alt="ERROR"
         height="auto"
       />
       <div>
         <div>
-          <p>MWF 8:00 AM</p>
-          <p>2020 Summer Session 1</p>
+          <p></p>
+          <p></p>
         </div>
       </div>
       {% endif %}
@@ -169,13 +169,13 @@
 
     <div class="tab-pane fade active show" id="Announcements" role="tabpanel" aria-labelledby="Announcements-tab">
         <ul>
-            {% if assignment %}
-              {% for item in assignment.submissions %}
+            {% if submissions %}
+              {% for item in submissions %}
               <li>
                 <div class="announcement">
                   <p class="marginAndWeight">{{item.submittor}}<span>Submitted on {{item.date}} at {{item.time}}</span></p>
                  
-                  {% for file in item.files %}
+                  {% for file in item.attachments %}
                     <a href="file.url">{{file.name}}</p>
                     {% empty %}
                   {% endfor %}
@@ -189,25 +189,12 @@
       
             <li>
               <div class="announcement">
-                <p class="marginAndWeight">Student Name<span>Submitted on 07/08/2020 at 8:02 AM</span></p>
-                <a href="">Wumbography Template.pdf</a><br>
-                <a href="">Wumbography Example.pdf</a><br>
+                <p class="marginAndWeight">No submissions<span></span></p>
+                <a href=""></a><br>
+                <a href=""></a><br>
               </div>
             </li>
-            <li>
-                <div class="announcement">
-                    <p class="marginAndWeight">Student Name 2<span>Submitted on 07/08/2020 at 8:02 AM</span></p>
-                    <a href="">Wumbography Template.pdf</a><br>
-                    <a href="">Wumbography Example.pdf</a><br>
-                  </div>
-            </li>
-            <li>
-                <div class="announcement">
-                    <p class="marginAndWeight">Student Name 3<span>Submitted on 07/08/2020 at 8:02 AM</span></p>
-                    <a href="">Wumbography Template.pdf</a><br>
-                    <a href="">Wumbography Example.pdf</a><br>
-                  </div>
-            </li>
+
             {% endif %}
     </div>
     

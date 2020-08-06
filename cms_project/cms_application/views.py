@@ -199,8 +199,50 @@ def aClass(response):
 
 @login_required   
 def assignmentlist(response):
-    return render(response, "cms_application/assignmentList.html")
-    return render(response, "cms_application/class.html", {"UserName":"TestName"})
+    context = {}
+    submissions = []
+
+    sub1 = {
+        'submittor' : "Shaun",
+         'attachments' : [{'name' : "Essay.doc",
+                            'url' : 'Essay.doc'}],
+        'date' : "07/08/2020",
+        'time' : "8:02 AM"
+    }
+
+    sub2 = {
+        'submittor' : "Kyle",
+        'attachments' : [{'name' : "paper.doc",
+                            'url' : 'paper.doc'}],
+ 
+        'date' : "07/12/2020",
+        'time' : "3:42 AM"
+
+    }
+
+    sub3 = {
+        'submittor' : "Lily",
+        'attachments' : [{'name' : "Dissertation on the being of man.doc.doc",
+                            'url' : 'Dissertation on the being of man.doc.doc'}],
+        'date' : "07/12/2020",
+        'time' : "1:59 PM"
+    }
+
+    submissions.append(sub1);
+    submissions.append(sub2);
+    submissions.append(sub3);
+    context["submissions"] = submissions
+
+    classD = {
+        'name' : 'Class Name',
+        'img' : 'https://us.123rf.com/450wm/stockbroker/stockbroker1408/stockbroker140802515/31050918-class-of-university-students-using-laptops-in-lecture.jpg?ver=6',
+        'time' : 'MWF 8:00 AM',
+        'semester' : '2020 Summer Session 1'
+    }
+
+    context["class"] = classD
+
+    return render(response, "cms_application/assignmentList.html", context)
 
 @login_required   
 def grades(response):
