@@ -8,6 +8,9 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 #@login_required
+def test(request):
+    return render(request, "cms_application/home.html")
+    
 def home(request):
 
     context = {}
