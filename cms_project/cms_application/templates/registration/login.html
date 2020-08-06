@@ -42,7 +42,7 @@
           class="btn btn-primary"
           value="Login"
         />
-        <input type="hidden" name="next" value="{% url 'test' %}" />
+        <input type="hidden" name="next" value="{{ next }}" />
 
         {# Assumes you setup the password_reset view in your URLconf #}
 
