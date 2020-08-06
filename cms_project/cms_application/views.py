@@ -7,7 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
-#@login_required
+@login_required
 def test(request):
     return render(request, "cms_application/home.html")
 
@@ -81,7 +81,7 @@ def home(request):
     return render(request, "cms_application/home.html", context)
     
 def login(response):
-    return redirect('/login/')
+    return redirect('/login/?next=/home/')
 
 @login_required   
 def aClass(response):
