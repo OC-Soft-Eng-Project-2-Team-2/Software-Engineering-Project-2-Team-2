@@ -12,7 +12,7 @@ class Student(models.Model):
     email = models.CharField(max_length=50)
     major = models.CharField(max_length=100)
     
-    profile_picture_filename = models.CharField(max_length=50, null=True)
+    profile_picture_filename = models.CharField(max_length=50, blank=True)
 
     sections = models.ManyToManyField(
         'Section',
@@ -116,7 +116,7 @@ class Professor(models.Model):
     email = models.CharField(max_length=50)
     department = models.CharField(max_length=100)
 
-    profile_picture_filename = models.CharField(max_length=50, null=True)
+    profile_picture_filename = models.CharField(max_length=50, blank=True)
 
     @property
     def profile_picture_location(self):
@@ -138,7 +138,7 @@ class Course(models.Model):
     credit_hours = models.IntegerField()
     course_description = models.CharField(max_length=1000)
 
-    profile_picture_filename = models.CharField(max_length=50, null=True)
+    profile_picture_filename = models.CharField(max_length=50, blank=True)
 
     @property
     def profile_picture_location(self):
@@ -172,7 +172,7 @@ class Section(models.Model):
     course = models.ForeignKey('Course', on_delete=models.SET_NULL, null=True)
     professor = models.ForeignKey('Professor', on_delete=models.SET_NULL, null=True)
 
-    syllabus_filename = models.CharField(max_length=50, null=True)
+    syllabus_filename = models.CharField(max_length=50, blank=True)
 
     students = models.ManyToManyField(
         'Student',
@@ -217,7 +217,7 @@ class Announcement(models.Model):
     announcement_text = models.CharField(max_length=1000)
 
     def __str__(self):
-        return announcement_title + '(' + posted_date + '):' + announcement_text[:100]
+        return self.announcement_title + ' (' + str(self.posted_date) + '): ' + self.announcement_text[:100]
 
 
 class Assignment(models.Model):
@@ -231,7 +231,7 @@ class Assignment(models.Model):
         through_fields=('assignment', 'student')
     )            
 
-    instructions_filename = models.CharField(max_length=50, null=True)
+    instructions_filename = models.CharField(max_length=50, blank=True)
 
     @property
     def instructions_location(self):
@@ -292,7 +292,7 @@ class StudentAssignment(models.Model):
     student = models.ForeignKey('Student', on_delete=models.SET_NULL, null=True)
     assignment = models.ForeignKey('Assignment', on_delete=models.SET_NULL, null=True)
     assignment_grade = models.DecimalField(max_digits=5, decimal_places=2)  # manually entered by professor, must be between 0.00 and 100.00
-    submission_filename = models.CharField(max_length=50, null=True)
+    submission_filename = models.CharField(max_length=50, blank=True)
 
     @property
     def student_data_subfolder_name(self):
