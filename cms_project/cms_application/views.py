@@ -5,9 +5,10 @@ from django.contrib.auth.models import User,auth
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+import logging
 # Create your views here.
 
-#@login_required
+@login_required
 def home(request):
 
     context = {}
@@ -73,6 +74,9 @@ def home(request):
     announcements.append(item2);
     announcements.append(item3);
     context['announcements'] = announcements;
+    context['is_student'] = True; #request.user.groups.filter(name='Student').exists();
+    logging.getLogger(__name__).error(str(context['is_student']))
+    logging.getLogger(__name__).error(str(request.user.username))
 
     return render(request, "cms_application/home.html", context)
     
@@ -233,4 +237,3 @@ def grades(response):
     context["grades"] = grades
     
     return render(response, "cms_application/grades.html", context)
-    
