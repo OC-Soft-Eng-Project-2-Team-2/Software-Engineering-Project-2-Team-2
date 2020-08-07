@@ -18,6 +18,8 @@ def home(request):
     context = {}
     calendarEvents = []
 
+    context['is_student'] = request.user.groups.filter(name='Student').exists();
+
     #Test info, replace with info for student from database
     event1 = {
         'description': "TEST: This is a test description 1",
@@ -78,7 +80,6 @@ def home(request):
     announcements.append(item2);
     announcements.append(item3);
     context['announcements'] = announcements;
-    context['is_student'] = request.user.groups.filter(name='Student').exists();
 
     return render(request, "cms_application/home.html", context)
     
@@ -88,6 +89,9 @@ def login(request):
 @login_required   
 def aClass(request):
     context = {}
+    context['is_student'] = request.user.groups.filter(name='Student').exists();
+    context['is_instructor'] = request.user.groups.filter(name='Instructor').exists();
+
     classI = {
         "name" : "Test Name",
         "img" : "https://i.imgflip.com/2xnbeb.jpg",
@@ -131,7 +135,6 @@ def aClass(request):
     announcements.append(item2);
     announcements.append(item3);
     context['announcements'] = announcements;
-    context['is_student'] = request.user.groups.filter(name='Student').exists();
 
     assignments = []
     attachments = []
@@ -212,6 +215,7 @@ def deny_access_to_non_instructor(function=None):
 @deny_access_to_non_student
 def grades(request):
     context = {}
+    context['is_student'] = request.user.groups.filter(name='Student').exists();
     grades = []
 
     grade1 = {
@@ -255,4 +259,6 @@ def submissions(request):
     return render(request, "cms_application/class.html", {"UserName":"TestName"})
     
 def accessdenied(request):
+    context = {}
+    context['is_student'] = request.user.groups.filter(name='Student').exists();
     return render(request, "cms_application/accessdenied.html")
