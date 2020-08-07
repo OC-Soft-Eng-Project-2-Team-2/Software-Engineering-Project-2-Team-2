@@ -3,6 +3,18 @@ from django.contrib.auth.models import User  # for authentication & authorizatio
 
 import datetime
 
+
+class Admin(models.Model):
+    user = models.OneToOneField(User, on_delete=models.SET_NULL, null=True)
+
+    staff_id = models.CharField(max_length=7, primary_key=True)
+    first_name = models.CharField(max_length=20)
+    last_name = models.CharField(max_length=20)
+    email = models.CharField(max_length=50)
+
+    def str(self):
+        return self.last_name + ', ' + self.first_name + ' (' + self.staff_id + '); Administrator'
+
 class Student(models.Model):
     user = models.OneToOneField(User, on_delete=models.SET_NULL, null=True)
 
