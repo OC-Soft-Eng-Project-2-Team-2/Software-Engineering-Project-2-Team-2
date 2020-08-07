@@ -6,7 +6,21 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required, user_passes_test
 import logging
+
+# models inports
+from .models import Announcement
+from .models import Section
+from .models import Assignment
+from .models import Student
 # Create your views here.
+
+def deny_access_to_non_student(function=None):
+    actual_decorator = user_passes_test(lambda u: u.groups.filter(name='Student').exists(), login_url='/accessdenied')
+    return actual_decorator(function)
+
+def deny_access_to_non_instructor(function=None):
+    actual_decorator = user_passes_test(lambda u: u.groups.filter(name='Instructor').exists(), login_url='/accessdenied')
+    return actual_decorator(function)
 
 @login_required
 def test(request):
@@ -14,71 +28,49 @@ def test(request):
 
 @login_required    
 def home(request):
-
     context = {}
-    calendarEvents = []
-
     context['is_student'] = request.user.groups.filter(name='Student').exists();
 
-    #Test info, replace with info for student from database
-    event1 = {
-        'description': "TEST: This is a test description 1",
-        'date':"7/13/20",
-        'month': "7",
-        'day': "13",
-        'year': '20'
-        }
-    event2 = {
-        'description': "TEST: This is a test description 2",
-        'date':"7/23/20",
-        'month': "7",
-        'day': "23",
-        'year': '20'
-        }
-    event3= {
-        'description': "TEST: This is a test description 3",
-        'date':"7/27/20",
-        'month': "7",
-        'day': "27",
-        'year': '20'
-        }
+    announce = Announcement.objects.all()
 
-    calendarEvents.append(event1)
-    calendarEvents.append(event2)
-    calendarEvents.append(event3)
+    calendarEvents = []
+
+    for item in announce:
+        if item.posted_date.strftime("%d")[0] == "0":
+            day = item.posted_date.strftime("%d")[1:]
+        else:
+            day = item.posted_date.strftime("%d")
+
+        if item.posted_date.strftime("%m")[0] == "0":
+            month = item.posted_date.strftime("%m")[1:]
+        else:
+            month = item.posted_date.strftime("%m")
+
+        itemA = {
+        'description': item.section.section_number + ": " + item.announcement_title,
+        'date': item.posted_date.strftime("%x"),
+        'month': month,
+        'day': day,
+        'year': item.posted_date.strftime("%y")
+        }
+        print(itemA)
+        calendarEvents.append(itemA)
+
+
     context['calendarEvents'] = calendarEvents;
 
     announcements = []
-    item1 = {
-        'image': "https://cf-images.us-east-1.prod.boltdns.net/v1/static/5660549791001/d8e5eb81-e27a-4bbf-8324-1090d1a5542e/8e2312dd-bba2-4601-954f-8b8698c3f347/1000x563/match/image.jpg",
-        'class': "YEET 101 - Intro to Yeet",
-        'date' : "7/15/2020",
-        'time' : "4:19 PM",
-        'title': "Yeet or be Yeeted",
-        'text' : "Yeet"
-    }
+    for item in announce:
+        itemA = {
+        'image': item.section.course.profile_picture_filename,
+        'class': item.section.course.course_name,
+        'date' : item.posted_date.strftime("%x"),
+        'time' : item.posted_date.strftime("%X"),
+        'title': item.announcement_title,
+        'text' : item.announcement_text
+            }
+        announcements.append(itemA);
 
-    item2 = {
-        'image': "https://cf-images.us-east-1.prod.boltdns.net/v1/static/5660549791001/d8e5eb81-e27a-4bbf-8324-1090d1a5542e/8e2312dd-bba2-4601-954f-8b8698c3f347/1000x563/match/image.jpg",
-        'class': "YEET 101 - Intro to Yeet",
-        'date' : "7/16/2020",
-        'time' : "4:19 PM",
-        'title': "Yeet or be Yeeted",
-        'text' : "Yeet"
-    }
-
-    item3 = {
-        'image': "https://cf-images.us-east-1.prod.boltdns.net/v1/static/5660549791001/d8e5eb81-e27a-4bbf-8324-1090d1a5542e/8e2312dd-bba2-4601-954f-8b8698c3f347/1000x563/match/image.jpg",
-        'class': "YEET 101 - Intro to Yeet",
-        'date' : "7/17/2020",
-        'time' : "4:19 PM",
-        'title': "Yeet or be Yeeted",
-        'text' : "Yeet"
-    }
-
-    announcements.append(item1);
-    announcements.append(item2);
-    announcements.append(item3);
     context['announcements'] = announcements;
 
     return render(request, "cms_application/home.html", context)
@@ -92,108 +84,75 @@ def aClass(request):
     context['is_student'] = request.user.groups.filter(name='Student').exists();
     context['is_instructor'] = request.user.groups.filter(name='Instructor').exists();
 
+    section = Section.objects.all()
+
+    selectedSection = section[0]
+
     classI = {
-        "name" : "Test Name",
-        "img" : "https://i.imgflip.com/2xnbeb.jpg",
-        "alt" : "Waaa",
-        "syllabus" : "/class",
-        "time": "MTWTHF 12:00AM - 12:00PM",
-        "semester": "2020 Fall Session 1",
-        "credits" : "12"
+        "name" : selectedSection.course.course_name,
+        "img" :  selectedSection.course.profile_picture_filename,
+        "alt" : selectedSection.section_number,
+        "syllabus" : selectedSection.syllabus_filename,
+        "time": selectedSection.days_of_week + " " + selectedSection.meeting_time,
+        "semester": selectedSection.semester_code,
+        "credits" : selectedSection.course.credit_hours
     }
     context['class'] = classI;
 
     announcements = []
-    item1 = {
-        'image': "https://cf-images.us-east-1.prod.boltdns.net/v1/static/5660549791001/d8e5eb81-e27a-4bbf-8324-1090d1a5542e/8e2312dd-bba2-4601-954f-8b8698c3f347/1000x563/match/image.jpg",
-        'class': "YEET 101 - Intro to Yeet",
-        'date' : "7/15/2020",
-        'time' : "4:19 PM",
-        'title': "Yeet or be Yeeted",
-        'text' : "Yeet"
-    }
-
-    item2 = {
-        'image': "https://cf-images.us-east-1.prod.boltdns.net/v1/static/5660549791001/d8e5eb81-e27a-4bbf-8324-1090d1a5542e/8e2312dd-bba2-4601-954f-8b8698c3f347/1000x563/match/image.jpg",
-        'class': "YEET 101 - Intro to Yeet",
-        'date' : "7/16/2020",
-        'time' : "4:19 PM",
-        'title': "Yeet or be Yeeted",
-        'text' : "Yeet"
-    }
-
-    item3 = {
-        'image': "https://cf-images.us-east-1.prod.boltdns.net/v1/static/5660549791001/d8e5eb81-e27a-4bbf-8324-1090d1a5542e/8e2312dd-bba2-4601-954f-8b8698c3f347/1000x563/match/image.jpg",
-        'class': "YEET 101 - Intro to Yeet",
-        'date' : "7/17/2020",
-        'time' : "4:19 PM",
-        'title': "Yeet or be Yeeted",
-        'text' : "Yeet"
-    }
-
-    announcements.append(item1);
-    announcements.append(item2);
-    announcements.append(item3);
+    announce = Announcement.objects.all()
+    for item in announce:
+        if item.section.section_number == selectedSection.section_number:
+            itemA = {
+                'image': item.section.course.profile_picture_filename,
+                'class': item.section.course.course_name,
+                'date' : item.posted_date.strftime("%x"),
+                'time' : item.posted_date.strftime("%X"),
+                'title': item.announcement_title,
+                'text' : item.announcement_text
+            }
+            announcements.append(itemA);
     context['announcements'] = announcements;
 
     assignments = []
     attachments = []
-    attach1 = {
-        "url" : "Waluigi #1",
-        "title" : "Waluigi #1"
-    }
-    attachments.append(attach1)
 
-    upload = []
-    up1 = {
-        "url" : "Waluigi #1",
-        "title" : "Waluigi #1 Done"
-    }
-    upload.append(up1)
-
-    assigment1 = {
-        "title" : "Homework 1",
-        "time" : "11:59PM",
-        "date" : "7/30/2020",
-        "grade" : "-/100",
-        "submitted" : {
-            "time" : "10:00 AM",
-            "date" : "7/25/2020"
-        },
-        "description" : "Chp 1 questions 1-5, A-Z",
-        "attachments" : attachments,
-        "uploads" : upload
-    }
-
-    assigment2 = {
-        "title" : "Homework 1",
-        "time" : "11:59PM",
-        "date" : "7/30/2020",
-        "grade" : "-/100",
-        "submitted" : {
-            "time" : "10:00 AM",
-            "date" : "7/25/2020"
-        },
-        "description" : "Chp 3 questions 7-16, A-Z",
-        "attachments" : attachments,
-        "uploads" : upload
-    }
-
-    assignments.append(assigment1);
-    assignments.append(assigment2);
+    assign = Assignment.objects.all()
+    for item in assign:
+        if item.section.section_number == selectedSection.section_number:
+            assigmentA = {
+                    "title" : item.assignment_name,
+                    "time" : item.due_date.strftime("%X"),
+                    "date" : item.due_date.strftime("%x"),
+                    "grade" : "-/100",
+                    "submitted" : {
+                        "time" : "",
+                        "date" : ""
+                    },
+                    "description" : "",
+                    "attachments" : item.instructions_filename,
+                    "uploads" : ""
+                }
+            assignments.append(assigmentA)
     context["assignments"] = assignments
-
+    
     students = []
+    #    for item in selectedSection.students:
+    #     student1 = {
+    #         "img" : item.profile_picture_filename,
+    #         "name" : item.first_name + " " + item.last_name
+    #     }
+    #     students.append(student1)
     student1 = {
-        "img" :"https://upload.wikimedia.org/wikipedia/en/thumb/8/8b/Purplecom.jpg/200px-Purplecom.jpg",
-        "name" : "Purple"
+        "img" :"https://www.demilked.com/magazine/wp-content/uploads/2019/04/5cb6d34f775c2-stock-models-share-weirdest-stories-photo-use-102-5cb5c725bc378__700.jpg",
+        "name" : "Lesly"
     }
     student2 = {
-        "img" :"https://pyxis.nymag.com/v1/imgs/07f/762/6ec01dddd29c0a9d9895b71c20c0bd911d-alien.rsquare.w700.jpg",
+        "img" :"https://footage.framepool.com/shotimg/qf/792533153-chin-finger-well-dressed-thinking.jpg",
         "name" : "Shaun"
     }
     student3 = {
-        "img" :"https://cdn0.wideopenpets.com/wp-content/uploads/2019/10/Fish-Names-770x405.png",
+        "img" :"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRLxiGWaNSlSrHizul_Zbdf_L1EdHpNlddeRA&usqp=CAU",
         "name" : "Tony"
     }
     students.append(student1)
@@ -203,8 +162,8 @@ def aClass(request):
 
     return render(request, "cms_application/class.html", context)
 
-@login_required  
-@deny_access_to_non_instructor 
+@login_required
+@deny_access_to_non_instructor  
 def assignmentlist(response):
     context = {}
     submissions = []
@@ -249,17 +208,11 @@ def assignmentlist(response):
 
     context["class"] = classD
 
-    return render(response, "cms_application/assignmentList.html", context)
-def deny_access_to_non_student(function=None):
-    actual_decorator = user_passes_test(lambda u: u.groups.filter(name='Student').exists(), login_url='/accessdenied')
-    return actual_decorator(function)
+    return render(response, "cms_application/submissions.html", context)
 
-def deny_access_to_non_instructor(function=None):
-    actual_decorator = user_passes_test(lambda u: u.groups.filter(name='Instructor').exists(), login_url='/accessdenied')
-    return actual_decorator(function)
 
 @login_required
-@deny_access_to_non_student
+
 def grades(request):
     context = {}
     context['is_student'] = request.user.groups.filter(name='Student').exists();
