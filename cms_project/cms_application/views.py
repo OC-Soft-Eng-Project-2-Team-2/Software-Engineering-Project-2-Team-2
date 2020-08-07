@@ -4,7 +4,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User,auth
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
+import logging
 # Create your views here.
 
 @login_required
@@ -16,6 +17,8 @@ def home(request):
 
     context = {}
     calendarEvents = []
+
+    context['is_student'] = request.user.groups.filter(name='Student').exists();
 
     #Test info, replace with info for student from database
     event1 = {
@@ -80,12 +83,15 @@ def home(request):
 
     return render(request, "cms_application/home.html", context)
     
-def login(response):
+def login(request):
     return redirect('/login/?next=/home/')
 
 @login_required   
-def aClass(response):
+def aClass(request):
     context = {}
+    context['is_student'] = request.user.groups.filter(name='Student').exists();
+    context['is_instructor'] = request.user.groups.filter(name='Instructor').exists();
+
     classI = {
         "name" : "Test Name",
         "img" : "https://i.imgflip.com/2xnbeb.jpg",
@@ -195,9 +201,10 @@ def aClass(response):
     students.append(student3)
     context["students"] = students
 
-    return render(response, "cms_application/class.html", context)
+    return render(request, "cms_application/class.html", context)
 
-@login_required   
+@login_required  
+@deny_access_to_non_instructor 
 def assignmentlist(response):
     context = {}
     submissions = []
@@ -243,10 +250,19 @@ def assignmentlist(response):
     context["class"] = classD
 
     return render(response, "cms_application/assignmentList.html", context)
+def deny_access_to_non_student(function=None):
+    actual_decorator = user_passes_test(lambda u: u.groups.filter(name='Student').exists(), login_url='/accessdenied')
+    return actual_decorator(function)
 
-@login_required   
-def grades(response):
+def deny_access_to_non_instructor(function=None):
+    actual_decorator = user_passes_test(lambda u: u.groups.filter(name='Instructor').exists(), login_url='/accessdenied')
+    return actual_decorator(function)
+
+@login_required
+@deny_access_to_non_student
+def grades(request):
     context = {}
+    context['is_student'] = request.user.groups.filter(name='Student').exists();
     grades = []
 
     grade1 = {
@@ -281,5 +297,15 @@ def grades(response):
     grades.append(grade2)
     context["grades"] = grades
     
-    return render(response, "cms_application/grades.html", context)
+    return render(request, "cms_application/grades.html", context)
+
+@login_required
+@deny_access_to_non_instructor   
+def submissions(request):
+    return render(request, "cms_application/submissions.html")
+    return render(request, "cms_application/class.html", {"UserName":"TestName"})
     
+def accessdenied(request):
+    context = {}
+    context['is_student'] = request.user.groups.filter(name='Student').exists();
+    return render(request, "cms_application/accessdenied.html")
