@@ -39,4 +39,42 @@ class AdminSerializer(serializers.HyperlinkedModelSerializer):
 class CourseSerializer(serializers.HyperlinkedModelSerializer):
      class Meta:
         model =Course
-        fields = ['course_name', 'department_code', 'course_number','credit_hours', 'course_description']       
+        fields = ['course_name', 'department_code', 'course_number','credit_hours', 'course_description'] 
+
+
+class SectionSerializer(serializers.HyperlinkedModelSerializer):
+     class Meta:
+        model =Section
+        fields = ['section_number', 'classroom', 'days_of_week','meeting_time', 'semester_code','start_date','end_date','course','professor','syllabus_filename','students']   
+
+
+class AnnouncementSerializer(serializers.HyperlinkedModelSerializer):
+     class Meta:
+        model =Announcement
+        fields = ['section', 'posted_date', 'announcement_title','announcement_text']  
+
+
+
+class AssignmentSerializer(serializers.HyperlinkedModelSerializer):
+     class Meta:
+        model =Assignment
+        fields = ['section', 'assignment_name', 'due_date','students','instructions_filename'] 
+
+
+
+
+
+class EnrollmentSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Enrollment
+        fields = ['status', 'student', 'section']
+
+
+
+
+class StudentAssignmentSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = StudentAssignment
+        fields = ['student', 'assignment', 'assignment_grade','submission_filename']
+
+
