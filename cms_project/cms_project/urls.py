@@ -22,5 +22,4 @@ urlpatterns = [
     path('', include('django.contrib.auth.urls')),
     path('class/', include("cms_application.urls")),
     path('home/', include("cms_application.urls")),
-    path('api/', include("cmsApi.urls")),
 ]

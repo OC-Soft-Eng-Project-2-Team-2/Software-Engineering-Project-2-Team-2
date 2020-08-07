@@ -1,35 +1,32 @@
-{% extends "baseAuth.html" %}
-{% load crispy_forms_tags %}
-
-{% block styles %}
+{% extends "baseAuth.html" %} {% load crispy_forms_tags %} {% block styles %}
 <style>
   .topLine {
     margin-bottom: 10px;
   }
 </style>
-{% endblock %}
-
-{% block content %}
+{% endblock %} {% block content %}
 <section class="container-fluid bg">
   <section class="row justify-content-center">
     <section class="col-6">
-
-      <form class="form-container" method="post" novalidate action="{% url 'login' %}">
-
+      <form
+        class="form-container"
+        method="post"
+        novalidate
+        action="{% url 'login' %}"
+      >
         {% if form.errors %}
-        <p style="color: pink;">Username and password didn't match. Please try again.</p>
-        {% endif %}
-
-        {% if next %}
-        {% if user.is_authenticated %}
-        <p style="color: pink;">Your account doesn't have access to this page. To proceed,
-          please login with an account that has access.</p>
+        <p style="color: pink;">
+          Username and password didn't match. Please try again.
+        </p>
+        {% endif %} {% if next %} {% if user.is_authenticated %}
+        <p style="color: pink;">
+          Your account doesn't have access to this page. To proceed, please
+          login with an account that has access.
+        </p>
         {% else %}
 
         <!-- <p>To access this page please login.</p> -->
-        {% endif %}
-        {% endif %}
-
+        {% endif %} {% endif %}
 
         <p class="topLine">To access this page, please login.</p>
         {% csrf_token %}
@@ -38,19 +35,21 @@
             <td>{{ form|crispy }}</td>
             <!-- <td>{{ form.username }}</td> -->
           </tr>
-
         </table>
-        <input id="loginButton" type="submit" class="btn btn-primary" value="Login" />
+        <input
+          id="loginButton"
+          type="submit"
+          class="btn btn-primary"
+          value="Login"
+        />
         <input type="hidden" name="next" value="{{ next }}" />
-
-
 
         {# Assumes you setup the password_reset view in your URLconf #}
 
-        <a id="forgotPassword" href="{% url 'password_reset' %}">Forget your password?</a>
-
+        <a id="forgotPassword" href="{% url 'password_reset' %}"
+          >Forget your password?</a
+        >
       </form>
-
     </section>
   </section>
 </section>
