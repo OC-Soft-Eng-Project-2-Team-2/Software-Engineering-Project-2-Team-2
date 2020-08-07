@@ -195,11 +195,20 @@
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="Announcements" role="tabpanel" aria-labelledby="Announcements-tab">
     <ul>
+      <li><button>Add</button></li>
         {% for item in announcements %}
         <li>
           <div class="announcement">
             <p class="marginAndWeight">{{item.title}}<span>Posted on {{item.date}} at {{item.time}}</span></p>
-            <p>{{item.text}}</p>
+            <p>{{item.text}} 
+
+              {% if user.professor %}
+              {% else %}
+              <span><button>Edit</button></span>
+
+            {% endif %}
+          </p>
+
           </div>
         </li>
         {% empty %}
@@ -249,9 +258,17 @@
               {% endfor %}
             </div>
           </div>
-          <button>Upload File(s)</button>
+          {% if user.student %}
+            <button>Upload File(s)</button>
+          {% else %}
+              <button>Edit</button>
+          {% endif %}
           <span>
-            <button>Submit</button>
+            {% if user.student %}
+              <button>Submit</button>
+            {% else %}
+              <a href="/assignmentlist"><button>Grade</button></a>
+            {% endif %}
           </span>
         </div>
       </li>

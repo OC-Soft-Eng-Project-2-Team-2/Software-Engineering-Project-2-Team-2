@@ -9,6 +9,10 @@ import logging
 # Create your views here.
 
 @login_required
+def test(request):
+    return render(request, "cms_application/home.html")
+
+@login_required    
 def home(request):
 
     context = {}
@@ -81,8 +85,9 @@ def home(request):
     return render(request, "cms_application/home.html", context)
     
 def login(response):
-    return redirect('/login/')
+    return redirect('/login/?next=/home/')
 
+@login_required   
 def aClass(response):
     context = {}
     classI = {
@@ -196,10 +201,12 @@ def aClass(response):
 
     return render(response, "cms_application/class.html", context)
 
+@login_required   
 def assignmentlist(response):
     return render(response, "cms_application/assignmentList.html")
     return render(response, "cms_application/class.html", {"UserName":"TestName"})
 
+@login_required   
 def grades(response):
     context = {}
     grades = []

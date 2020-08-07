@@ -5,7 +5,7 @@ from django.contrib.auth.models import User, Group
 from cms_application.models import Student,Professor,Admin,Course,Section,Announcement,Assignment, Enrollment,StudentAssignment
 from rest_framework import viewsets
 from rest_framework import permissions
-from .serializers import StudentSerializer,ProfessorSerializer,UserSerializer, GroupSerializer,AdminSerializer,CourseSerializer 
+from .serializers import StudentSerializer,ProfessorSerializer,UserSerializer, GroupSerializer,AdminSerializer,CourseSerializer,SectionSerializer,AnnouncementSerializer,AssignmentSerializer,EnrollmentSerializer,StudentAssignmentSerializer
 from rest_framework import generics
 import json
 
@@ -150,4 +150,165 @@ class CourseViewSet(viewsets.ModelViewSet,generics.CreateAPIView, generics.Retri
         course.is_active = False
         course.save()
         return Response("course successfully deleted", status=status.HTTP_202_ACCEPTED) 
-   
+
+
+
+class SectionViewSet(viewsets.ModelViewSet,generics.CreateAPIView, generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [permissions.AllowAny]
+    queryset =Section.objects.all()
+    serializer_class =SectionSerializer    
+
+
+    def post(self, request, format=None):
+        body = json.loads(request.body)
+        serializer =Section.Serializer(data=body)
+        serializer.is_valid()
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+    def put(self, request, *args, **kwargs):
+        body=json.loads(request.body)
+        user = Section.objects.get(username = request.user.username)
+        serializer =Section.Serializer(instance=user, data=body)
+        serializer.is_valid()
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)  
+
+
+    def delete(self, request, *args, **kwargs):
+        section= Section.objects.get(username = request.user.username)
+        section.is_active = False
+        section.save()
+        return Response("section successfully deleted", status=status.HTTP_202_ACCEPTED)    
+
+
+
+class AnnouncementViewSet(viewsets.ModelViewSet,generics.CreateAPIView, generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [permissions.AllowAny]
+    queryset =Announcement.objects.all()
+    serializer_class =AnnouncementSerializer   
+
+    def post(self, request, format=None):
+        body = json.loads(request.body)
+        serializer =Announcement.Serializer(data=body)
+        serializer.is_valid()
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    def put(self, request, *args, **kwargs):
+        body=json.loads(request.body)
+        user = Announcement.objects.get(username = request.user.username)
+        serializer =Announcement.Serializer(instance=user, data=body)
+        serializer.is_valid()
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)    
+
+    def delete(self, request, *args, **kwargs):
+        announcement= Announcement.objects.get(username = request.user.username)
+        announcement.is_active = False
+        announcement.save()
+        return Response("announcement successfully deleted", status=status.HTTP_202_ACCEPTED)     
+
+
+
+class AssignmentViewSet(viewsets.ModelViewSet,generics.CreateAPIView, generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [permissions.AllowAny]
+    queryset =Assignment.objects.all()
+    serializer_class =AssignmentSerializer   
+    
+    def post(self, request, format=None):
+        body = json.loads(request.body)
+        serializer =Assignment.Serializer(data=body)
+        serializer.is_valid()
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED) 
+
+
+    def put(self, request, *args, **kwargs):
+        body=json.loads(request.body)
+        user = Assignment.objects.get(username = request.user.username)
+        serializer =Assignment.Serializer(instance=user, data=body)
+        serializer.is_valid()
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)  
+
+    def delete(self, request, *args, **kwargs):
+        assignment= Assignment.objects.get(username = request.user.username)
+        assignment.is_active = False
+        assignment.save()
+        return Response("assignment successfully deleted", status=status.HTTP_202_ACCEPTED) 
+
+
+
+
+
+
+
+
+
+
+class EnrollmentViewSet(viewsets.ModelViewSet,generics.CreateAPIView, generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [permissions.AllowAny]
+    queryset = Enrollment.objects.all()
+    serializer_class = EnrollmentSerializer
+
+
+
+    def post(self, request, format=None):
+        body = json.loads(request.body)
+        serializer =EnrollmentSerializer(data=body)
+        serializer.is_valid()
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+    def put(self, request, *args, **kwargs):
+        body=json.loads(request.body)
+        user = Enrollment.objects.get(username = request.user.username)
+        serializer =Enrollment.Serializer(instance=user, data=body)
+        serializer.is_valid()
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)   
+
+    def delete(self, request, *args, **kwargs):
+        enrollment= Enrollment.objects.get(username = request.user.username)
+        enrollment.is_active = False
+        enrollment.save()
+        return Response(" Enrollment successfully deleted", status=status.HTTP_202_ACCEPTED)  
+
+
+
+
+
+class StudentAssignmentViewSet(viewsets.ModelViewSet,generics.CreateAPIView, generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [permissions.AllowAny]
+    queryset = StudentAssignment.objects.all()
+    serializer_class = StudentAssignmentSerializer
+
+
+
+
+    def post(self, request, format=None):
+        body = json.loads(request.body)
+        serializer =StudentAssignmentSerializer(data=body)
+        serializer.is_valid()
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+
+    def put(self, request, *args, **kwargs):
+        body=json.loads(request.body)
+        user = StudentAssignment.objects.get(username = request.user.username)
+        serializer =StudentAssignment.Serializer(instance=user, data=body)
+        serializer.is_valid()
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+    def delete(self, request, *args, **kwargs):
+       studentAssignment= StudentAssignment.objects.get(username = request.user.username)
+       studentAssignment.is_active = False
+       studentAssignment.save()
+       return Response(" studentAssignment successfully deleted", status=status.HTTP_202_ACCEPTED)  
