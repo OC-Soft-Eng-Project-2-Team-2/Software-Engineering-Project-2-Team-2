@@ -263,9 +263,9 @@
           {% empty %} {% endfor %}
 
           <!-- TEST DATA BELOW REMOVE WHEN DATABASE IS READY-->
-          <a class="dropdown-item" href="/class">WUM 101</a>
-          <a class="dropdown-item" href="/class">WWE 210</a>
-          <a class="dropdown-item" href="/class">YEET 555</a>
+          {% for item in sidebar %}
+          <a class="dropdown-item" href="/class">{{item.name}}</a>
+          {% endfor %}
           <!-- END TEST DATA-->
         </div>
       </div>
@@ -282,9 +282,9 @@
           {% empty %} {% endfor %}
 
           <!-- TEST DATA BELOW REMOVE WHEN DATABASE IS READY-->
-          <a class="dropdown-item" href="/grades">WUM 101</a>
-          <a class="dropdown-item" href="/grades">WWE 210</a>
-          <a class="dropdown-item" href="/grades">YEET 555</a>
+          {% for item in sidebar %}
+          <a class="dropdown-item" href="/class">{{item.name}}</a>
+          {% endfor %}
           <!-- END TEST DATA-->
         </div>
       </div>

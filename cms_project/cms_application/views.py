@@ -12,7 +12,24 @@ from .models import Announcement
 from .models import Section
 from .models import Assignment
 from .models import Student
+from .models import StudentAssignment
+from .models import Enrollment
 # Create your views here.
+
+def sidebarInit():
+    context = {}
+    sidebar = []
+    
+    stud = Student.objects.all()[0]
+    enrolm = Enrollment.objects.all().filter(student=stud)
+
+    for item in enrolm:
+        classA = {
+            'name' : item.section.course.course_name
+        }
+        sidebar.append(classA)
+    context['sidebar'] = sidebar;
+    return context
 
 def deny_access_to_non_student(function=None):
     actual_decorator = user_passes_test(lambda u: u.groups.filter(name='Student').exists(), login_url='/accessdenied')
@@ -29,6 +46,7 @@ def test(request):
 @login_required    
 def home(request):
     context = {}
+    context = sidebarInit()
     context['is_student'] = request.user.groups.filter(name='Student').exists();
 
     announce = Announcement.objects.all()
@@ -53,7 +71,6 @@ def home(request):
         'day': day,
         'year': item.posted_date.strftime("%y")
         }
-        print(itemA)
         calendarEvents.append(itemA)
 
 
@@ -72,7 +89,7 @@ def home(request):
         announcements.append(itemA);
 
     context['announcements'] = announcements;
-
+    print(context)
     return render(request, "cms_application/home.html", context)
     
 def login(request):
@@ -84,8 +101,10 @@ def aClass(request):
     context['is_student'] = request.user.groups.filter(name='Student').exists();
     context['is_instructor'] = request.user.groups.filter(name='Instructor').exists();
 
-    section = Section.objects.all()
+    stud = Student.objects.all()[0]
+    enrolm = Enrollment.objects.all().filter(student=stud)[0]
 
+    section = Section.objects.all()
     selectedSection = section[0]
 
     classI = {
@@ -135,29 +154,20 @@ def aClass(request):
                 }
             assignments.append(assigmentA)
     context["assignments"] = assignments
+
+    gradeA = {
+        'current' : 94, #enrolm.current_grade(),
+        'final' : 94 #enrolm.current_grade()
+    }
+    context["grade"] = gradeA
     
     students = []
-    #    for item in selectedSection.students:
-    #     student1 = {
-    #         "img" : item.profile_picture_filename,
-    #         "name" : item.first_name + " " + item.last_name
-    #     }
-    #     students.append(student1)
-    student1 = {
-        "img" :"https://www.demilked.com/magazine/wp-content/uploads/2019/04/5cb6d34f775c2-stock-models-share-weirdest-stories-photo-use-102-5cb5c725bc378__700.jpg",
-        "name" : "Lesly"
-    }
-    student2 = {
-        "img" :"https://footage.framepool.com/shotimg/qf/792533153-chin-finger-well-dressed-thinking.jpg",
-        "name" : "Shaun"
-    }
-    student3 = {
-        "img" :"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRLxiGWaNSlSrHizul_Zbdf_L1EdHpNlddeRA&usqp=CAU",
-        "name" : "Tony"
-    }
-    students.append(student1)
-    students.append(student2)
-    students.append(student3)
+    for item in selectedSection.students.all():
+        student1 = {
+            "img" : item.profile_picture_filename,
+            "name" : item.first_name + " " + item.last_name
+        }
+        students.append(student1)
     context["students"] = students
 
     return render(request, "cms_application/class.html", context)
@@ -199,57 +209,63 @@ def assignmentlist(response):
     submissions.append(sub3);
     context["submissions"] = submissions
 
-    classD = {
-        'name' : 'Class Name',
-        'img' : 'https://us.123rf.com/450wm/stockbroker/stockbroker1408/stockbroker140802515/31050918-class-of-university-students-using-laptops-in-lecture.jpg?ver=6',
-        'time' : 'MWF 8:00 AM',
-        'semester' : '2020 Summer Session 1'
+    classI = {
+        "name" : selectedSection.course.course_name,
+        "img" :  selectedSection.course.profile_picture_filename,
+        "alt" : selectedSection.section_number,
+        "syllabus" : selectedSection.syllabus_filename,
+        "time": selectedSection.days_of_week + " " + selectedSection.meeting_time,
+        "semester": selectedSection.semester_code,
+        "credits" : selectedSection.course.credit_hours
     }
-
-    context["class"] = classD
+    context['class'] = classI;
 
     return render(response, "cms_application/submissions.html", context)
 
 
 @login_required
-
+@deny_access_to_non_student
 def grades(request):
     context = {}
-    context['is_student'] = request.user.groups.filter(name='Student').exists();
-    grades = []
+    context['is_student'] = request.user.groups.filter(name='Student').exists()
 
-    grade1 = {
-        'name': 'Course I',
-        'grade': '50/100',
-        'percentage': 50, 
-        'letter': 'F',
-        'assignments': [
-            {'name': 'Assignment1', 'grade': '50/100'},
-            {'name': 'Assignment2', 'grade': '50/100'},
-            {'name': 'Assignment3', 'grade': '50/100'},
-            {'name': 'Assignment4', 'grade': '50/100'},
-            {'name': 'Assignment5', 'grade': '50/100'}
-        ]
-    }
+    stud = Student.objects.all()[0]
+    studAssign = StudentAssignment.objects.all().filter(student=stud)
 
-    grade2 = {
-        'name': 'Course II',
-        'grade': '200/100',
-        'percentage': 200, 
-        'letter': 'A',
-        'assignments': [
-            {'name': 'Assignment1', 'grade': '200/100'},
-            {'name': 'Assignment2', 'grade': '200/100'},
-            {'name': 'Assignment3', 'grade': '200/100'},
-            {'name': 'Assignment4', 'grade': '200/100'},
-            {'name': 'Assignment5', 'grade': '200/100'}
-        ]
-    }
+    assignments = []
+    for item in studAssign:
+        assignA = {
+            'course' : item.assignment.section.course.course_name,
+            'name' : item.assignment.assignment_name,
+            'grade': item.assignment_grade
+        }
+        assignments.append(assignA)
+    context["assignments"] = assignments
 
-    grades.append(grade1)
-    grades.append(grade2)
-    context["grades"] = grades
+    enrolm = Enrollment.objects.all().filter(student=stud)
+    classes = []
+    grade = ""
+    for item in enrolm:
+        curr = 94
+        if curr >= 90:
+            grade = "A"
+        elif curr >= 80:
+            grade = "B"
+        elif curr >= 70:
+            grade = "C"
+        elif curr >= 60:
+            grade = "D"
+        else:
+            grade = "F"
     
+        classA = {
+            'name' : item.section.course.course_name,
+            'grade' : curr,
+            'percentage': curr,
+            'letter' : grade
+        }
+        classes.append(classA)
+    context["classes"] = classes
     return render(request, "cms_application/grades.html", context)
 
 @login_required
