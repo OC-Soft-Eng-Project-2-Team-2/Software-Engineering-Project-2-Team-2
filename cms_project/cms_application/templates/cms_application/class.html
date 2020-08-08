@@ -167,8 +167,8 @@
       <p>{{class.credits}} Credit Hour(s)</p>
     </div>
     <div>
-      <p>Current Grade: 46/100</p> <!-- Not sure about how to get the student grade for the specified class-->
-      <p>Final Grade: -</p>
+      <p>Current Grade: {{grade.current}}%</p> <!-- Not sure about how to get the student grade for the specified class-->
+      <p>Final Grade: {{grade.final}}%</p>
     </div>
   </div>
 
@@ -268,7 +268,7 @@
           {% if is_instructor %}
           <button class="reducePadding">&#128393 Edit</button>
           <span>
-            <a href="/assignmentlist"><button>Grade Submissions</button></a>
+            <a href="/submissions"><button>Grade Submissions</button></a>
           </span>
           {% else %}
           <button>Upload File(s)</button>
