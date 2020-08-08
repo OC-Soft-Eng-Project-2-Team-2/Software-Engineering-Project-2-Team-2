@@ -89,7 +89,6 @@ def home(request):
         announcements.append(itemA);
 
     context['announcements'] = announcements;
-    print(context)
     return render(request, "cms_application/home.html", context)
     
 def login(request):
