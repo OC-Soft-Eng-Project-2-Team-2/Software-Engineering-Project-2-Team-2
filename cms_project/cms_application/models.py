@@ -24,7 +24,7 @@ class Student(models.Model):
     email = models.CharField(max_length=50)
     major = models.CharField(max_length=100)
     
-    profile_picture_filename = models.CharField(max_length=50, blank=True)
+    profile_picture_filename = models.CharField(max_length=50, null=True, blank=True)
 
     sections = models.ManyToManyField(
         'Section',
@@ -40,14 +40,14 @@ class Student(models.Model):
     @property
     def student_data_folder_name(self):
         """This is the folder where a student's profile image and uploaded coursework will be stored."""
-        return "cms_application/static/students/" + self.student_id + '/'
+        return "../../static/students/" + self.student_id + '/'
 
 
     @property
     def profile_picture_location(self):
         """This is the full filepath to the student's profile image."""
         if self.profile_picture_filename is None:
-            return "cms_application/static/cms_application/account icon.png"
+            return "../../static/cms_application/account icon.png"
         else:
             return self.student_data_folder_name + self.profile_picture_filename
 
@@ -128,15 +128,15 @@ class Professor(models.Model):
     email = models.CharField(max_length=50)
     department = models.CharField(max_length=100)
 
-    profile_picture_filename = models.CharField(max_length=50, blank=True)
+    profile_picture_filename = models.CharField(max_length=50, null=True, blank=True)
 
     @property
     def profile_picture_location(self):
         """This is the filepath to the professor's profile image."""
         if self.profile_picture_filename is None:
-            return "cms_application/static/cms_application/account icon.png"
+            return "../../static/cms_application/account icon.png"
         else:
-            return "cms_application/static/professors/" + self.faculty_id + "/" + self.profile_picture_filename
+            return "../../static/professors/" + self.faculty_id + "/" + self.profile_picture_filename
 
     
     def __str__(self):
@@ -150,15 +150,15 @@ class Course(models.Model):
     credit_hours = models.IntegerField()
     course_description = models.CharField(max_length=1000)
 
-    profile_picture_filename = models.CharField(max_length=50, blank=True)
+    profile_picture_filename = models.CharField(max_length=50, null=True, blank=True)
 
     @property
     def profile_picture_location(self):
         """This is the filepath to the course image."""
         if self.profile_picture_filename is None:
-            return "cms_application/static/cms_application/Class icon white.png"
+            return "../../static/cms_application/Class icon white.png"
         else:
-            return "cms_application/static/courses/" + self.full_course_code + "/" + self.profile_picture_filename
+            return "../../static/courses/" + self.full_course_code + "/" + self.profile_picture_filename
 
     @property
     def full_course_code(self):
@@ -184,7 +184,7 @@ class Section(models.Model):
     course = models.ForeignKey('Course', on_delete=models.SET_NULL, null=True)
     professor = models.ForeignKey('Professor', on_delete=models.SET_NULL, null=True)
 
-    syllabus_filename = models.CharField(max_length=50, blank=True)
+    syllabus_filename = models.CharField(max_length=50, null=True, blank=True)
 
     students = models.ManyToManyField(
         'Student',
@@ -204,7 +204,7 @@ class Section(models.Model):
     @property
     def section_data_folder_name(self):
         """This is the folder where the syllabus and all assignment instructions used for this section will be stored."""
-        return "cms_application/static/sections/" + self.full_section_code + '/'
+        return "../../static/sections/" + self.full_section_code + '/'
 
     @property
     def syllabus_location(self):
@@ -243,7 +243,7 @@ class Assignment(models.Model):
         through_fields=('assignment', 'student')
     )            
 
-    instructions_filename = models.CharField(max_length=50, blank=True)
+    instructions_filename = models.CharField(max_length=50, null=True, blank=True)
 
     @property
     def instructions_location(self):
@@ -289,11 +289,12 @@ class Enrollment(models.Model):
 
     @property
     def current_grade(self):
-        current_section_student_assignments = self.student.assignments.filter(assignment.section==self.section)
+        current_section_assignments = self.student.assignments.filter(assignment.section==self.section)
         sum_of_grades = 0
-        if current_section_student_assignments:
-            for a in current_section_student_assignments:
-                sum_of_grades = sum_of_grades + a.assignment_grade
+        if current_section_assignments:
+            for assignment in current_section_assignments:
+                student_assigment = StudentAssignment.objects.filter(student=self.student, assignment=assignment)
+                sum_of_grades = sum_of_grades + student_assigment.assignment_grade
         return round(sum_of_grades / 100.00, 2)
 
     def __str__(self):
@@ -304,7 +305,7 @@ class StudentAssignment(models.Model):
     student = models.ForeignKey('Student', on_delete=models.SET_NULL, null=True)
     assignment = models.ForeignKey('Assignment', on_delete=models.SET_NULL, null=True)
     assignment_grade = models.DecimalField(max_digits=5, decimal_places=2)  # manually entered by professor, must be between 0.00 and 100.00
-    submission_filename = models.CharField(max_length=50, blank=True)
+    submission_filename = models.CharField(max_length=50, null=True, blank=True)
 
     @property
     def student_data_subfolder_name(self):
