@@ -263,13 +263,13 @@
           {% empty %} {% endfor %}
 
           <!-- TEST DATA BELOW REMOVE WHEN DATABASE IS READY-->
-          <a class="dropdown-item" href="/class">WUM 101</a>
-          <a class="dropdown-item" href="/class">WWE 210</a>
-          <a class="dropdown-item" href="/class">YEET 555</a>
+          {% for item in sidebar %}
+          <a class="dropdown-item" href="/class">{{item.name}}</a>
+          {% endfor %}
           <!-- END TEST DATA-->
         </div>
       </div>
-
+      {% if is_student %}
       <div class="pageLink dropright" onclick="openNav()">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
@@ -282,12 +282,13 @@
           {% empty %} {% endfor %}
 
           <!-- TEST DATA BELOW REMOVE WHEN DATABASE IS READY-->
-          <a class="dropdown-item" href="/grades">WUM 101</a>
-          <a class="dropdown-item" href="/grades">WWE 210</a>
-          <a class="dropdown-item" href="/grades">YEET 555</a>
+          {% for item in sidebar %}
+          <a class="dropdown-item" href="/class">{{item.name}}</a>
+          {% endfor %}
           <!-- END TEST DATA-->
         </div>
       </div>
+      {% endif %}
 
       <div class="pageLink">
         <a href="/logout" id="navbarDropdown" role="button">
