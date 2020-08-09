@@ -70,25 +70,23 @@
     <div class="header">Grade Total</div>
     <div class="header">Percentage</div>
     <div class="header">Letter</div>
-    {% for course in grades %}
-    <div>{{course.name}}</div>
-    <div>{{course.grade}}</div>
-    <div>{{course.percentage}}</div>
-    <div>{{course.letter}}</div>
+    {% for course in classes %}
+        <div>{{course.name}}</div>
+        <div>{{course.grade}}</div>
+        <div>{{course.percentage}}</div>
+        <div>{{course.letter}}</div>
     {% endfor %}
 </div>
 <h1>Assignments</h1>
 <div id="grade-details">
-    {% for course in grades %}
-    {% for assignment in course.assignments %}
-    <div class="grade-detail-row grade-body-row">
-        <div class="col">
-            <img src="https://i.pinimg.com/originals/51/c2/54/51c25482d801d6ff7f80deee727e13c6.png">
-            <p>{{course.name}} - {{assignment.name}}</p>
+    {% for assign in assignments %}
+        <div class="grade-detail-row grade-body-row">
+            <div class="col">
+                <img src="https://i.pinimg.com/originals/51/c2/54/51c25482d801d6ff7f80deee727e13c6.png">
+                <p>{{assign.course}} - {{assign.name}}</p>
+            </div>
+            <div class="grade-col">{{assign.grade}}</div>
         </div>
-        <div class="grade-col">{{assignment.grade}}</div>
-    </div>
-    {% endfor %}
     {% endfor %}
 </div>
 </div>
