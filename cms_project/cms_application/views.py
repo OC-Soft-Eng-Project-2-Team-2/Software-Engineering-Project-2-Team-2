@@ -50,6 +50,7 @@ def home(request):
     context['is_student'] = request.user.groups.filter(name='Student').exists();
 
     announce = Announcement.objects.all()
+    stud = Student.objects.all()[0]
 
     calendarEvents = []
 
@@ -79,7 +80,7 @@ def home(request):
     announcements = []
     for item in announce:
         itemA = {
-        'image': item.section.course.profile_picture_filename,
+        'image': item.section.course.profile_picture_location,
         'class': item.section.course.course_name,
         'date' : item.posted_date.strftime("%x"),
         'time' : item.posted_date.strftime("%X"),
@@ -97,6 +98,7 @@ def login(request):
 @login_required   
 def aClass(request):
     context = {}
+    context = sidebarInit()
     context['is_student'] = request.user.groups.filter(name='Student').exists();
     context['is_instructor'] = request.user.groups.filter(name='Instructor').exists();
 
@@ -108,9 +110,9 @@ def aClass(request):
 
     classI = {
         "name" : selectedSection.course.course_name,
-        "img" :  selectedSection.course.profile_picture_filename,
+        "img" :  selectedSection.course.profile_picture_location,
         "alt" : selectedSection.section_number,
-        "syllabus" : selectedSection.syllabus_filename,
+        "syllabus" : selectedSection.syllabus_location,
         "time": selectedSection.days_of_week + " " + selectedSection.meeting_time,
         "semester": selectedSection.semester_code,
         "credits" : selectedSection.course.credit_hours
@@ -122,7 +124,7 @@ def aClass(request):
     for item in announce:
         if item.section.section_number == selectedSection.section_number:
             itemA = {
-                'image': item.section.course.profile_picture_filename,
+                'image': item.section.course.profile_picture_location,
                 'class': item.section.course.course_name,
                 'date' : item.posted_date.strftime("%x"),
                 'time' : item.posted_date.strftime("%X"),
@@ -163,7 +165,7 @@ def aClass(request):
     students = []
     for item in selectedSection.students.all():
         student1 = {
-            "img" : item.profile_picture_filename,
+            "img" : item.profile_picture_location,
             "name" : item.first_name + " " + item.last_name
         }
         students.append(student1)
@@ -175,6 +177,7 @@ def aClass(request):
 @deny_access_to_non_instructor  
 def assignmentlist(response):
     context = {}
+    context = sidebarInit()
     submissions = []
 
     sub1 = {
@@ -210,7 +213,7 @@ def assignmentlist(response):
 
     classI = {
         "name" : selectedSection.course.course_name,
-        "img" :  selectedSection.course.profile_picture_filename,
+        "img" :  selectedSection.course.profile_picture_location,
         "alt" : selectedSection.section_number,
         "syllabus" : selectedSection.syllabus_filename,
         "time": selectedSection.days_of_week + " " + selectedSection.meeting_time,
@@ -226,6 +229,7 @@ def assignmentlist(response):
 @deny_access_to_non_student
 def grades(request):
     context = {}
+    context = sidebarInit()
     context['is_student'] = request.user.groups.filter(name='Student').exists()
 
     stud = Student.objects.all()[0]
