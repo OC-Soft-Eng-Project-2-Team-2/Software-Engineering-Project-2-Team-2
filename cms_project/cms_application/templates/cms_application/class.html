@@ -250,7 +250,7 @@
               </div>
               <div>
                 {% for attachment in item.attachments %}
-                <a href="{{attachment.url}}">{{attachment.title}}</a><br>
+                <a href="{{attachment.url}}" download>{{attachment.title}}</a><br>
                 {% empty %}
                 {% endfor %}
               </div>

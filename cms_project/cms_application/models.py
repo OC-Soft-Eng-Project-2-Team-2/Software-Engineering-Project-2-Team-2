@@ -40,14 +40,14 @@ class Student(models.Model):
     @property
     def student_data_folder_name(self):
         """This is the folder where a student's profile image and uploaded coursework will be stored."""
-        return "cms_application/static/students/" + self.student_id + '/'
+        return "../../static/students/" + self.student_id + '/'
 
 
     @property
     def profile_picture_location(self):
         """This is the full filepath to the student's profile image."""
         if self.profile_picture_filename is None:
-            return "cms_application/static/cms_application/account icon.png"
+            return "../../static/cms_application/account icon.png"
         else:
             return self.student_data_folder_name + self.profile_picture_filename
 
@@ -134,9 +134,9 @@ class Professor(models.Model):
     def profile_picture_location(self):
         """This is the filepath to the professor's profile image."""
         if self.profile_picture_filename is None:
-            return "cms_application/static/cms_application/account icon.png"
+            return "../../static/cms_application/account icon.png"
         else:
-            return "cms_application/static/professors/" + self.faculty_id + "/" + self.profile_picture_filename
+            return "../../static/professors/" + self.faculty_id + "/" + self.profile_picture_filename
 
     
     def __str__(self):
@@ -156,9 +156,9 @@ class Course(models.Model):
     def profile_picture_location(self):
         """This is the filepath to the course image."""
         if self.profile_picture_filename is None:
-            return "cms_application/static/cms_application/Class icon white.png"
+            return "../../static/cms_application/Class icon white.png"
         else:
-            return "cms_application/static/courses/" + self.full_course_code + "/" + self.profile_picture_filename
+            return "../../static/courses/" + self.full_course_code + "/" + self.profile_picture_filename
 
     @property
     def full_course_code(self):
@@ -204,7 +204,7 @@ class Section(models.Model):
     @property
     def section_data_folder_name(self):
         """This is the folder where the syllabus and all assignment instructions used for this section will be stored."""
-        return "cms_application/static/sections/" + self.full_section_code + '/'
+        return "../../static/sections/" + self.full_section_code + '/'
 
     @property
     def syllabus_location(self):

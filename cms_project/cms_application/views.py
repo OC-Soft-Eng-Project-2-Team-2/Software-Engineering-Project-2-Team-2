@@ -150,7 +150,10 @@ def aClass(request):
                         "date" : ""
                     },
                     "description" : "",
-                    "attachments" : item.instructions_filename,
+                    "attachments" : [{
+                        "title" : item.instructions_filename,
+                        "url" : item.instructions_location
+                        }],
                     "uploads" : ""
                 }
             assignments.append(assigmentA)
@@ -226,7 +229,7 @@ def assignmentlist(response):
 
 
 @login_required
-@deny_access_to_non_student
+
 def grades(request):
     context = {}
     context = sidebarInit()
