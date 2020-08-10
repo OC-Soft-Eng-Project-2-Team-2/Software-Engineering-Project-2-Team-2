@@ -59,6 +59,7 @@
       width: 36px;
       overflow: hidden;
       display: inline-block;
+      border-radius: 100%;
     }
 
     .sidenav a {
@@ -241,8 +242,7 @@
           <!-- END TEST DATA-->
         </div>
 
-
-        <img class="sideNavTopItem2" src="{% static "cms_application/account icon.png" %}" title="Account"
+        <img class="sideNavTopItem2" src="{{ userPfpUrl }}" title="Account"
           id="notificationDropdown" onclick="uploadPfp()">
         </img>
       </div>
@@ -254,8 +254,7 @@
       <div class="pageLink dropright" onclick="openNav()">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
-          <img class="navIcon" src="{% static "cms_application/Class Icon White.png" %}"
-            title="Classes">Classes
+          <img class="navIcon" src="{% static "cms_application/Class Icon White.png" %}" title="Classes">Courses
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           {% for item in classes %}
@@ -273,17 +272,12 @@
       <div class="pageLink dropright" onclick="openNav()">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
-          <img class="navIcon" src="{% static "cms_application/grades Icon small.png" %}"
-            title="Grades">Grades
+          <img class="navIcon" src="{% static "cms_application/grades Icon small.png" %}" title="Grades">Grades
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          {% for item in classes %}
-          <a class="dropdown-item" href="/grades/{{item.class}}">{{item.class}}</a>
-          {% empty %} {% endfor %}
-
           <!-- TEST DATA BELOW REMOVE WHEN DATABASE IS READY-->
           {% for item in sidebar %}
-          <a class="dropdown-item" href="/class">{{item.name}}</a>
+          <a class="dropdown-item" href="/grades">{{item.name}}</a>
           {% endfor %}
           <!-- END TEST DATA-->
         </div>
@@ -319,12 +313,34 @@
       }
 
       function uploadPfp() {
-        var x = document.createElement("INPUT");
-        x.setAttribute("type", "file");
-        x.setAttribute("accept", "image/*");
-        x.click();
-        /* TODO: Send image file to database, etc. */
-        x.getAttribute('value')
+
+        var pfpInput = document.createElement("INPUT");
+        pfpInput.setAttribute("type", "file");
+        /*pfpInput.setAttribute("name", "csrfmiddlewaretoken");
+        pfpInput.setAttribute("value", csrfValue);*/
+        pfpInput.setAttribute("accept", "image/*");
+        pfpInput.click();
+
+        /* if user provides valid image file, create and submit form*/
+        fetch("{{ userPfpUrl }}", {
+          method: "POST",
+          body: JSON.stringify(pfpInput.getAttribute('value'))
+        })
+
+        /*var xhr = new XMLHttpRequest();
+        xhr.open("POST", '{{ userPfpUrl }}', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(JSON.stringify({
+          value: pfpInput.getAttribute('value')
+        }));*/
+
+
+        /*var form = document.createElement("form");
+        form.setAttribute("bo")
+        form.setAttribute("method", "post");
+        form.submit();
+
+        pfpInput.getAttribute('value')*/
       }
     </script>
 
