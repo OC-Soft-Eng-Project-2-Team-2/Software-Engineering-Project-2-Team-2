@@ -289,11 +289,12 @@ class Enrollment(models.Model):
 
     @property
     def current_grade(self):
-        current_section_student_assignments = self.student.assignments.filter(assignment.section==self.section)
+        current_section_assignments = self.student.assignments.filter(assignment.section==self.section)
         sum_of_grades = 0
-        if current_section_student_assignments:
-            for a in current_section_student_assignments:
-                sum_of_grades = sum_of_grades + a.assignment_grade
+        if current_section_assignments:
+            for assignment in current_section_assignments:
+                student_assigment = StudentAssignment.objects.filter(student=self.student, assignment=assignment)
+                sum_of_grades = sum_of_grades + student_assigment.assignment_grade
         return round(sum_of_grades / 100.00, 2)
 
     def __str__(self):

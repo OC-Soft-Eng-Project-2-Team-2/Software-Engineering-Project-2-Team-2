@@ -58,6 +58,7 @@ def test(request):
 def home(request):
     context = sidebarInit(request)
     announce = Announcement.objects.all()
+    stud = Student.objects.all()[0]
 
     calendarEvents = []
 
@@ -155,7 +156,10 @@ def aClass(request):
                         "date" : ""
                     },
                     "description" : "",
-                    "attachments" : item.instructions_location,
+                    "attachments" : [{
+                        "title" : item.instructions_filename,
+                        "url" : item.instructions_location
+                        }],
                     "uploads" : ""
                 }
             assignments.append(assigmentA)
@@ -230,7 +234,7 @@ def assignmentlist(response):
 
 
 @login_required
-@deny_access_to_non_student
+
 def grades(request):
     context = sidebarInit(request)
 

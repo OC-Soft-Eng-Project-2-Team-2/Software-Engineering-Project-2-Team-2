@@ -160,7 +160,7 @@
   <div>
     <div>
       <h4>{{class.professor}}</h4>
-      <a href="{{class.syllabus}}">Syllabus</a>
+      <a href="{{class.syllabus}}" download>Syllabus</a>
     </div>
     <div>
       <p>{{class.time}}</p>
@@ -251,7 +251,7 @@
               </div>
               <div>
                 {% for attachment in item.attachments %}
-                <a href="{{attachment.url}}">{{attachment.title}}</a><br>
+                <a href="{{attachment.url}}" download>{{attachment.title}}</a><br>
                 {% empty %}
                 {% endfor %}
               </div>
@@ -273,8 +273,11 @@
           </span>
           {% else %}
           <button>Upload File(s)</button>
+          <div>
+            <input type="file" name="document">
+          </div>>
           <span>
-            <button>Submit</button>
+            <button type="submit">Submit</button>
           </span>
           {% endif %}
         </div>
