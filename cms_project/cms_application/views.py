@@ -108,7 +108,7 @@ def aClass(request):
     context = sidebarInit(request)
 
     stud = Student.objects.all()[0]
-    enrolm = Enrollment.objects.all().filter(student=stud)[0]
+    enrolm = Enrollment.objects.all().filter(student=stud)[2]
 
     section = Section.objects.all()
     selectedSection = section[0]
@@ -166,8 +166,8 @@ def aClass(request):
     context["assignments"] = assignments
 
     gradeA = {
-        'current' : 94, #enrolm.current_grade(),
-        'final' : 94 #enrolm.current_grade()
+        'current' : enrolm.current_grade,
+        'final' : enrolm.current_grade
     }
     context["grade"] = gradeA
     
@@ -189,10 +189,10 @@ def assignmentlist(response):
     submissions = []
 
     stud = Student.objects.all()[0]
-    enrolm = Enrollment.objects.all().filter(student=stud)[0]
+    enrolm = Enrollment.objects.all().filter(student=stud)[2]
 
     section = Section.objects.all()
-    selectedSection = section[0]
+    selectedSection = section[2]
 
     sub1 = {
         'submittor' : "Shaun",
