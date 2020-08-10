@@ -14,13 +14,15 @@ from .models import Assignment
 from .models import Student
 from .models import StudentAssignment
 from .models import Enrollment
+from .models import Professor
 # Create your views here.
 
-def sidebarInit():
+def sidebarInit(request):
     context = {}
     sidebar = []
     
     stud = Student.objects.all()[0]
+    prof = Professor.objects.all()[0]
     enrolm = Enrollment.objects.all().filter(student=stud)
 
     for item in enrolm:
@@ -29,14 +31,23 @@ def sidebarInit():
         }
         sidebar.append(classA)
     context['sidebar'] = sidebar;
+
+    context['is_student'] = request.user.groups.filter(name='student').exists();
+    context['is_instructor'] = request.user.groups.filter(name='instructor').exists();
+
+    if context['is_student']:
+        context['userPfpUrl'] = stud.profile_picture_location;
+    else:
+        context['userPfpUrl'] = prof.profile_picture_location;
+    
     return context
 
 def deny_access_to_non_student(function=None):
-    actual_decorator = user_passes_test(lambda u: u.groups.filter(name='Student').exists(), login_url='/accessdenied')
+    actual_decorator = user_passes_test(lambda u: u.groups.filter(name='student').exists(), login_url='/accessdenied')
     return actual_decorator(function)
 
 def deny_access_to_non_instructor(function=None):
-    actual_decorator = user_passes_test(lambda u: u.groups.filter(name='Instructor').exists(), login_url='/accessdenied')
+    actual_decorator = user_passes_test(lambda u: u.groups.filter(name='instructor').exists(), login_url='/accessdenied')
     return actual_decorator(function)
 
 @login_required
@@ -45,10 +56,7 @@ def test(request):
 
 @login_required    
 def home(request):
-    context = {}
-    context = sidebarInit()
-    context['is_student'] = request.user.groups.filter(name='Student').exists();
-
+    context = sidebarInit(request)
     announce = Announcement.objects.all()
     stud = Student.objects.all()[0]
 
@@ -97,10 +105,7 @@ def login(request):
 
 @login_required   
 def aClass(request):
-    context = {}
-    context = sidebarInit()
-    context['is_student'] = request.user.groups.filter(name='Student').exists();
-    context['is_instructor'] = request.user.groups.filter(name='Instructor').exists();
+    context = sidebarInit(request)
 
     stud = Student.objects.all()[0]
     enrolm = Enrollment.objects.all().filter(student=stud)[0]
@@ -118,6 +123,7 @@ def aClass(request):
         "credits" : selectedSection.course.credit_hours
     }
     context['class'] = classI;
+
 
     announcements = []
     announce = Announcement.objects.all()
@@ -179,9 +185,14 @@ def aClass(request):
 @login_required
 @deny_access_to_non_instructor  
 def assignmentlist(response):
-    context = {}
-    context = sidebarInit()
+    context = sidebarInit(response)
     submissions = []
+
+    stud = Student.objects.all()[0]
+    enrolm = Enrollment.objects.all().filter(student=stud)[0]
+
+    section = Section.objects.all()
+    selectedSection = section[0]
 
     sub1 = {
         'submittor' : "Shaun",
@@ -218,7 +229,7 @@ def assignmentlist(response):
         "name" : selectedSection.course.course_name,
         "img" :  selectedSection.course.profile_picture_location,
         "alt" : selectedSection.section_number,
-        "syllabus" : selectedSection.syllabus_filename,
+        "syllabus" : selectedSection.syllabus_location,
         "time": selectedSection.days_of_week + " " + selectedSection.meeting_time,
         "semester": selectedSection.semester_code,
         "credits" : selectedSection.course.credit_hours
@@ -231,9 +242,7 @@ def assignmentlist(response):
 @login_required
 
 def grades(request):
-    context = {}
-    context = sidebarInit()
-    context['is_student'] = request.user.groups.filter(name='Student').exists()
+    context = sidebarInit(request)
 
     stud = Student.objects.all()[0]
     studAssign = StudentAssignment.objects.all().filter(student=stud)
@@ -252,7 +261,7 @@ def grades(request):
     classes = []
     grade = ""
     for item in enrolm:
-        curr = 94
+        curr = item.current_grade
         if curr >= 90:
             grade = "A"
         elif curr >= 80:
@@ -277,10 +286,10 @@ def grades(request):
 @login_required
 @deny_access_to_non_instructor   
 def submissions(request):
+    context = sidebarInit(request)
     return render(request, "cms_application/submissions.html")
     return render(request, "cms_application/class.html", {"UserName":"TestName"})
     
 def accessdenied(request):
-    context = {}
-    context['is_student'] = request.user.groups.filter(name='Student').exists();
+    context = sidebarInit(request)
     return render(request, "cms_application/accessdenied.html")
