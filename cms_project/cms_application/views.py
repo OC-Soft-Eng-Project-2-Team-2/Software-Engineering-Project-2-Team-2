@@ -185,8 +185,14 @@ def aClass(request):
 @login_required
 @deny_access_to_non_instructor  
 def assignmentlist(response):
-    context = sidebarInit()
+    context = sidebarInit(response)
     submissions = []
+
+    stud = Student.objects.all()[0]
+    enrolm = Enrollment.objects.all().filter(student=stud)[0]
+
+    section = Section.objects.all()
+    selectedSection = section[0]
 
     sub1 = {
         'submittor' : "Shaun",

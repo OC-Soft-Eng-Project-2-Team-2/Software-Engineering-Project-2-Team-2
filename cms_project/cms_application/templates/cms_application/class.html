@@ -143,6 +143,14 @@
     margin: 5px;
     width: calc(100% - 10px);
   }
+
+  input[type=file] .button {
+    background-color: #222;
+    color: ivory;
+    padding: 3px 15px;
+    border: 1px solid #222;
+    border-radius: 0.2rem;
+  }
 </style>
 {% endblock styles %}
 
@@ -168,7 +176,8 @@
       <p>{{class.credits}} Credit Hour(s)</p>
     </div>
     <div>
-      <p>Current Grade: {{grade.current}}%</p> <!-- Not sure about how to get the student grade for the specified class-->
+      <p>Current Grade: {{grade.current}}%</p>
+      <!-- Not sure about how to get the student grade for the specified class-->
       <p>Final Grade: {{grade.final}}%</p>
     </div>
   </div>
@@ -272,13 +281,13 @@
             <a href="/submissions"><button>Grade Submissions</button></a>
           </span>
           {% else %}
-          <button>Upload File(s)</button>
           <div>
-            <input type="file" name="document">
-          </div>>
-          <span>
-            <button type="submit">Submit</button>
-          </span>
+            <button onclick="document.getElementById('getFile').click()">Upload File(s)</button>
+            <input type='file' id="getFile" style="display:none">
+            <span>
+              <button type="submit">Submit</button>
+            </span>
+          </div>
           {% endif %}
         </div>
       </li>
