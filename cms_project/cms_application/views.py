@@ -261,7 +261,7 @@ def grades(request):
     classes = []
     grade = ""
     for item in enrolm:
-        curr = 94
+        curr = item.current_grade
         if curr >= 90:
             grade = "A"
         elif curr >= 80:

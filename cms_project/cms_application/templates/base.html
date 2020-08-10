@@ -268,19 +268,12 @@
           <!-- END TEST DATA-->
         </div>
       </div>
+
       {% if is_student %}
-      <div class="pageLink dropright" onclick="openNav()">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
+      <div class="pageLink">
+        <a href="/grades" id="navbarDropdown" role="button">
           <img class="navIcon" src="{% static "cms_application/grades Icon small.png" %}" title="Grades">Grades
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <!-- TEST DATA BELOW REMOVE WHEN DATABASE IS READY-->
-          {% for item in sidebar %}
-          <a class="dropdown-item" href="/grades">{{item.name}}</a>
-          {% endfor %}
-          <!-- END TEST DATA-->
-        </div>
       </div>
       {% endif %}
 
